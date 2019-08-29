@@ -8,7 +8,8 @@ class LunarRover {
   BrazoExcavador brazo;
 
   public:
-  void excavar(EstrategiaDeExcavacion& estrategiaDeExcavacion);
+  LunarRover();
+  void excavar(EstrategiaDeExcavacion* estrategiaDeExcavacion);
 };
 
 #endif

@@ -4,6 +4,7 @@
 
 LunarRover::LunarRover() : brazo(BrazoExcavador()) { };
 
-void LunarRover::excavar(EstrategiaDeExcavacion& estrategiaDeExcavacion) {
-  estrategiaDeExcavacion.excavar(this->brazo);
+void LunarRover::excavar(EstrategiaDeExcavacion* estrategiaDeExcavacion) {
+  std::cout << "~bip bop bip~ lunar rover activando estrategia de excavacion" << std::endl;
+  estrategiaDeExcavacion->excavar(this->brazo);
 }

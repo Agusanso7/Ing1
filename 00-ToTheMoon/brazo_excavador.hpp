@@ -4,6 +4,7 @@
 enum Sentido { HORARIO, ANTI_HORARIO };
 
 class BrazoExcavador {
+  public:
   void girar(Sentido sentido, float velocidadRPM , float minutos);
   void cerrarPinza();
 };

@@ -9,12 +9,12 @@ int main(int argc, const char* argv[]) {
   }
 
   std::string tipoDePiso(argv[1]);
-  EstrategiaDeExcavacion estrategia;
+  EstrategiaDeExcavacion* estrategia;
 
   if(tipoDePiso == "DURO") {
-    estrategia = EstrategiaDePisoDuro();
+    estrategia = new EstrategiaDePisoDuro();
   } else if(tipoDePiso == "BLANDO") {
-    estrategia = EstrategiaDePisoBlando();
+    estrategia = new EstrategiaDePisoBlando();
   } else {
     std::cerr << "piso invalido" << std::endl;
     return -1;
@@ -23,5 +23,6 @@ int main(int argc, const char* argv[]) {
   LunarRover rover;
   rover.excavar(estrategia);
 
+  delete(estrategia);
   return 0;
 }

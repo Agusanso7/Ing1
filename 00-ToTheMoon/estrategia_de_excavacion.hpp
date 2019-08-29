@@ -5,7 +5,8 @@
 
 class EstrategiaDeExcavacion {
   public: 
-  virtual void excavar(BrazoExcavador& brazo);
+  virtual void excavar(BrazoExcavador& brazo) = 0;
+  virtual ~EstrategiaDeExcavacion() {};
 };
 
 class EstrategiaDePisoDuro : public EstrategiaDeExcavacion {
