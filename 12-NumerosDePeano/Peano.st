@@ -21,21 +21,19 @@ I class
 
 	^ unNumeroDePeano next.! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 13:59:03'!
+!I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:43:00'!
 - unNumeroDePeano
-	"
-	self assert: false.
-	"
+
 	self error: self descripcionDeErrorDeNumerosNegativosNoSoportados.! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:19:36'!
+!I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:43:29'!
 / unNumeroDePeano
 	
-	unNumeroDePeano  > self ifTrue:[
+	unNumeroDePeano  > self ifTrue:[		
 		self error: self descripcionDeErrorDeNoSePuedeDividirPorUnNumeroMayor.
 	].
 
-	^ I.! !
+	^ self.! !
 
 !I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:16:59'!
 > unNumeroDePeano
@@ -54,10 +52,10 @@ next
 
 	^ II.! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'A 8/26/2019 19:10:01'!
+!I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:44:11'!
 previous
 
-	self assert: false.! !
+	self error: self descripcionDeErrorDeNumerosNegativosNoSoportados.! !
 
 !I class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 13:12:02'!
 restaInversa: unNumeroDePeano
@@ -112,7 +110,7 @@ II class
 	"
 	^ unNumeroDePeano restaInversa: self.! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:15:26'!
+!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:44:47'!
 / unNumeroDePeano
 
 	unNumeroDePeano  > self ifTrue:[
@@ -125,14 +123,14 @@ II class
 		^ I + (self - unNumeroDePeano  / unNumeroDePeano). 
 	].! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:18:39'!
+!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:16'!
 > unNumeroDePeano
 
 	unNumeroDePeano = I ifTrue:[
-		^ true
+		^ true.
 	] ifFalse: [
-		^ self previous  > unNumeroDePeano  previous
-	]! !
+		^ self previous  > unNumeroDePeano  previous.
+	].! !
 
 !II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:16:16'!
 descripcionDeErrorDeNoSePuedeDividirPorUnNumeroMayor
@@ -142,14 +140,14 @@ descripcionDeErrorDeNoSePuedeDividirPorUnNumeroMayor
 descripcionDeErrorDeNumerosNegativosNoSoportados
 	^ 'Numeros negativos no soportados!!'! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:26:19'!
+!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:48:02'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
 	next := III.
 	previous := I.! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'A 8/26/2019 19:05:32'!
+!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:24'!
 next
 
 	next ifNil: [
@@ -157,12 +155,12 @@ next
 		next previous: self.
 	].
 
-	^ next! !
+	^ next.! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'A 8/26/2019 18:57:55'!
+!II class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:36'!
 previous
 
-	^ previous! !
+	^ previous.! !
 
 !II class methodsFor: 'as yet unclassified' stamp: 'A 8/26/2019 19:04:46'!
 previous: unNumeroDePeano
@@ -198,7 +196,7 @@ DenotativeObject subclass: #III
 III class
 	instanceVariableNames: 'next previous'!
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 * unNumeroDePeano
 	"|resultado|	
 
@@ -212,12 +210,12 @@ III class
 	
 	^ self previous * unNumeroDePeano  + unNumeroDePeano! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 + unNumeroDePeano
 
 	^ self previous + unNumeroDePeano next.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 - unNumeroDePeano
 	"
 	|resultado|	
@@ -232,7 +230,7 @@ III class
 	"
 	^ unNumeroDePeano restaInversa: self.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 / unNumeroDePeano
 
 	unNumeroDePeano  > self ifTrue:[
@@ -245,31 +243,31 @@ III class
 		^ I + (self - unNumeroDePeano  / unNumeroDePeano). 
 	].! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 > unNumeroDePeano
 
 	unNumeroDePeano = I ifTrue:[
-		^ true
+		^ true.
 	] ifFalse: [
-		^ self previous  > unNumeroDePeano  previous
-	]! !
+		^ self previous  > unNumeroDePeano  previous.
+	].! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 descripcionDeErrorDeNoSePuedeDividirPorUnNumeroMayor
 	^ 'No se puede dividir por un numero mayor!!'.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 descripcionDeErrorDeNumerosNegativosNoSoportados
 	^ 'Numeros negativos no soportados!!'! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:26:19'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:48:02'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
 	next := IIII.
 	previous := II.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 next
 
 	next ifNil: [
@@ -277,19 +275,19 @@ next
 		next previous: self.
 	].
 
-	^ next! !
+	^ next.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 previous
 
-	^ previous! !
+	^ previous.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 previous: unNumeroDePeano
 
 	previous := unNumeroDePeano.! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 removeAllNext
 
 	next ifNotNil:
@@ -299,7 +297,7 @@ removeAllNext
 		next := nil.
 	]! !
 
-!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!III class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 restaInversa: unNumeroDePeano
 
 	^ self previous restaInversa: unNumeroDePeano previous.! !
@@ -318,7 +316,7 @@ DenotativeObject subclass: #IIII
 IIII class
 	instanceVariableNames: 'next previous'!
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 * unNumeroDePeano
 	"|resultado|	
 
@@ -332,12 +330,12 @@ IIII class
 	
 	^ self previous * unNumeroDePeano  + unNumeroDePeano! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 + unNumeroDePeano
 
 	^ self previous + unNumeroDePeano next.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 - unNumeroDePeano
 	"
 	|resultado|	
@@ -352,7 +350,7 @@ IIII class
 	"
 	^ unNumeroDePeano restaInversa: self.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:22:24'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 / unNumeroDePeano
 
 	unNumeroDePeano  > self ifTrue:[
@@ -360,36 +358,36 @@ IIII class
 	].
 
 	self = unNumeroDePeano  ifTrue:[
-		^ I
+		^ I.
 	] ifFalse:[
 		^ I + (self - unNumeroDePeano  / unNumeroDePeano). 
 	].! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 > unNumeroDePeano
 
 	unNumeroDePeano = I ifTrue:[
-		^ true
+		^ true.
 	] ifFalse: [
-		^ self previous  > unNumeroDePeano  previous
-	]! !
+		^ self previous  > unNumeroDePeano  previous.
+	].! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 descripcionDeErrorDeNoSePuedeDividirPorUnNumeroMayor
 	^ 'No se puede dividir por un numero mayor!!'.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 descripcionDeErrorDeNumerosNegativosNoSoportados
 	^ 'Numeros negativos no soportados!!'! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:26:19'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:48:02'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
 	next := nil.
 	previous := III.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 next
 
 	next ifNil: [
@@ -397,19 +395,19 @@ next
 		next previous: self.
 	].
 
-	^ next! !
+	^ next.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 previous
 
-	^ previous! !
+	^ previous.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 previous: unNumeroDePeano
 
 	previous := unNumeroDePeano.! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 removeAllNext
 
 	next ifNotNil:
@@ -419,7 +417,7 @@ removeAllNext
 		next := nil.
 	]! !
 
-!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:20:31'!
+!IIII class methodsFor: 'as yet unclassified' stamp: 'A 8/29/2019 14:45:58'!
 restaInversa: unNumeroDePeano
 
 	^ self previous restaInversa: unNumeroDePeano previous.! !
