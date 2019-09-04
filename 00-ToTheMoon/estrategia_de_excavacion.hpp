@@ -19,4 +19,9 @@ class EstrategiaDePisoBlando : public EstrategiaDeExcavacion {
   void excavar(BrazoExcavador& brazo);
 };
 
+class EstrategiaDePisoIntermedio : public EstrategiaDeExcavacion {
+  public: 
+  void excavar(BrazoExcavador& brazo);
+};
+
 #endif

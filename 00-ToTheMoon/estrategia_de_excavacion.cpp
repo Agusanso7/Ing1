@@ -12,3 +12,9 @@ void EstrategiaDePisoBlando::excavar(BrazoExcavador& brazo) {
   brazo.cerrarPinza();
   brazo.girar(HORARIO, 100, 10);
 }
+
+void EstrategiaDePisoIntermedio::excavar(BrazoExcavador& brazo) {
+  brazo.girar(HORARIO, 150, 5);
+  brazo.cerrarPinza();
+  brazo.girar(ANTI_HORARIO, 100, 10);
+}

@@ -4,7 +4,7 @@
 
 int main(int argc, const char* argv[]) {
   if(argc != 2) {
-    std::cerr << "uso: [DURO|BLANDO]" << std::endl;
+    std::cerr << "uso: [DURO|INTERMEDIO|BLANDO]" << std::endl;
     return -1;
   }
 
@@ -15,6 +15,8 @@ int main(int argc, const char* argv[]) {
     estrategia = new EstrategiaDePisoDuro();
   } else if(tipoDePiso == "BLANDO") {
     estrategia = new EstrategiaDePisoBlando();
+  } else if(tipoDePiso == "INTERMEDIO") {
+    estrategia = new EstrategiaDePisoIntermedio();
   } else {
     std::cerr << "piso invalido" << std::endl;
     return -1;
