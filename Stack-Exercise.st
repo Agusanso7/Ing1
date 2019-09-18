@@ -138,10 +138,68 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'sentences matchingPrefix nonMatchingPrefix emptyStack loadedStack matchingSentences nonMatchingSentences allSentences prefixWithSpaces emptyPrefix'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:04:40'!
+test01FindWithEmptyStackDoesNotMatchAnything! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 18:57:38'!
+test02FindWithLoadedStackReturnsMatchingSentences! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:01:52'!
+test03FindWithLoadedStackDoesNotReturnNonMatchingSentences! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:02:13'!
+test04FindWithEmptyStackDoesNotChangeTheStack! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:02:24'!
+test05FindWithLoadedStackDoesNotChangeTheStack! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:03:06'!
+test06FindWithEmptyPrefixFails! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:03:19'!
+test07FindWithPrefixIncludingSpacesFails! !
+
+
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'ss 9/18/2019 19:04:09'!
+setUp
+
+	matchingSentences := OrderedCollection new.
+	
+	matchingSentences addLast: 'the first sentence'.
+	
+	matchingSentences addLast: 'the second sentence'.
+	
+	matchingSentences addLast: 'the many sentence?'.
+	
+	
+	nonMatchingSentences := OrderedCollection new.
+		
+	nonMatchingSentences addLast: 'this sentence does not match'.
+	
+	nonMatchingSentences addLast: 'this sentence does not match either'.
+	
+	
+	allSentences := OrderedCollection new.
+	allSentences addAll: nonMatchingSentences.
+	allSentences addAll: matchingSentences.
+	
+	matchingPrefix := 'the'.
+	
+	nonMatchingPrefix := 'nope'.
+	
+	prefixWithSpaces := 's p a c e s'.
+
+	emptyPrefix := ''.
+	
+	emptyStack := OOStack new.
+	
+	loadedStack := OOStack new.
+	allSentences do: [:sentence | loadedStack push: sentence].! !
 
 
 !classDefinition: #OOStack category: #'Stack-Exercise'!
@@ -206,9 +264,12 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'finding' stamp: 'a s 9/16/2019 21:39:15'!
+!SentenceFinderByPrefix methodsFor: 'finding' stamp: 'ss 9/18/2019 19:07:28'!
 find: prefix
 	|matchingSentences allSentences|
+	
+	prefix isEmpty ifTrue: [self error: self class emptyPrefixErrorDescription].
+	(prefix includes: ' ') ifTrue: [self error: self class emptyPrefixErrorDescription].
 
 	allSentences  := OrderedCollection new.	
 	matchingSentences  := OrderedCollection new.
@@ -243,6 +304,17 @@ SentenceFinderByPrefix class
 newWithStack: aStack
 
 	self new initializeWithStack: aStack! !
+
+
+!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'ss 9/18/2019 19:09:37'!
+emptyPrefixErrorDescription
+
+	^'prefix cannot be empty'! !
+
+!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'ss 9/18/2019 19:09:50'!
+prefixWithSpacesErrorDescription
+
+	^'prefix cannot contain spaces'! !
 
 
 !classDefinition: #StackElement category: #'Stack-Exercise'!
