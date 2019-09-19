@@ -138,68 +138,146 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: 'sentences matchingPrefix nonMatchingPrefix emptyStack loadedStack matchingSentences nonMatchingSentences allSentences prefixWithSpaces emptyPrefix'
+	instanceVariableNames: 'sentences matchingPrefix nonMatchingPrefix emptyStack loadedStack matchingSentences nonMatchingSentences allSentences prefixWithSpaces emptyPrefix emptyOrderedCollection'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:04:40'!
-test01FindWithEmptyStackDoesNotMatchAnything! !
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/18/2019 23:47:33'!
+test01FindWithEmptyStackDoesNotMatchAnything
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 18:57:38'!
-test02FindWithLoadedStackReturnsMatchingSentences! !
+	| sentenceFinderWithEmptyStack |
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:01:52'!
-test03FindWithLoadedStackDoesNotReturnNonMatchingSentences! !
+	sentenceFinderWithEmptyStack := SentenceFinderByPrefix newWithStack: emptyStack.
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:02:13'!
-test04FindWithEmptyStackDoesNotChangeTheStack! !
+	self assert: (sentenceFinderWithEmptyStack find: 'the') = emptyOrderedCollection.
+	self assert: (sentenceFinderWithEmptyStack find: 'nope') = emptyOrderedCollection.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:02:24'!
-test05FindWithLoadedStackDoesNotChangeTheStack! !
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:01:28'!
+test02FindWithLoadedStackReturnsMatchingSentences
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:03:06'!
-test06FindWithEmptyPrefixFails! !
+	| senteceFinderWithLoadedStack |
+	
+	senteceFinderWithLoadedStack := SentenceFinderByPrefix newWithStack: loadedStack.
+											
+	self assert: (senteceFinderWithLoadedStack find: matchingPrefix) = matchingSentences.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'ss 9/18/2019 19:03:19'!
-test07FindWithPrefixIncludingSpacesFails! !
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:06:26'!
+test03FindWithLoadedStackDoesNotReturnNonMatchingSentences
+
+	| senteceFinderWithLoadedStack |
+	
+	senteceFinderWithLoadedStack := SentenceFinderByPrefix newWithStack: loadedStack.
+											
+	self assert: (senteceFinderWithLoadedStack find: nonMatchingPrefix) = emptyOrderedCollection.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:22:38'!
+test04FindWithEmptyStackDoesNotChangeTheStack
+
+	| sentenceFinderWithEmptyStack emptyStackCopy |
+
+	emptyStackCopy := emptyStack copy.
+	
+	sentenceFinderWithEmptyStack := SentenceFinderByPrefix newWithStack: emptyStack.
+	
+	sentenceFinderWithEmptyStack find: 'the'.	
+	self assert: emptyStackCopy = emptyStack.
+	
+	sentenceFinderWithEmptyStack find: 'nope'.	
+	self assert: emptyStackCopy = emptyStack.
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:24:47'!
+test05FindWithLoadedStackDoesNotChangeTheStack
+
+	| senteceFinderWithLoadedStack loadedStackCopy |
+
+	loadedStackCopy := loadedStack copy.
+	
+	senteceFinderWithLoadedStack := SentenceFinderByPrefix newWithStack: emptyStack.
+	
+	senteceFinderWithLoadedStack find: 'the'.	
+	self assert: loadedStackCopy = loadedStack.
+	
+	senteceFinderWithLoadedStack find: 'nope'.	
+	self assert: loadedStackCopy = loadedStack.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:31:04'!
+test06FindWithEmptyPrefixFails
+
+	| sentenceFinderWithEmptyStack senteceFinderWithLoadedStack |
+
+	sentenceFinderWithEmptyStack := SentenceFinderByPrefix newWithStack: emptyStack.
+
+	self should: [ sentenceFinderWithEmptyStack find: emptyPrefix ]
+		 raise: Error
+		 withExceptionDo: [ :anError | self assert: anError messageText equals: SentenceFinderByPrefix emptyPrefixErrorDescription ]. 
+	
+	senteceFinderWithLoadedStack := SentenceFinderByPrefix newWithStack: loadedStack.
+											
+	self should: [ senteceFinderWithLoadedStack find: emptyPrefix ]
+		 raise: Error
+		 withExceptionDo: [ :anError | self assert: anError messageText equals: SentenceFinderByPrefix emptyPrefixErrorDescription ]. 
+		
+
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'a s 9/19/2019 00:42:38'!
+test07FindWithPrefixIncludingSpacesFails
+
+	| sentenceFinderWithEmptyStack senteceFinderWithLoadedStack |
+
+	sentenceFinderWithEmptyStack := SentenceFinderByPrefix newWithStack: emptyStack.
+
+	self should: [ sentenceFinderWithEmptyStack find: prefixWithSpaces ]
+		 raise: Error
+		 withExceptionDo: [ :anError | self assert: anError messageText equals: SentenceFinderByPrefix prefixWithSpacesErrorDescription ]. 
+	
+	senteceFinderWithLoadedStack := SentenceFinderByPrefix newWithStack: loadedStack.
+											
+	self should: [ senteceFinderWithLoadedStack find: prefixWithSpaces ]
+		 raise: Error
+		 withExceptionDo: [ :anError | self assert: anError messageText equals: SentenceFinderByPrefix prefixWithSpacesErrorDescription ].! !
 
 
-!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'ss 9/18/2019 19:04:09'!
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'a s 9/19/2019 00:43:20'!
 setUp
 
 	matchingSentences := OrderedCollection new.
-	
+
 	matchingSentences addLast: 'the first sentence'.
-	
 	matchingSentences addLast: 'the second sentence'.
-	
 	matchingSentences addLast: 'the many sentence?'.
-	
-	
+
 	nonMatchingSentences := OrderedCollection new.
 		
 	nonMatchingSentences addLast: 'this sentence does not match'.
-	
 	nonMatchingSentences addLast: 'this sentence does not match either'.
-	
-	
+
 	allSentences := OrderedCollection new.
 	allSentences addAll: nonMatchingSentences.
 	allSentences addAll: matchingSentences.
-	
-	matchingPrefix := 'the'.
-	
-	nonMatchingPrefix := 'nope'.
-	
-	prefixWithSpaces := 's p a c e s'.
 
+	matchingPrefix := 'the'.
+	nonMatchingPrefix := 'nope'.
+	prefixWithSpaces := 's p a c e s'.
 	emptyPrefix := ''.
-	
+
 	emptyStack := OOStack new.
-	
+	emptyOrderedCollection := OrderedCollection new.
+
 	loadedStack := OOStack new.
-	allSentences do: [:sentence | loadedStack push: sentence].! !
+	allSentences do: [:sentence | loadedStack push: sentence].
+
+
+	! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SentenceFinderByPrefixTest class' category: #'Stack-Exercise'!
+SentenceFinderByPrefixTest class
+	instanceVariableNames: 'emptyStack'!
 
 
 !classDefinition: #OOStack category: #'Stack-Exercise'!
@@ -208,16 +286,6 @@ Object subclass: #OOStack
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
-
-!OOStack methodsFor: 'accesing' stamp: 'a s 9/16/2019 21:08:45'!
-isEmpty
-
-	^currentStackElement amountOfElements = 0! !
-
-!OOStack methodsFor: 'accesing' stamp: 'a s 9/16/2019 21:01:42'!
-size
-
-	^currentStackElement amountOfElements ! !
 
 !OOStack methodsFor: 'accesing' stamp: 'a s 9/16/2019 21:02:11'!
 top
@@ -238,6 +306,34 @@ pop
 initialize
 
 	currentStackElement := BottomStackElement new! !
+
+
+!OOStack methodsFor: 'comparing' stamp: 'a s 9/19/2019 00:19:30'!
+= otherStack
+	
+	| myElement otherElement |
+	
+	self size  = otherStack size ifFalse: [^ false]. 
+	
+	[self size = 0] whileFalse:[
+		myElement := self pop.
+		otherElement := otherStack pop.
+		myElement = otherElement ifFalse: [^ false].
+	].
+	
+	^ true
+
+	! !
+
+!OOStack methodsFor: 'comparing' stamp: 'a s 9/16/2019 21:08:45'!
+isEmpty
+
+	^currentStackElement amountOfElements = 0! !
+
+!OOStack methodsFor: 'comparing' stamp: 'a s 9/16/2019 21:01:42'!
+size
+
+	^currentStackElement amountOfElements ! !
 
 
 !OOStack methodsFor: 'adding' stamp: 'a s 9/16/2019 21:01:12'!
@@ -264,12 +360,12 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'finding' stamp: 'ss 9/18/2019 19:07:28'!
+!SentenceFinderByPrefix methodsFor: 'finding' stamp: 'a s 9/19/2019 00:44:56'!
 find: prefix
 	|matchingSentences allSentences|
 	
 	prefix isEmpty ifTrue: [self error: self class emptyPrefixErrorDescription].
-	(prefix includes: ' ') ifTrue: [self error: self class emptyPrefixErrorDescription].
+	(prefix includesSubString: ' ') ifTrue: [self error: self class prefixWithSpacesErrorDescription].
 
 	allSentences  := OrderedCollection new.	
 	matchingSentences  := OrderedCollection new.
@@ -277,8 +373,8 @@ find: prefix
 	[stackToSearch isEmpty ] whileFalse: [
 		|topSentence|
 		topSentence := stackToSearch pop.
-		allSentences addFirst: topSentence.
-		(topSentence beginsWith: prefix) ifTrue: [matchingSentences addLast: topSentence]. 
+		allSentences addLast: topSentence.
+		(topSentence beginsWith: prefix) ifTrue: [matchingSentences addFirst: topSentence]. 
 	].
 
 	allSentences do: [ :sentence | stackToSearch push: sentence ].
@@ -300,21 +396,21 @@ initializeWithStack: aStackToSearch
 SentenceFinderByPrefix class
 	instanceVariableNames: ''!
 
-!SentenceFinderByPrefix class methodsFor: 'initialization' stamp: 'a s 9/16/2019 21:21:11'!
+!SentenceFinderByPrefix class methodsFor: 'initialization' stamp: 'a s 9/18/2019 23:36:36'!
 newWithStack: aStack
 
-	self new initializeWithStack: aStack! !
+	^ self new initializeWithStack: aStack! !
 
 
-!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'ss 9/18/2019 19:09:37'!
+!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'a s 9/19/2019 00:37:48'!
 emptyPrefixErrorDescription
 
-	^'prefix cannot be empty'! !
+	^ 'prefix cannot be empty'! !
 
-!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'ss 9/18/2019 19:09:50'!
+!SentenceFinderByPrefix class methodsFor: 'error descriptions' stamp: 'a s 9/19/2019 00:37:43'!
 prefixWithSpacesErrorDescription
 
-	^'prefix cannot contain spaces'! !
+	^ 'prefix cannot contain spaces'! !
 
 
 !classDefinition: #StackElement category: #'Stack-Exercise'!
