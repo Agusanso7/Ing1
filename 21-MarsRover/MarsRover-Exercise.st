@@ -187,6 +187,17 @@ south
 west
 	^West new! !
 
+
+!MarsRoverTest methodsFor: 'testing invalid' stamp: 'a s 10/10/2019 16:50:27'!
+test16invalidMoveError
+
+	| marsRover |
+	
+	marsRover := MarsRover newAt: 0@0 withOrientation: self east.
+
+	self should: [marsRover do: 'fasdfs'] raise: Error description: MarsRover invalidSequenceOfMoverErrorDescription.
+! !
+
 
 !classDefinition: #MarsRover category: #'MarsRover-Exercise'!
 Object subclass: #MarsRover
@@ -198,6 +209,18 @@ Object subclass: #MarsRover
 !MarsRover methodsFor: 'private' stamp: 'a s 10/9/2019 19:13:21'!
 doSingleMove: aMove
 	(self singleActionForMove at: aMove) value! !
+
+!MarsRover methodsFor: 'private' stamp: 'a s 10/10/2019 16:45:22'!
+isInvalidSequenceOfMoves: aSecuenceOfMoves
+
+	aSecuenceOfMoves do: [:aMove | (self isValidSingleMove: aMove) ifFalse: [^true]. ].
+	^false
+	! !
+
+!MarsRover methodsFor: 'private' stamp: 'a s 10/10/2019 16:46:45'!
+isValidSingleMove: aMove
+
+	^ aMove=$f or: aMove=$b or: aMove=$r or: aMove=$l! !
 
 !MarsRover methodsFor: 'private' stamp: 'a s 10/9/2019 19:11:24'!
 singleActionForMove
@@ -211,8 +234,10 @@ singleActionForMove
 	^singleActionForMove.! !
 
 
-!MarsRover methodsFor: 'moving' stamp: 'a s 10/9/2019 19:14:28'!
+!MarsRover methodsFor: 'moving' stamp: 'a s 10/10/2019 16:45:30'!
 do: aSecuenceOfMoves
+
+	(self isInvalidSequenceOfMoves: aSecuenceOfMoves) ifTrue: [self error: self class invalidSequenceOfMoverErrorDescription].
 
 	aSecuenceOfMoves do: [ :aMove | self doSingleMove: aMove].
 ! !
@@ -268,6 +293,10 @@ moveForwardToWest
 !classDefinition: 'MarsRover class' category: #'MarsRover-Exercise'!
 MarsRover class
 	instanceVariableNames: ''!
+
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'a s 10/10/2019 16:15:39'!
+invalidSequenceOfMoverErrorDescription
+	^ 'The sequence of moves is invalid !!!!'! !
 
 !MarsRover class methodsFor: 'as yet unclassified' stamp: 'a s 10/9/2019 18:59:32'!
 newAt: aPosition withOrientation: anOrientation
