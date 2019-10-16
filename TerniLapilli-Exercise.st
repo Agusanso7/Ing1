@@ -53,7 +53,7 @@ test04ItsOTurnAfterXPlays
 	
 	! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/10/2019 19:11:51'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:03'!
 test05XCantPlayTwiceInARow
 
 	| terniLapiliGame |
@@ -66,7 +66,7 @@ test05XCantPlayTwiceInARow
 		withExceptionDo: [:error | 
 			self assert: error messageText  = TerniLapilli invalidTurnErrorDescription.
 			self assert: terniLapiliGame numberOfChips equals: 1. 
-		].
+	].
 	
 	
 	! !
@@ -98,7 +98,7 @@ test07ItsXTurnAfterO
 	self assert: terniLapiliGame isPlayingO not.
 	self assert: terniLapiliGame isPlayingX.! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/10/2019 19:48:06'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:15'!
 test08XCantPutTwoChipsInTheSamePlace
 
 	| terniLapiliGame |
@@ -115,7 +115,7 @@ test08XCantPutTwoChipsInTheSamePlace
 				self assert: terniLapiliGame numberOfChips equals: 2.
 				self assert: (terniLapiliGame isXAt: 'a1').
 				self assert: (terniLapiliGame isOAt: 'a2').
-			].
+	].
 		
 	self should: [terniLapiliGame putXAt: 'a2']
 		raise: Error - MessageNotUnderstood 
@@ -124,9 +124,9 @@ test08XCantPutTwoChipsInTheSamePlace
 				self assert: terniLapiliGame numberOfChips equals: 2.
 				self assert: (terniLapiliGame isXAt: 'a1').
 				self assert: (terniLapiliGame isOAt: 'a2').
-			].! !
+	].! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/10/2019 19:50:46'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:24'!
 test09OCantPutTwoChipsInTheSamePlace
 
 	| terniLapiliGame |
@@ -145,7 +145,7 @@ test09OCantPutTwoChipsInTheSamePlace
 				self assert: (terniLapiliGame isXAt: 'a1').
 				self assert: (terniLapiliGame isXAt: 'a3').
 				self assert: (terniLapiliGame isOAt: 'a2').
-			].
+	].
 		
 			
 	self should: [terniLapiliGame putOAt: 'a3']
@@ -156,7 +156,7 @@ test09OCantPutTwoChipsInTheSamePlace
 				self assert: (terniLapiliGame isXAt: 'a1').
 				self assert: (terniLapiliGame isXAt: 'a3').
 				self assert: (terniLapiliGame isOAt: 'a2').
-			].! !
+	].! !
 
 !TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/10/2019 19:53:40'!
 test10WhenGameBeginsItisNotOver
@@ -311,7 +311,7 @@ test19OWinsIfItHas3ChipsInTopRow
 	self assert: terniLapiliGame hasPlayerOWon.
 	self assert: terniLapiliGame hasPlayerXWon not.! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 18:50:31'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:37'!
 test20OCantPlaceMoreChipsIfXWon
 	| terniLapiliGame |
 	
@@ -330,9 +330,9 @@ test20OCantPlaceMoreChipsIfXWon
 			self assert: terniLapiliGame  hasPlayerXWon.
 			self assert: terniLapiliGame numberOfChips equals: 5.
 			self assert: (terniLapiliGame isOAt: 'a3') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 18:56:09'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:44'!
 test21XCantPlaceMoreThan3Chips
 	| terniLapiliGame |
 	
@@ -351,9 +351,9 @@ test21XCantPlaceMoreThan3Chips
 			self assert: error messageText = TerniLapilli cantPlaceMoreChipsErrorDescription.
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isXAt: 'b1') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:02:42'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:51'!
 test22XCantMoveChipsHavingPlayedLessThan3
 	| terniLapiliGame |
 	
@@ -369,7 +369,7 @@ test22XCantMoveChipsHavingPlayedLessThan3
 			self assert: terniLapiliGame numberOfChips equals: 2.
 			self assert: (terniLapiliGame isXAt: 'a1').
 			self assert: (terniLapiliGame isXAt: 'b2') not.
-		]! !
+	]! !
 
 !TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:09:44'!
 test23XCanMoveAChipAfterHavingPlaced3
@@ -390,7 +390,7 @@ test23XCanMoveAChipAfterHavingPlaced3
 	self assert: (terniLapiliGame isXAt: 'a1') not.	
 	! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:17:53'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:55:58'!
 test24XCantMoveAChipToAnOccupiedSpace
 	| terniLapiliGame |
 	
@@ -410,10 +410,10 @@ test24XCantMoveAChipToAnOccupiedSpace
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isXAt: 'b2') not.
 			self assert: (terniLapiliGame isXAt: 'a1').	
-		].
+	].
 	! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:20:22'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:03'!
 test25XCantMoveAChipFromSpaceWithoutItsChip
 	| terniLapiliGame |
 	
@@ -434,7 +434,7 @@ test25XCantMoveAChipFromSpaceWithoutItsChip
 			self assert: (terniLapiliGame isXAt: 'b3') not.
 			self assert: (terniLapiliGame isXAt: 'a3') not.
 			self assert: (terniLapiliGame isOAt: 'a3').	
-		].
+	].
 	! !
 
 !TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:28:08'!
@@ -457,7 +457,7 @@ test26OCanMoveChipsAfterHavingPlaced3
 	self assert: (terniLapiliGame isOAt: 'a2') not.
 	! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:30:27'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:27'!
 test27OCantPlaceMoreThan3Chips
 	| terniLapiliGame |
 	
@@ -477,9 +477,9 @@ test27OCantPlaceMoreThan3Chips
 			self assert: error messageText = TerniLapilli cantPlaceMoreChipsErrorDescription.
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isOAt: 'a1') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:39:03'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:32'!
 test28OCantMoveChipsTwiceInARow
 	| terniLapiliGame |
 	
@@ -502,9 +502,9 @@ test28OCantMoveChipsTwiceInARow
 			self assert: (terniLapiliGame isOAt: 'b2').
 			self assert: (terniLapiliGame isOAt: 'b3') not.
 			self assert: terniLapiliGame isPlayingX.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 19:41:44'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:37'!
 test29XCantMoveChipsTwiceInARow
 	| terniLapiliGame |
 	
@@ -526,9 +526,9 @@ test29XCantMoveChipsTwiceInARow
 			self assert: (terniLapiliGame isXAt: 'c2').
 			self assert: (terniLapiliGame isXAt: 'c1') not.
 			self assert: terniLapiliGame isPlayingO.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:02:30'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:40'!
 test30XCantMoveChipsFromBottomRowtoTopRow
 	| terniLapiliGame |
 	
@@ -548,9 +548,9 @@ test30XCantMoveChipsFromBottomRowtoTopRow
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isXAt: 'a1').
 			self assert: (terniLapiliGame isXAt: 'c1') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:17:28'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:46'!
 test31XCantMoveChipsFromLeftColumntoRightColumn
 	| terniLapiliGame |
 	
@@ -570,9 +570,9 @@ test31XCantMoveChipsFromLeftColumntoRightColumn
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isXAt: 'a1').
 			self assert: (terniLapiliGame isXAt: 'b3') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:21:13'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:54'!
 test32OCantMoveChipsFromLeftColumntoRightColumn
 	| terniLapiliGame |
 	
@@ -593,9 +593,9 @@ test32OCantMoveChipsFromLeftColumntoRightColumn
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isOAt: 'a3').
 			self assert: (terniLapiliGame isOAt: 'b3') not.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:30:45'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:56:59'!
 test33CantPutChipInUnexistingRow
 	| terniLapiliGame |
 	
@@ -606,9 +606,9 @@ test33CantPutChipInUnexistingRow
 		withExceptionDo: [:error | 
 			self assert: error messageText = TerniLapilli unexistingPositionErrorDescription .
 			self assert: terniLapiliGame numberOfChips equals: 0.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:31:02'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:57:03'!
 test34CantPutChipInUnexistingColumn
 	| terniLapiliGame |
 	
@@ -619,9 +619,9 @@ test34CantPutChipInUnexistingColumn
 		withExceptionDo: [:error | 
 			self assert: error messageText = TerniLapilli unexistingPositionErrorDescription .
 			self assert: terniLapiliGame numberOfChips equals: 0.
-		]! !
+	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'ss 10/13/2019 20:35:00'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 15:54:34'!
 test35CantMoveChipToUnexistingPosition
 	| terniLapiliGame |
 	
@@ -640,7 +640,29 @@ test35CantMoveChipToUnexistingPosition
 			self assert: error messageText = TerniLapilli unexistingPositionErrorDescription .
 			self assert: terniLapiliGame numberOfChips equals: 6.
 			self assert: (terniLapiliGame isXAt: 'a1').
-		]! !
+	]! !
+
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 16:53:42'!
+test36CantMoveFromSideToAnotherSide
+	| terniLapiliGame |
+	
+	terniLapiliGame := TerniLapilli startNewGame.
+	
+	terniLapiliGame putXAt: 'b1'.
+	terniLapiliGame putOAt: 'a1'.
+	terniLapiliGame putXAt: 'a2'.
+	terniLapiliGame putOAt: 'b3'.
+	terniLapiliGame putXAt: 'a3'.
+	terniLapiliGame putOAt: 'c3'.
+	
+	self  should: [terniLapiliGame moveXChipFrom: 'b1' to: 'c2']
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error | 
+			self assert: error messageText = TerniLapilli invalidMovementErrorDescription .
+			self assert: terniLapiliGame numberOfChips equals: 6.
+			self assert: (terniLapiliGame isXAt: 'b1').
+			self assert: (terniLapiliGame isXAt: 'c2') not.
+	]! !
 
 
 !classDefinition: #TerniLapilli category: #'TerniLapilli-Exercise'!
@@ -753,19 +775,18 @@ hasAWinningRowIn: chipsPositions
 hasEnoughChipsToWinIn: chipPositions
 	^chipPositions size = 3 ! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'a s 10/10/2019 21:14:46'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:48:44'!
 hasWonWithChipsIn: chipsPositions
+
 	^(self hasEnoughChipsToWinIn: chipsPositions) and: [
-		(self hasAWinningRowIn: chipsPositions ) or: [
-			(self hasAWinningColumnIn: chipsPositions) or: [
-				self hasAWinningDiagonalIn: chipsPositions 
-			]
-		]
+		(self hasAWinningRowIn: chipsPositions ) or:
+		(self hasAWinningColumnIn: chipsPositions) or:
+		(self hasAWinningDiagonalIn: chipsPositions)
 	]! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'ss 10/13/2019 20:18:46'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:25:32'!
 isInvalidMovementFrom: initialPosition to: nextPosition 
-	| initialPositionRow nextPositionRow initialPositionColumn nextPositionColumn |
+	| initialPositionRow nextPositionRow initialPositionColumn nextPositionColumn movesFromColumnToAnotherColumn movesFromRowToAnotherRow movesFromASideToAnotherSide |
 	
 	initialPositionRow := initialPosition at: 1.
 	nextPositionRow := nextPosition at: 1.
@@ -773,16 +794,31 @@ isInvalidMovementFrom: initialPosition to: nextPosition
 	initialPositionColumn := initialPosition at: 2.
 	nextPositionColumn := nextPosition at: 2.
 	
-	^(Set with: initialPositionRow with: nextPositionRow) = #($a $c) asSet or: [
-		(Set with: initialPositionColumn with: nextPositionColumn) = #($1 $3) asSet.
-		].! !
+	movesFromRowToAnotherRow := (Set with: initialPositionColumn with: nextPositionColumn) = #($1 $3) asSet.
+	movesFromColumnToAnotherColumn := (Set with: initialPositionRow with: nextPositionRow) = #($a $c) asSet.
+	movesFromASideToAnotherSide := (self isPositionASide: initialPosition) and: (self isPositionASide: nextPosition).
+	
+	^movesFromRowToAnotherRow or: movesFromColumnToAnotherColumn or: movesFromASideToAnotherSide! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'ss 10/13/2019 20:31:41'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:47:04'!
+isPositionASide: aPosition
+
+	| initialPositionColumn initialPositionRow |
+	initialPositionRow := aPosition at: 1.	
+	initialPositionColumn := aPosition at: 2.
+	
+	^ (initialPositionRow = $b and: initialPositionColumn ~= $2) or:
+	   (initialPositionColumn = $2 and: initialPositionRow ~= $b)
+! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:43:34'!
 isValid: aPosition
 
-	^(aPosition size = 2 and: [#($a $b $c) includes: (aPosition at: 1)]) and: [#($1 $2 $3) includes: (aPosition at: 2)]! !
+	^aPosition size = 2 and: 
+	  (#($a $b $c) includes: (aPosition at: 1)) and: 
+	  (#($1 $2 $3) includes: (aPosition at: 2))! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'ss 10/13/2019 20:35:24'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:33:27'!
 moveChipIn: playerChipPositions from: initialPosition to: nextPosition 
 	playerChipPositions size = 3 ifFalse: [self error: self class cantMoveChipsYetErrorDescription].
 	(self isValid: nextPosition) ifFalse: [self error: self class unexistingPositionErrorDescription ].
