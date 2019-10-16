@@ -642,7 +642,7 @@ test35CantMoveChipToUnexistingPosition
 			self assert: (terniLapiliGame isXAt: 'a1').
 	]! !
 
-!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 16:53:42'!
+!TerniLapilliTest methodsFor: 'testing' stamp: 'a s 10/16/2019 17:10:41'!
 test36CantMoveFromSideToAnotherSide
 	| terniLapiliGame |
 	
@@ -655,7 +655,7 @@ test36CantMoveFromSideToAnotherSide
 	terniLapiliGame putXAt: 'a3'.
 	terniLapiliGame putOAt: 'c3'.
 	
-	self  should: [terniLapiliGame moveXChipFrom: 'b1' to: 'c2']
+	self should: [terniLapiliGame moveXChipFrom: 'b1' to: 'c2']
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [:error | 
 			self assert: error messageText = TerniLapilli invalidMovementErrorDescription .
@@ -689,38 +689,29 @@ isPlayingX
 	^ turn = #X
 	! !
 
-!TerniLapilli methodsFor: 'playing' stamp: 'ss 10/13/2019 20:21:47'!
+!TerniLapilli methodsFor: 'playing' stamp: 'a s 10/16/2019 18:50:21'!
 moveOChipFrom: initialPosition to: nextPosition 
-	self isPlayingO ifFalse: [self error: self class invalidTurnErrorDescription ].
-	
-	self moveChipIn: oChipPositions from: initialPosition to: nextPosition.
+	self state moveOChipFrom: initialPosition to: nextPosition.
 	
 	turn := #X! !
 
-!TerniLapilli methodsFor: 'playing' stamp: 'ss 10/13/2019 20:22:12'!
+!TerniLapilli methodsFor: 'playing' stamp: 'a s 10/16/2019 18:50:41'!
 moveXChipFrom: initialPosition to: nextPosition
-	self isPlayingX ifFalse: [self error: self class invalidTurnErrorDescription ].
-
-	self moveChipIn: xChipPositions from: initialPosition to: nextPosition.
+	self state moveXChipFrom: initialPosition to: nextPosition.
 
 	turn := #O! !
 
-!TerniLapilli methodsFor: 'playing' stamp: 'ss 10/13/2019 19:45:35'!
+!TerniLapilli methodsFor: 'playing' stamp: 'a s 10/16/2019 18:39:21'!
 putOAt: aPosition
-	self isPlayingO ifFalse: [self error: self class invalidTurnErrorDescription ].
-	self isOver ifTrue: [self error: self class gameIsAlreadyOverErrorDescription ].
-
-	self putChipIn: oChipPositions at: aPosition.
+	self state putOAt: aPosition.
 
 	turn := #X.
 	
 	! !
 
-!TerniLapilli methodsFor: 'playing' stamp: 'ss 10/13/2019 19:46:17'!
+!TerniLapilli methodsFor: 'playing' stamp: 'a s 10/16/2019 18:50:54'!
 putXAt: aPosition
-	self isPlayingX ifFalse: [self error: self class invalidTurnErrorDescription ].
-
-	self putChipIn: xChipPositions at: aPosition.
+	self state putXAt: aPosition.
 
 	turn := #O.! !
 
@@ -733,9 +724,9 @@ hasPlayerOWon
 hasPlayerXWon
 	^self hasWonWithChipsIn: xChipPositions ! !
 
-!TerniLapilli methodsFor: 'winning' stamp: 'a s 10/10/2019 21:00:36'!
+!TerniLapilli methodsFor: 'winning' stamp: 'a s 10/16/2019 17:14:23'!
 isOver
-	^self hasPlayerXWon or: [self hasPlayerOWon]! !
+	^self hasPlayerXWon or: self hasPlayerOWon! !
 
 
 !TerniLapilli methodsFor: 'testing' stamp: 'a s 10/10/2019 19:28:26'!
@@ -761,18 +752,19 @@ hasAWinningColumnIn: chipsPositions
 
 	^(chipsPositions collect: [:chipPosition | chipPosition at: 2]) asSet size = 1 ! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'a s 10/10/2019 21:14:46'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 17:14:55'!
 hasAWinningDiagonalIn: chipsPositions
 
-	^#('a1' 'b2' 'c3') asSet = chipsPositions asSet or: [#('c1' 'b2' 'a3') asSet = chipsPositions asSet ]! !
+	^#('a1' 'b2' 'c3') asSet = chipsPositions asSet or: #('c1' 'b2' 'a3') asSet = chipsPositions asSet! !
 
 !TerniLapilli methodsFor: 'private' stamp: 'a s 10/10/2019 21:12:13'!
 hasAWinningRowIn: chipsPositions
 
 	^(chipsPositions collect: [:chipPosition | chipPosition at: 1]) asSet size = 1 ! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'a s 10/10/2019 21:11:00'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 17:15:15'!
 hasEnoughChipsToWinIn: chipPositions
+
 	^chipPositions size = 3 ! !
 
 !TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 16:48:44'!
@@ -830,9 +822,18 @@ moveChipIn: playerChipPositions from: initialPosition to: nextPosition
 	playerChipPositions remove: initialPosition.
 	playerChipPositions add: nextPosition.! !
 
-!TerniLapilli methodsFor: 'private' stamp: 'ss 10/13/2019 20:30:29'!
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:49:46'!
+moveChipWhenOIsPlayingFrom: initialPosition to: nextPostion
+
+	self moveChipIn: oChipPositions from: initialPosition to: nextPostion ! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:49:51'!
+moveChipWhenXIsPlayingFrom: initialPosition to: nextPostion
+
+	self moveChipIn: xChipPositions from: initialPosition to: nextPostion ! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:40:20'!
 putChipIn: playerChipPositions at: aPosition
-	playerChipPositions size = 3 ifTrue: [self error: self class cantPlaceMoreChipsErrorDescription ].
 	(self isValid: aPosition ) ifFalse: [self error: self class unexistingPositionErrorDescription ].
 	
 	self chipPositions detect: [:chipPosition | chipPosition = aPosition ] 
@@ -840,6 +841,20 @@ putChipIn: playerChipPositions at: aPosition
 		ifNone: [playerChipPositions add: aPosition].
 	
 	! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:37:19'!
+putChipWhenOIsPlayingOn: aPosition
+	
+	self putChipIn: oChipPositions at: aPosition ! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:37:42'!
+putChipWhenXIsPlayingOn: aPosition
+	
+	self putChipIn: xChipPositions at: aPosition ! !
+
+!TerniLapilli methodsFor: 'private' stamp: 'a s 10/16/2019 18:39:44'!
+state
+	^TerniLapilliState newForGame: self! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -883,3 +898,298 @@ startNewGame
 !TerniLapilli class methodsFor: 'as yet unclassified' stamp: 'ss 10/13/2019 20:27:04'!
 unexistingPositionErrorDescription
 	^'position does not exists'! !
+
+
+!classDefinition: #TerniLapilliState category: #'TerniLapilli-Exercise'!
+Object subclass: #TerniLapilliState
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!TerniLapilliState methodsFor: 'initialization' stamp: 'a s 10/16/2019 18:41:33'!
+initializeWith: aGame
+
+	game := aGame! !
+
+
+!TerniLapilliState methodsFor: 'playing' stamp: 'a s 10/16/2019 18:05:48'!
+moveOChipFrom: initialPosition to: nextPosition 
+
+	self subclassResponsibility! !
+
+!TerniLapilliState methodsFor: 'playing' stamp: 'a s 10/16/2019 18:05:53'!
+moveXChipFrom: initialPosition to: nextPosition 
+
+	self subclassResponsibility! !
+
+!TerniLapilliState methodsFor: 'playing' stamp: 'a s 10/16/2019 18:06:23'!
+putOAt: aPosition
+
+	self subclassResponsibility! !
+
+!TerniLapilliState methodsFor: 'playing' stamp: 'a s 10/16/2019 18:06:19'!
+putXAt: aPosition
+
+	self subclassResponsibility! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TerniLapilliState class' category: #'TerniLapilli-Exercise'!
+TerniLapilliState class
+	instanceVariableNames: ''!
+
+!TerniLapilliState class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:01:39'!
+canHandle: aGame
+
+	self subclassResponsibility! !
+
+!TerniLapilliState class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:45:49'!
+doesNotHaveEnoughChipsFor: aGame
+
+	^aGame numberOfChips < 6
+	! !
+
+!TerniLapilliState class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:17:10'!
+newForGame: aGame
+
+	^ (self subclasses detect: [:aClassToHandle| aClassToHandle canHandle: aGame ]) newForGame: aGame.! !
+
+
+!classDefinition: #GameOver category: #'TerniLapilli-Exercise'!
+TerniLapilliState subclass: #GameOver
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!GameOver methodsFor: 'playing' stamp: 'a s 10/16/2019 18:25:46'!
+moveOChipFrom: initialPosition to: nextPosition 
+
+	self error: game class gameIsAlreadyOverErrorDescription ! !
+
+!GameOver methodsFor: 'playing' stamp: 'a s 10/16/2019 18:25:50'!
+moveXChipFrom: initialPosition to: nextPosition 
+
+	self error: game class gameIsAlreadyOverErrorDescription ! !
+
+!GameOver methodsFor: 'playing' stamp: 'a s 10/16/2019 18:26:14'!
+putOAt: aPosition
+
+	self error: game class gameIsAlreadyOverErrorDescription ! !
+
+!GameOver methodsFor: 'playing' stamp: 'a s 10/16/2019 18:26:19'!
+putXAt: aPosition
+
+	self error: game class gameIsAlreadyOverErrorDescription ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'GameOver class' category: #'TerniLapilli-Exercise'!
+GameOver class
+	instanceVariableNames: ''!
+
+!GameOver class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:22:46'!
+newForGame: aGame
+	
+	^self new initializeWith: aGame! !
+
+
+!GameOver class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:09:36'!
+canHandle: aGame
+
+	^ aGame isOver! !
+
+
+!classDefinition: #OIsPlaying category: #'TerniLapilli-Exercise'!
+TerniLapilliState subclass: #OIsPlaying
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!OIsPlaying methodsFor: 'playing' stamp: 'a s 10/16/2019 18:28:32'!
+moveXChipFrom: initialPosition to: nextPosition 
+
+	self error: game class invalidTurnErrorDescription ! !
+
+!OIsPlaying methodsFor: 'playing' stamp: 'a s 10/16/2019 18:28:46'!
+putXAt: aPosition
+
+	self error: game class invalidTurnErrorDescription ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'OIsPlaying class' category: #'TerniLapilli-Exercise'!
+OIsPlaying class
+	instanceVariableNames: ''!
+
+!OIsPlaying class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:10:29'!
+canHandle: aGame
+
+	^ aGame isOver not and: aGame isPlayingO! !
+
+
+!classDefinition: #OHasChipsLeftToPut category: #'TerniLapilli-Exercise'!
+OIsPlaying subclass: #OHasChipsLeftToPut
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!OHasChipsLeftToPut methodsFor: 'playing' stamp: 'a s 10/16/2019 18:30:53'!
+moveOChipFrom: initialPosition to: nextPosition
+
+	self error: game class cantMoveChipsYetErrorDescription ! !
+
+!OHasChipsLeftToPut methodsFor: 'playing' stamp: 'a s 10/16/2019 18:38:34'!
+putOAt: aPosition
+
+	game putChipWhenOIsPlayingOn: aPosition .! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'OHasChipsLeftToPut class' category: #'TerniLapilli-Exercise'!
+OHasChipsLeftToPut class
+	instanceVariableNames: ''!
+
+!OHasChipsLeftToPut class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:46:02'!
+canHandle: aGame
+
+	^self doesNotHaveEnoughChipsFor: aGame ! !
+
+!OHasChipsLeftToPut class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:23:44'!
+newForGame: aGame
+	
+	^self new initializeWith: aGame! !
+
+
+!classDefinition: #OHasEnoughChips category: #'TerniLapilli-Exercise'!
+OIsPlaying subclass: #OHasEnoughChips
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!OHasEnoughChips methodsFor: 'playing' stamp: 'a s 10/16/2019 18:48:25'!
+moveOChipFrom: initialPosition to: nextPosition
+
+	game moveChipWhenOIsPlayingFrom: initialPosition to: nextPosition! !
+
+!OHasEnoughChips methodsFor: 'playing' stamp: 'a s 10/16/2019 18:32:01'!
+putOAt: aPosition
+
+	self error: game class cantPlaceMoreChipsErrorDescription ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'OHasEnoughChips class' category: #'TerniLapilli-Exercise'!
+OHasEnoughChips class
+	instanceVariableNames: ''!
+
+!OHasEnoughChips class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:46:45'!
+canHandle: aGame
+
+	^(self doesNotHaveEnoughChipsFor: aGame) not! !
+
+!OHasEnoughChips class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:23:52'!
+newForGame: aGame
+	
+	^self new initializeWith: aGame! !
+
+
+!classDefinition: #XIsPlaying category: #'TerniLapilli-Exercise'!
+TerniLapilliState subclass: #XIsPlaying
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!XIsPlaying methodsFor: 'playing' stamp: 'a s 10/16/2019 18:29:17'!
+moveOChipFrom: initialPosition to: nextPosition 
+
+	self error: game class invalidTurnErrorDescription ! !
+
+!XIsPlaying methodsFor: 'playing' stamp: 'a s 10/16/2019 18:29:00'!
+putOAt: aPosition
+
+	self error: game class invalidTurnErrorDescription ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'XIsPlaying class' category: #'TerniLapilli-Exercise'!
+XIsPlaying class
+	instanceVariableNames: ''!
+
+!XIsPlaying class methodsFor: 'subclass creation' stamp: 'a s 10/16/2019 18:11:16'!
+canHandle: aGame
+
+	^ aGame isOver not and: aGame isPlayingX! !
+
+
+!classDefinition: #XHasChipsLeftToPut category: #'TerniLapilli-Exercise'!
+XIsPlaying subclass: #XHasChipsLeftToPut
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!XHasChipsLeftToPut methodsFor: 'playing' stamp: 'a s 10/16/2019 18:31:25'!
+moveXChipFrom: initialPosition to: nextPosition
+
+	self error: game class cantMoveChipsYetErrorDescription ! !
+
+!XHasChipsLeftToPut methodsFor: 'playing' stamp: 'a s 10/16/2019 18:38:08'!
+putXAt: aPosition
+
+	game putChipWhenXIsPlayingOn: aPosition .! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'XHasChipsLeftToPut class' category: #'TerniLapilli-Exercise'!
+XHasChipsLeftToPut class
+	instanceVariableNames: ''!
+
+!XHasChipsLeftToPut class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:46:16'!
+canHandle: aGame
+
+	^self doesNotHaveEnoughChipsFor: aGame ! !
+
+!XHasChipsLeftToPut class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:24:08'!
+newForGame: aGame
+	
+	^self new initializeWith: aGame! !
+
+
+!classDefinition: #XHasEnoughChips category: #'TerniLapilli-Exercise'!
+XIsPlaying subclass: #XHasEnoughChips
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapilli-Exercise'!
+
+!XHasEnoughChips methodsFor: 'playing' stamp: 'a s 10/16/2019 18:48:47'!
+moveXChipFrom: initialPosition to: nextPosition
+
+	game moveChipWhenXIsPlayingFrom: initialPosition to: nextPosition! !
+
+!XHasEnoughChips methodsFor: 'playing' stamp: 'a s 10/16/2019 18:32:22'!
+putXAt: aPosition
+
+	self error: game class cantPlaceMoreChipsErrorDescription! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'XHasEnoughChips class' category: #'TerniLapilli-Exercise'!
+XHasEnoughChips class
+	instanceVariableNames: ''!
+
+!XHasEnoughChips class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:46:54'!
+canHandle: aGame
+
+	^(self doesNotHaveEnoughChipsFor: aGame) not! !
+
+!XHasEnoughChips class methodsFor: 'instance creation' stamp: 'a s 10/16/2019 18:24:00'!
+newForGame: aGame
+	
+	^self new initializeWith: aGame! !
