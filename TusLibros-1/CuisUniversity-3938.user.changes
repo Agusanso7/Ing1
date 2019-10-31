@@ -213,3 +213,247 @@ PASSED!
 
 !testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 16:55:29'!
 PASSED!
+
+----STARTUP---- (31 October 2019 17:03:12) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+----End fileIn of /home/asansone/Desktop/Ing1/TusLibros-1/TusLibros.st----!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:05:45'!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (Carrito times: 'algo') equals: 0.
+	! !
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:05:55' prior: 50777636!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.
+	! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:05:56'!
+ERROR!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:11'!
+times: aString 
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:21' prior: 50777654!
+times: anItem
+
+	^ 0! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:29' prior: 50777644!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:09'!
+test05ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!methodRemoval: CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:07:09'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:47'!
+test06ElCarritoContiene2VecesUnItemAgregado2Veces
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:54'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!methodRemoval: CarritoTest #test05ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:07:54'!
+test05ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:01'!
+test05ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.! !
+
+!methodRemoval: CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:08:01'!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:49' prior: 50777725!
+test06ElCarritoContiene2VecesUnItemAgregado2Veces
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+	carrito add: 'cosa'.
+		
+	self assert: (carrito times: 'cosa') equals: 2.
+	! !
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:08:52'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:09:09' prior: 50777658!
+times: anItem
+
+	^ elements times: anItem.! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:09:10'!
+ERROR!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:09:10'!
+ERROR!
+
+----End fileIn of /home/asansone/Desktop/linux64/Packages/TerseGuide.pck.st----!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:10:02' prior: 50777777!
+times: anItem
+
+	^ elements occurrencesOf: anItem! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+----SNAPSHOT----(31 October 2019 17:10:26) CuisUniversity-3938.image priorSource: 14319118!

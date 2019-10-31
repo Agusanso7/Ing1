@@ -1,4 +1,4 @@
-!classDefinition: #CarritoTest category: #TusLibros stamp: 'a s 10/31/2019 16:56:05'!
+!classDefinition: #CarritoTest category: #TusLibros stamp: 'a s 10/31/2019 17:10:19'!
 TestCase subclass: #CarritoTest
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -36,7 +36,7 @@ test03ElCarritoNoContieneItemsQueNoFueronAgregados
 	self deny: (carrito hasItem: 'cosa')
 	! !
 
-!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:55:07'!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:54'!
 test04ElCarritoContieneUnItemSiEsteFueAgregado
 
 	| carrito |
@@ -48,8 +48,30 @@ test04ElCarritoContieneUnItemSiEsteFueAgregado
 	self assert: (carrito hasItem: 'cosa')
 	! !
 
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:01'!
+test05ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.! !
+
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:49'!
+test06ElCarritoContiene2VecesUnItemAgregado2Veces
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+	carrito add: 'cosa'.
+		
+	self assert: (carrito times: 'cosa') equals: 2.
+	! !
+
 
-!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 16:56:05'!
+!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 17:10:19'!
 Object subclass: #Carrito
 	instanceVariableNames: 'elements'
 	classVariableNames: ''
@@ -80,3 +102,8 @@ hasItem: anItem
 	^ elements includes: anItem
 	
 	! !
+
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:10:02'!
+times: anItem
+
+	^ elements occurrencesOf: anItem! !
