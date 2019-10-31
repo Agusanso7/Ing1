@@ -1,0 +1,215 @@
+
+
+----STARTUP---- (31 October 2019 16:36:48) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+Object subclass: #Carrito
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 16:39:26'!
+Object subclass: #Carrito
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+TestCase subclass: #CarritoTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CarritoTest category: #TusLibros stamp: 'a s 10/31/2019 16:39:59'!
+TestCase subclass: #CarritoTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CarritoTest methodsFor: 'no messages' stamp: 'a s 10/31/2019 16:41:28'!
+test01CarritoNuevoEstaVacio
+
+	self assert: Carrito new isEmpty! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:41:31'!
+ERROR!
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:41:45'!
+isEmpty
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:42:11' prior: 50777389!
+isEmpty
+	
+	^ true! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:42:16'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:42:16'!
+PASSED!
+!CarritoTest methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:44:23'!
+test02CarritoConUnItemNoEstaVacio
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	! !
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:44:38'!
+ERROR!
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:45:01'!
+add: aString 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 16:46:11'!
+Object subclass: #Carrito
+	instanceVariableNames: 'elements'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:46:05' prior: 50777413!
+add: anElement
+	
+	elements add: anElement! !
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:46:31'!
+initalize
+
+	elements := OrderedCollection new.! !
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:47:05' prior: 50777393!
+isEmpty
+	
+	^ elements isEmpty! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:47:06'!
+ERROR!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:47:06'!
+ERROR!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:47:24'!
+ERROR!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:47:24'!
+ERROR!
+!CarritoTest methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:48:06' prior: 50777381!
+test01CarritoNuevoEstaVacio
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: carrito isEmpty.! !
+!Carrito methodsFor: 'initialization' stamp: 'a s 10/31/2019 16:48:59'!
+initialize
+
+	elements := OrderedCollection new.! !
+
+!methodRemoval: Carrito #initalize stamp: 'a s 10/31/2019 16:48:59'!
+initalize
+
+	elements := OrderedCollection new.!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:49:02'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:49:02'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:52:01'!
+test02ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	! !
+
+!methodRemoval: CarritoTest #test02ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:52:10'!
+test02ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:52:59'!
+test03ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+		
+	self deny: (carrito hasItem: 'cosa')
+	! !
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:53:02'!
+ERROR!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:22'!
+hasItem: aString 
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:32' prior: 50777496!
+hasItem: anItem
+
+	^ true 
+	
+	! !
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:53:42'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:59' prior: 50777501!
+hasItem: anItem
+
+	^ false
+	
+	! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:55:07'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 16:55:11'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:55:28' prior: 50777509!
+hasItem: anItem
+
+	^ elements includes: anItem
+	
+	! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
