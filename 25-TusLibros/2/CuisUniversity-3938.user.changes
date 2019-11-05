@@ -1,0 +1,2093 @@
+
+
+----STARTUP---- (31 October 2019 16:36:48) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+Object subclass: #Carrito
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 16:39:26'!
+Object subclass: #Carrito
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+TestCase subclass: #CarritoTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CarritoTest category: #TusLibros stamp: 'a s 10/31/2019 16:39:59'!
+TestCase subclass: #CarritoTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CarritoTest methodsFor: 'no messages' stamp: 'a s 10/31/2019 16:41:28'!
+test01CarritoNuevoEstaVacio
+
+	self assert: Carrito new isEmpty! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:41:31'!
+ERROR!
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:41:45'!
+isEmpty
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:42:11' prior: 50777389!
+isEmpty
+	
+	^ true! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:42:16'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:42:16'!
+PASSED!
+!CarritoTest methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:44:23'!
+test02CarritoConUnItemNoEstaVacio
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	! !
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:44:38'!
+ERROR!
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:45:01'!
+add: aString 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Carrito category: #TusLibros stamp: 'a s 10/31/2019 16:46:11'!
+Object subclass: #Carrito
+	instanceVariableNames: 'elements'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:46:05' prior: 50777413!
+add: anElement
+	
+	elements add: anElement! !
+!Carrito methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:46:31'!
+initalize
+
+	elements := OrderedCollection new.! !
+!Carrito methodsFor: 'comparing' stamp: 'a s 10/31/2019 16:47:05' prior: 50777393!
+isEmpty
+	
+	^ elements isEmpty! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:47:06'!
+ERROR!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:47:06'!
+ERROR!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:47:24'!
+ERROR!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:47:24'!
+ERROR!
+!CarritoTest methodsFor: 'as yet unclassified' stamp: 'a s 10/31/2019 16:48:06' prior: 50777381!
+test01CarritoNuevoEstaVacio
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: carrito isEmpty.! !
+!Carrito methodsFor: 'initialization' stamp: 'a s 10/31/2019 16:48:59'!
+initialize
+
+	elements := OrderedCollection new.! !
+
+!methodRemoval: Carrito #initalize stamp: 'a s 10/31/2019 16:48:59'!
+initalize
+
+	elements := OrderedCollection new.!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:49:02'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:49:02'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:52:01'!
+test02ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	! !
+
+!methodRemoval: CarritoTest #test02ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:52:10'!
+test02ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'elemento'.
+	
+	self deny: carrito isEmpty
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:52:59'!
+test03ElCarritoNoContieneItemsQueNoFueronAgregados
+
+	| carrito |
+	
+	carrito := Carrito new.
+		
+	self deny: (carrito hasItem: 'cosa')
+	! !
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:53:02'!
+ERROR!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:22'!
+hasItem: aString 
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:32' prior: 50777496!
+hasItem: anItem
+
+	^ true 
+	
+	! !
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:53:42'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:53:59' prior: 50777501!
+hasItem: anItem
+
+	^ false
+	
+	! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:54:00'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 16:55:07'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 16:55:11'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 16:55:28' prior: 50777509!
+hasItem: anItem
+
+	^ elements includes: anItem
+	
+	! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 16:55:29'!
+PASSED!
+
+----STARTUP---- (31 October 2019 17:03:12) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+----End fileIn of /home/asansone/Desktop/Ing1/TusLibros-1/TusLibros.st----!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:04:24'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:05:45'!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (Carrito times: 'algo') equals: 0.
+	! !
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:05:55' prior: 50777636!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.
+	! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:05:56'!
+ERROR!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:11'!
+times: aString 
+	self shouldBeImplemented.! !
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:21' prior: 50777654!
+times: anItem
+
+	^ 0! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:06:26'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:06:29' prior: 50777644!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.! !
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:06:29'!
+PASSED!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:09'!
+test05ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!methodRemoval: CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:07:09'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:47'!
+test06ElCarritoContiene2VecesUnItemAgregado2Veces
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:07:54'!
+test04ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	! !
+
+!methodRemoval: CarritoTest #test05ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:07:54'!
+test05ElCarritoContieneUnItemSiEsteFueAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+		
+	self assert: (carrito hasItem: 'cosa')
+	!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:01'!
+test05ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.! !
+
+!methodRemoval: CarritoTest #test04ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:08:01'!
+test04ElCarritoContiene0VecesUnItemNoAgregado
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	self assert: (carrito times: 'algo') equals: 0.!
+!CarritoTest methodsFor: 'testing' stamp: 'a s 10/31/2019 17:08:49' prior: 50777725!
+test06ElCarritoContiene2VecesUnItemAgregado2Veces
+
+	| carrito |
+	
+	carrito := Carrito new.
+	
+	carrito add: 'cosa'.
+	carrito add: 'cosa'.
+		
+	self assert: (carrito times: 'cosa') equals: 2.
+	! !
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:08:52'!
+FAILURE!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:09:09' prior: 50777658!
+times: anItem
+
+	^ elements times: anItem.! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:09:10'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:09:10'!
+ERROR!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:09:10'!
+ERROR!
+
+----End fileIn of /home/asansone/Desktop/linux64/Packages/TerseGuide.pck.st----!
+!Carrito methodsFor: 'testing' stamp: 'a s 10/31/2019 17:10:02' prior: 50777777!
+times: anItem
+
+	^ elements occurrencesOf: anItem! !
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:10:03'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 10/31/2019 17:10:12'!
+PASSED!
+
+----SNAPSHOT----(31 October 2019 17:10:26) CuisUniversity-3938.image priorSource: 14319118!
+
+----STARTUP---- (4 November 2019 16:16:06) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 11/4/2019 16:16:08'!
+PASSED!
+
+!testRun: #CarritoTest #test01CarritoNuevoEstaVacio stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+!testRun: #CarritoTest #test02CarritoConUnItemNoEstaVacio stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+!testRun: #CarritoTest #test03ElCarritoNoContieneItemsQueNoFueronAgregados stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+!testRun: #CarritoTest #test04ElCarritoContieneUnItemSiEsteFueAgregado stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+!testRun: #CarritoTest #test05ElCarritoContiene0VecesUnItemNoAgregado stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+!testRun: #CarritoTest #test06ElCarritoContiene2VecesUnItemAgregado2Veces stamp: 'a s 11/4/2019 16:48:40'!
+PASSED!
+
+----QUIT----(4 November 2019 16:50:23) CuisUniversity-3938.image priorSource: 14374647!
+
+----STARTUP---- (4 November 2019 16:59:01) as /home/asansone/Desktop/linux64/CuisUniversity-3938.image!
+
+
+----End fileIn of /home/asansone/Desktop/2019-2c/25-TusLibros/Iteracion1/TusLibros-18.st----!
+
+!classRemoval: #Cart stamp: 'a s 11/4/2019 17:03:13'!
+Object subclass: #Cart
+	instanceVariableNames: 'catalog items'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #Carrito stamp: 'a s 11/4/2019 17:03:14'!
+Object subclass: #Carrito
+	instanceVariableNames: 'elements'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #CartTest stamp: 'a s 11/4/2019 17:03:14'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #CarritoTest stamp: 'a s 11/4/2019 17:03:15'!
+TestCase subclass: #CarritoTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+----End fileIn of /home/asansone/Desktop/2019-2c/25-TusLibros/Iteracion1/TusLibros-18.st----!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 17:03:23'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 18:33:47'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 18:39:19'!
+PASSED!
+
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CashierTest category: #TusLibros stamp: 'a s 11/4/2019 18:42:29'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 18:44:21'!
+test01CantCheckoutEmptyCart
+
+	self assert: false.! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 18:44:53' prior: 50781392!
+test01CantCheckoutEmptyCart
+
+	self assert: false.! !
+
+TestCase subclass: #TusLibrosTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #TusLibrosTest category: #TusLibros stamp: 'a s 11/4/2019 18:45:48'!
+TestCase subclass: #TusLibrosTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+TusLibrosTest subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: #TusLibros stamp: 'a s 11/4/2019 18:46:00'!
+TusLibrosTest subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:46:23'!
+createCart
+	
+	^Cart acceptingItemsOf: self defaultCatalog! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:46:33'!
+defaultCatalog
+	
+	^ Array with: self itemSellByTheStore! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:46:42'!
+itemNotSellByTheStore
+	
+	^'invalidBook'! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:47:02'!
+itemSellByTheStore
+	
+	^ 'validBook'! !
+
+!methodRemoval: CartTest #createCart stamp: 'a s 11/4/2019 18:47:06'!
+createCart
+	
+	^Cart acceptingItemsOf: self defaultCatalog!
+
+!methodRemoval: CartTest #defaultCatalog stamp: 'a s 11/4/2019 18:47:06'!
+defaultCatalog
+	
+	^ Array with: self itemSellByTheStore!
+
+!methodRemoval: CartTest #itemNotSellByTheStore stamp: 'a s 11/4/2019 18:47:06'!
+itemNotSellByTheStore
+	
+	^'invalidBook'!
+
+!methodRemoval: CartTest #itemSellByTheStore stamp: 'a s 11/4/2019 18:47:06'!
+itemSellByTheStore
+	
+	^ 'validBook'!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 18:47:10'!
+PASSED!
+
+TusLibrosTest subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CashierTest category: #TusLibros stamp: 'a s 11/4/2019 18:47:20'!
+TusLibrosTest subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cashier category: #TusLibros stamp: 'a s 11/4/2019 18:50:04'!
+Object subclass: #Cashier
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 18:49:57' prior: 50781397!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart |
+	emptyCart := self createCart. 
+
+	self should: [Cashier checkoutCart: emptyCart]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+			]! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:50:11'!
+ERROR!
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:50:21'!
+checkoutCart: aCart 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeCheckoutCart: aCart ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:50:42' prior: 50781515!
+checkoutCart: aCart 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	"^self new initializeCheckoutCart: aCart" ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:50:47' prior: 50781524!
+checkoutCart: aCart 
+	self shouldBeImplemented.
+	"^self new initializeCheckoutCart: aCart" ! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:50:48'!
+ERROR!
+!Cashier class methodsFor: 'error descriptions' stamp: 'a s 11/4/2019 18:51:04'!
+cantCheckoutEmptyCartErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'error descriptions' stamp: 'a s 11/4/2019 18:51:16' prior: 50781542!
+cantCheckoutEmptyCartErrorDescription
+	^'cant checkout empty cart'! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:51:18'!
+FAILURE!
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:52:04' prior: 50781533!
+checkoutCart: aCart
+
+	^self new ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:52:52' prior: 50781557!
+checkoutCart: aCart
+	self error: self cantCheckoutEmptyCartErrorDescription ! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:52:54'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 18:56:51' prior: 50781500!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart |
+	emptyCart := self createCart. 
+
+	self should: [Cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+			]! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 18:57:26'!
+checkoutCart: aCart withCreditCard: aCreditCard
+	self error: self cantCheckoutEmptyCartErrorDescription ! !
+
+!methodRemoval: Cashier class #checkoutCart: stamp: 'a s 11/4/2019 18:57:28'!
+checkoutCart: aCart
+	self error: self cantCheckoutEmptyCartErrorDescription !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:57:31'!
+ERROR!
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:57:31'!
+ERROR!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:57:51'!
+validCreditCard
+
+	^'credit card'! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 18:57:57' prior: 50781601!
+validCreditCard
+
+	^'valid credit card'! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 18:57:59'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:00:03' prior: 50781571!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart |
+	emptyCart := self createCart. 
+
+	self should: [Cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+	]! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:02:59' prior: 50781612!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := Cashier new.
+
+	self should: [cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+	]! !
+!Cashier methodsFor: 'nil' stamp: 'a s 11/4/2019 19:03:44'!
+checkoutCart: aCart withCreditCard: aCreditCard
+	self error: self cantCheckoutEmptyCartErrorDescription ! !
+
+!methodRemoval: Cashier class #checkoutCart:withCreditCard: stamp: 'a s 11/4/2019 19:03:51'!
+checkoutCart: aCart withCreditCard: aCreditCard
+	self error: self cantCheckoutEmptyCartErrorDescription !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:03:55'!
+ERROR!
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:03:55'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:04:08' prior: 50781639!
+checkoutCart: aCart withCreditCard: aCreditCard
+	self error: self class cantCheckoutEmptyCartErrorDescription ! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:04:09'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:08:39'!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := Cashier new.
+
+	self should: [cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+	]! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:08:45' prior: 50781667!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := Cashier new.! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:09:43' prior: 50781682!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| cart cashier |
+	
+	cart := self createCart.
+	cart add: self itemSellByTheStore.
+	 
+	cashier := Cashier new.! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:10:39' prior: 50781689!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard ! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:11:45' prior: 50781697!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assert: aCashier ledger size equals: 1
+	self assert: (aCashier ledger at: 1) equals: aCart! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:11:50' prior: 50781707!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assert: aCashier ledger size equals: 1.
+	self assert: (aCashier ledger at: 1) equals: aCart.! !
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 19:11:52'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:12:22' prior: 50781658!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription] 
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:12:30' prior: 50781738!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	
+	
+	! !
+
+!classDefinition: #Cashier category: #TusLibros stamp: 'a s 11/4/2019 19:12:48'!
+Object subclass: #Cashier
+	instanceVariableNames: 'ledger'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:12:46' prior: 50781746!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	
+	ledger add: aCart
+	
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:13:02'!
+initialize
+
+	ledger := OrderedCollection new.
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:13:12'!
+ledger 
+	ledger
+	
+	! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:13:13'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 19:13:13'!
+ERROR!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 19:13:13'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:13:28' prior: 50781773!
+ledger 
+	^ledger copy
+	
+	! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:13:30'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 19:13:30'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 19:24:52'!
+test03CantCheckoutWithExpiredCreditCard
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	self should: [aCashier checkoutCart: aCart withCreditCard: self expiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: Cashier expiredCreditCardErrorDescription.
+			self assert: aCashier ledger size equals: 0.
+		].
+	
+	! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:24:56'!
+ERROR!
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:25:09'!
+expiredCreditCard
+	self shouldBeImplemented.! !
+
+!classDefinition: #CreditCard category: #TusLibros stamp: 'a s 11/4/2019 19:31:56'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:31:50' prior: 50781818!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' name: 'hola' withExpiration: (GregorianMonthOfYear year: 2019 month: December)! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:32:02'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 19:32:08'!
+withNumber: aString name: aString2 withExpiration: aGregorianMonthOfYear 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithNumber: aString name: aString2 withExpiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 19:33:14' prior: 50781841!
+withNumber: aNumber name: aName withExpiration: anExpiration 
+	^self new initializeWithNumber: aNumber name: aName withExpiration: anExpiration ! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:33:17'!
+ERROR!
+
+!classDefinition: #CreditCard category: #TusLibros stamp: 'a s 11/4/2019 19:33:32'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: #TusLibros stamp: 'a s 11/4/2019 19:33:32'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: #TusLibros stamp: 'a s 11/4/2019 19:33:33'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number name expiration'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCard methodsFor: 'initialization' stamp: 'a s 11/4/2019 19:33:33'!
+initializeWithNumber: aNumber name: aName withExpiration: anExpiration 
+	self shouldBeImplemented.
+	number := aNumber.
+	name := aName.
+	expiration := anExpiration.! !
+!CreditCard methodsFor: 'initialization' stamp: 'a s 11/4/2019 19:33:42' prior: 50781885!
+initializeWithNumber: aNumber name: aName withExpiration: anExpiration 
+	number := aNumber.
+	name := aName.
+	expiration := anExpiration.! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:33:45'!
+FAILURE!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:34:25'!
+FAILURE!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:34:59'!
+FAILURE!
+!Cashier class methodsFor: 'error descriptions' stamp: 'a s 11/4/2019 19:35:33'!
+expiredCreditCardErrorDescription
+	^'credit card is expired'! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 19:35:36'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 19:35:36'!
+PASSED!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:35:36'!
+FAILURE!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:35:36'!
+FAILURE!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:36:04'!
+FAILURE!
+
+!methodRemoval: CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 19:37:01'!
+test03CantCheckoutWithExpiredCreditCard
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	self should: [aCashier checkoutCart: aCart withCreditCard: self expiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: Cashier expiredCreditCardErrorDescription.
+			self assert: aCashier ledger size equals: 0.
+		].
+	
+	!
+
+TusLibrosTest subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCardTest category: #TusLibros stamp: 'a s 11/4/2019 19:37:10'!
+TusLibrosTest subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCardTest methodsFor: 'nil' stamp: 'a s 11/4/2019 19:38:29'!
+test01CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	aCreditCard := self expiredCreditCard
+	
+	self assert: aCreditCard isExpired. ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:38:33'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:38:33'!
+ERROR!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:38:49' prior: 50781961!
+test01CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self expiredCreditCard.
+	
+	self assert: aCreditCard isExpired. ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:38:50'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:38:50'!
+ERROR!
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:39:09'!
+isExpired
+	self shouldBeImplemented.! !
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:39:14' prior: 50781992!
+isExpired
+	^true! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:39:18'!
+PASSED!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:39:39'!
+test02CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self assert: aCreditCard isExpired negated . ! !
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:39:40' prior: 50782003!
+test02CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self assert: aCreditCard isExpired negated. ! !
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:39:49' prior: 50782012!
+test02CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self deny: aCreditCard isExpired. ! !
+
+!testRun: #CreditCardTest #test02CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:39:51'!
+ERROR!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:40:23' prior: 50781830!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		withExpiration: (GregorianMonthOfYear year: 2019 month: December)! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 19:40:43'!
+withNumber: aNumber name: aName expiration: anExpiration 
+	^self new initializeWithNumber: aNumber name: aName withExpiration: anExpiration ! !
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:40:43' prior: 50782033!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: 2019 month: December)! !
+
+!methodRemoval: CreditCard class #withNumber:name:withExpiration: stamp: 'a s 11/4/2019 19:40:43'!
+withNumber: aNumber name: aName withExpiration: anExpiration 
+	^self new initializeWithNumber: aNumber name: aName withExpiration: anExpiration !
+!CreditCard methodsFor: 'initialization' stamp: 'a s 11/4/2019 19:41:02'!
+initializeWithNumber: aNumber name: aName expiration: anExpiration 
+	number := aNumber.
+	name := aName.
+	expiration := anExpiration.! !
+!CreditCard class methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:41:02' prior: 50782040!
+withNumber: aNumber name: aName expiration: anExpiration 
+	^self new initializeWithNumber: aNumber name: aName expiration: anExpiration ! !
+
+!methodRemoval: CreditCard #initializeWithNumber:name:withExpiration: stamp: 'a s 11/4/2019 19:41:02'!
+initializeWithNumber: aNumber name: aName withExpiration: anExpiration 
+	number := aNumber.
+	name := aName.
+	expiration := anExpiration.!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:41:03'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:41:03'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:41:03'!
+ERROR!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:43:02' prior: 50781605!
+validCreditCard
+
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: 2019 month: December).! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:43:11' prior: 50782048!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: 2018 month: December)! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:44:34' prior: 50782104!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: 2018 month: December). ! !
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 19:45:04'!
+test02CreditCardIsNotExpiredIfItHasNotReachedExpiration
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self deny: aCreditCard isExpired. ! !
+
+!methodRemoval: CreditCardTest #test02CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:45:04'!
+test02CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self deny: aCreditCard isExpired. !
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:45:53' prior: 50781996!
+isExpired
+	^expiration <= FixedGregorianDate ! !
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:45:58' prior: 50782134!
+isExpired
+	^expiration <= FixedGregorianDate today! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:45:59'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:45:59'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:46:08'!
+ERROR!
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:46:22' prior: 50782139!
+isExpired
+	^expiration <= FixedGregorianDate today monthOfYear ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:46:24'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:46:24'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:46:26'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:46:26'!
+ERROR!
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:47:36' prior: 50782155!
+isExpired
+	^expiration < FixedGregorianDate today monthOfYear ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:47:38'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:47:38'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:47:39'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:47:39'!
+ERROR!
+
+expiration !
+
+expiration class!
+
+[]!
+
+FixedGregorianDate today monthOfYear!
+
+FixedGregorianDate today monthOfYear!
+
+2019!
+
+FixedGregorianDate today monthOfYear class!
+
+expiration class!
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 19:51:37' prior: 50782175!
+isExpired
+	^expiration < (FixedGregorianDate today monthOfYear) ! !
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:51:40'!
+ERROR!
+
+expiration!
+
+expiration class!
+
+FixedGregorianDate today monthOfYear class!
+
+FixedGregorianDate today monthOfYear!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:56:11'!
+ERROR!
+
+expiration!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:57:25' prior: 50782111!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: 2018 * year month: December). ! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:57:37' prior: 50782218!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear year: (2018 * year) month: December). ! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:57:45' prior: 50782097!
+validCreditCard
+
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear yearNumber: 2019 month: December).! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 19:57:52' prior: 50782226!
+expiredCreditCard
+	^CreditCard withNumber: '1231231' 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear yearNumber: 2018 month: December). ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 19:57:54'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 19:57:54'!
+PASSED!
+!CreditCard methodsFor: 'validation' stamp: 'a s 11/4/2019 20:01:45'!
+isExpiredFrom: aDate
+	^expiration < (aDate monthOfYear) ! !
+
+!methodRemoval: CreditCard #isExpired stamp: 'a s 11/4/2019 20:02:02'!
+isExpired
+	^expiration < (FixedGregorianDate today monthOfYear) !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:03:30'!
+date
+	FixedGregorianDate yearNumber: 2019 month: February dayNumber: 20 ! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:03:35' prior: 50782266!
+date
+	^FixedGregorianDate yearNumber: 2019 month: February dayNumber: 20 ! !
+!CreditCardTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:04:02' prior: 50781977!
+test01CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self expiredCreditCard.
+	
+	self assert: (aCreditCard isExpiredFrom: self date). ! !
+!CreditCardTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:04:46' prior: 50782278!
+test01CreditCardIsExpiredIfItReachedExpirationDate
+	| aCreditCard |
+	
+	aCreditCard := self expiredCreditCard.
+	
+	self assert: (aCreditCard isExpiredFrom: self date). ! !
+!CreditCardTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:04:56' prior: 50782118!
+test02CreditCardIsNotExpiredIfItHasNotReachedExpiration
+	| aCreditCard |
+	
+	aCreditCard := self validCreditCard .
+	
+	self deny: (aCreditCard isExpiredFrom: self date). ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 20:04:57'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 20:04:57'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:05:08'!
+test03CantCheckoutWithExpiredCreditCard
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := Cashier new.
+	self should: [aCashier checkoutCart: aCart withCreditCard: self expiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: Cashier expiredCreditCardErrorDescription.
+			self assert: aCashier ledger size equals: 0.
+		].
+	
+	! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 20:05:25'!
+FAILURE!
+
+!classDefinition: #Cashier category: #TusLibros stamp: 'a s 11/4/2019 20:06:12'!
+Object subclass: #Cashier
+	instanceVariableNames: 'ledger date'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:06:19' prior: 50781760!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	(aCreditCard isExpiredFrom: date) ifTrue: [self error: self class expiredCreditCardErrorDescription ].
+	
+	ledger add: aCart
+	
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:07:01'!
+initializeOn: aDate
+	date := aDate.
+	ledger := OrderedCollection new.
+	
+	! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 20:07:38'!
+newOn: aDate
+	^self new initializeOn: aDate! !
+
+!methodRemoval: Cashier #initialize stamp: 'a s 11/4/2019 20:07:43'!
+initialize
+
+	ledger := OrderedCollection new.
+	
+	!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:07:53' prior: 50781625!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := Cashier newOn: self date.
+
+	self should: [cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+	]! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:08:13'!
+createCashier
+	
+	^Cashier newOn: self date! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:08:29' prior: 50782364!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := self createCashier.
+
+	self should: [cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription
+	]! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:08:45' prior: 50781721!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assert: aCashier ledger size equals: 1.
+	self assert: (aCashier ledger at: 1) equals: aCart.! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:08:55' prior: 50782312!
+test03CantCheckoutWithExpiredCreditCard
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	self should: [aCashier checkoutCart: aCart withCreditCard: self expiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: Cashier expiredCreditCardErrorDescription.
+			self assert: aCashier ledger size equals: 0.
+		].
+	
+	! !
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 20:08:56'!
+PASSED!
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 20:08:56'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 20:08:56'!
+PASSED!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 20:08:56'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:09:25' prior: 50782412!
+test03CantCheckoutWithExpiredCreditCard
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	self should: [aCashier checkoutCart: aCart withCreditCard: self expiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: Cashier expiredCreditCardErrorDescription.
+			self assert: aCashier ledger isEmpty 
+		].
+	
+	! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:09:47' prior: 50782383!
+test01CantCheckoutEmptyCart
+	
+	| emptyCart cashier |
+	emptyCart := self createCart. 
+	cashier := self createCashier.
+
+	self should: [cashier checkoutCart: emptyCart withCreditCard: self validCreditCard]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [:error | 
+			self assert: error messageText equals: Cashier cantCheckoutEmptyCartErrorDescription.
+			self assert: cashier ledger isEmpty 
+	]! !
+!Cashier class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 20:10:18'!
+newOn: aDate registeringOn: aLedger
+	^self new initializeOn: aDate registeringOn: aLedger.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:10:36'!
+initializeOn: aDate registeringOn: aLedger
+	date := aDate.
+	ledger := aLedger 
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:10:41' prior: 50781787!
+ledger 
+	^ledger
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:10:54' prior: 50782488!
+ledger 
+	^ledger copy
+	
+	! !
+
+!methodRemoval: Cashier #initializeOn: stamp: 'a s 11/4/2019 20:10:57'!
+initializeOn: aDate
+	date := aDate.
+	ledger := OrderedCollection new.
+	
+	!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:11:16' prior: 50782378!
+createCashier
+	
+	^Cashier newOn: self date registeringOn: OrderedCollection new.! !
+
+!methodRemoval: Cashier class #newOn: stamp: 'a s 11/4/2019 20:11:22'!
+newOn: aDate
+	^self new initializeOn: aDate!
+!CreditCardTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:32:24'!
+test03CreditCardIsNotValidIfNameContainsNumbers
+
+	self should: [] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: CreditCard invalidNameErrorDescription
+			]! !
+
+!testRun: #CreditCardTest #test03CreditCardIsNotValidIfNameContainsNumbers stamp: 'a s 11/4/2019 20:32:27'!
+FAILURE!
+!CreditCardTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:33:38' prior: 50782510!
+test03CreditCardIsNotValidIfNameContainsNumbers
+
+	self should: [CreditCard withNumber: 123 name: '123' expiration: self date monthOfYear ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: CreditCard invalidNameErrorDescription
+			]! !
+
+!testRun: #CreditCardTest #test03CreditCardIsNotValidIfNameContainsNumbers stamp: 'a s 11/4/2019 20:33:41'!
+FAILURE!
+!CreditCard class methodsFor: 'error descriptions' stamp: 'a s 11/4/2019 20:34:00'!
+invalidNameErrorDescription
+	^'invalid name'! !
+!CreditCard class methodsFor: 'validating' stamp: 'a s 11/4/2019 20:35:18'!
+validName: aName
+	^aName allSatisfy: [:aChar | aChar isLetter].! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'a s 11/4/2019 20:35:52' prior: 50782071!
+withNumber: aNumber name: aName expiration: anExpiration 
+	(self validName: aName) ifFalse: [self error: self invalidNameErrorDescription ].
+	
+	^self new initializeWithNumber: aNumber name: aName expiration: anExpiration ! !
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 20:35:53'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 20:35:53'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardIsNotValidIfNameContainsNumbers stamp: 'a s 11/4/2019 20:35:53'!
+PASSED!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:36:15' prior: 50782234!
+validCreditCard
+
+	^CreditCard withNumber: 1231231 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear yearNumber: 2019 month: December).! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:36:21' prior: 50782242!
+expiredCreditCard
+	^CreditCard withNumber: 1231231 
+		name: 'hola' 
+		expiration: (GregorianMonthOfYear yearNumber: 2018 month: December). ! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 20:36:27'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 20:36:28'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 20:36:28'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardIsNotValidIfNameContainsNumbers stamp: 'a s 11/4/2019 20:36:28'!
+PASSED!
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:41:42'!
+priceOfItemSellByTheStore
+	
+	^200 * peso! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:41:46' prior: 50782624!
+priceOfItemSellByTheStore
+	
+	^200 * peso! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:43:11' prior: 50781428!
+defaultCatalog
+	
+	| catalog |
+	catalog := Dictionary new.
+	catalog at: self itemSellByTheStore put: self priceOfItemSellByTheStore! !
+!TusLibrosTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:43:22' prior: 50782634!
+defaultCatalog
+	
+	| catalog |
+	
+	catalog := Dictionary new.
+	catalog at: self itemSellByTheStore put: self priceOfItemSellByTheStore.
+	
+	^catalog! !
+!Cart methodsFor: 'assertions' stamp: 'a s 11/4/2019 20:43:50' prior: 50781141!
+assertIsValidItem: anItem
+
+	(catalog includesKey: anItem) ifFalse: [ self error: self invalidItemErrorMessage ]! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 20:44:00'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'a s 11/4/2019 20:45:28'!
+test09CartKnowsItsTotalPrice
+
+	| cart |
+	
+	cart := self createCart.
+	
+	cart add: 5 of: self itemSellByTheStore.
+	
+	self assert: cart price equals: 5*self priceOfItemSellByTheStore.! !
+
+!testRun: #CartTest #test09CartKnowsItsTotalPrice stamp: 'a s 11/4/2019 20:45:31'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 20:45:44'!
+price
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'queries' stamp: 'a s 11/4/2019 20:47:02' prior: 50782692!
+price
+	^0! !
+!CartTest methodsFor: 'tests' stamp: 'a s 11/4/2019 20:47:17'!
+test09EmptyCartHasAPriceOf0
+
+	| cart |
+	
+	cart := self createCart.
+	
+	cart add: 5 of: self itemSellByTheStore.
+	
+	self assert: cart price equals: 5*self priceOfItemSellByTheStore.! !
+!CartTest methodsFor: 'tests' stamp: 'a s 11/4/2019 20:47:23' prior: 50782699!
+test09EmptyCartHasAPriceOf0
+
+	| cart |
+	
+	cart := self createCart.
+	
+	self assert: cart price equals: 0! !
+
+!methodRemoval: CartTest #test09CartKnowsItsTotalPrice stamp: 'a s 11/4/2019 20:47:26'!
+test09CartKnowsItsTotalPrice
+
+	| cart |
+	
+	cart := self createCart.
+	
+	cart add: 5 of: self itemSellByTheStore.
+	
+	self assert: cart price equals: 5*self priceOfItemSellByTheStore.!
+
+!testRun: #CartTest #test09EmptyCartHasAPriceOf0 stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+
+!testRun: #CartTest #test09EmptyCartHasAPriceOf0 stamp: 'a s 11/4/2019 20:47:28'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'a s 11/4/2019 20:47:53'!
+test10CartPriceIsTheSumOfTheItemsPrice
+
+	| cart |
+	
+	cart := self createCart.
+	
+	self assert: cart price equals: 0! !
+!CartTest methodsFor: 'tests' stamp: 'a s 11/4/2019 20:48:16' prior: 50782754!
+test10CartPriceIsTheSumOfTheItemsPrice
+
+	| cart |
+	
+	cart := self createCart.
+	
+	cart add: 5 of: self itemSellByTheStore.
+	
+	self assert: cart price equals: 5*self priceOfItemSellByTheStore ! !
+
+!testRun: #CartTest #test10CartPriceIsTheSumOfTheItemsPrice stamp: 'a s 11/4/2019 20:48:18'!
+FAILURE!
+!Cart methodsFor: 'queries' stamp: 'a s 11/4/2019 20:48:54' prior: 50782696!
+price
+	^items sum: [:item | self priceOf: item] ifEmpty: [0] ! !
+!Cart methodsFor: 'queries' stamp: 'a s 11/4/2019 20:49:17'!
+priceOf: anItem
+	^catalog at: anItem ! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test09EmptyCartHasAPriceOf0 stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+
+!testRun: #CartTest #test10CartPriceIsTheSumOfTheItemsPrice stamp: 'a s 11/4/2019 20:49:21'!
+PASSED!
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:50:18'!
+test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assert: aCashier ledger size equals: 1.
+	self assert: (aCashier ledger at: 1) equals: aCart.! !
+
+!methodRemoval: CashierTest #test02CheckoutCartWithOneItemSavesCartInLedger stamp: 'a s 11/4/2019 20:50:25'!
+test02CheckoutCartWithOneItemSavesCartInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assert: aCashier ledger size equals: 1.
+	self assert: (aCashier ledger at: 1) equals: aCart.!
+!CashierTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:53:46'!
+assertOn: aLedger at: anIndex wasSold: anItem withAmount: anAmount 
+
+	| ledgerEntry |
+	ledgerEntry := aLedger at: anIndex.
+	
+	! !
+!CashierTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:54:42' prior: 50782841!
+assertOn: aLedger at: anIndex wasSold: anItem withAmount: anAmount 
+	| ledgerEntry |
+	
+	ledgerEntry := aLedger at: anIndex.
+
+	self assert: (ledgerEntry at: 1) equals: anItem.
+	self assert: (ledgerEntry at: 2) equals: anAmount 
+	! !
+!CashierTest methodsFor: 'support' stamp: 'a s 11/4/2019 20:54:43' prior: 50782848!
+assertOn: aLedger at: anIndex wasSold: anItem withAmount: anAmount 
+	| ledgerEntry |
+	
+	ledgerEntry := aLedger at: anIndex.
+
+	self assert: (ledgerEntry at: 1) equals: anItem.
+	self assert: (ledgerEntry at: 2) equals: anAmount.
+	! !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:55:40' prior: 50782813!
+test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: self itemSellByTheStore of: 2.
+	 
+	aCashier := self createCashier.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assertOn: aCashier ledger at: 1 wasSold: self itemSellByTheStore withAmount: 2! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 20:55:48'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 20:55:48'!
+ERROR!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 20:55:48'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 20:55:48'!
+ERROR!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 20:55:52'!
+ERROR!
+
+aQuantity !
+!CashierTest methodsFor: 'testing' stamp: 'a s 11/4/2019 20:56:22' prior: 50782868!
+test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger
+	
+	| aCart aCashier |
+	
+	aCart := self createCart.
+	aCart add: 2 of: self itemSellByTheStore.
+	 
+	aCashier := self createCashier.
+	aCashier checkoutCart: aCart withCreditCard: self validCreditCard.
+	
+	self assertOn: aCashier ledger at: 1 wasSold: self itemSellByTheStore withAmount: 2! !
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 20:56:23'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 21:09:33' prior: 50782340!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	(aCreditCard isExpiredFrom: date) ifTrue: [self error: self class expiredCreditCardErrorDescription ].
+
+	
+	! !
+!Cart methodsFor: 'initialization' stamp: 'a s 11/4/2019 21:10:00' prior: 50781154!
+initializeAcceptingItemsOf: aCatalog
+
+	catalog := aCatalog.
+	items := Bag new.! !
+!Cart methodsFor: 'initialization' stamp: 'a s 11/4/2019 21:13:47' prior: 50782929!
+initializeAcceptingItemsOf: aCatalog
+
+	catalog := aCatalog.
+	items := OrderedCollection new.! !
+
+b := Bag new!
+
+b add: 5 of: 'asd' !
+
+b add: 3 withOccurrences: 2!
+
+b!
+
+b add: 3!
+
+b!
+
+b do: [:i | i printString ]!
+
+b do: [:i | i printString ]!
+
+i := 0!
+
+x := 0
+b do: [:i | x := x +1]!
+
+
+x := 0.
+b do: [:i | x := x +1]!
+
+x!
+!Cart methodsFor: 'queries' stamp: 'a s 11/4/2019 21:18:21'!
+uniqueItemsDo: aBlock
+	items asSet do: aBlock! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 21:20:00' prior: 50782918!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	(aCreditCard isExpiredFrom: date) ifTrue: [self error: self class expiredCreditCardErrorDescription ].
+
+	
+	aCart  uniqueItemsDo: [:item | | occurrencesOfItem |
+		occurrencesOfItem := aCart occurrencesOf: item.
+		ledger add: (Array with: item with: occurrencesOfItem)
+	]! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 21:20:04'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 21:20:04'!
+PASSED!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 21:20:04'!
+PASSED!
+!Cashier methodsFor: 'nil' stamp: 'a s 11/4/2019 21:20:31'!
+recordSalesOnLedgerFor: aCart! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 21:20:41' prior: 50782977!
+recordSalesOnLedgerFor: aCart
+
+	aCart  uniqueItemsDo: [:item | | occurrencesOfItem |
+		occurrencesOfItem := aCart occurrencesOf: item.
+		ledger add: (Array with: item with: occurrencesOfItem)
+	]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'a s 11/4/2019 21:20:51' prior: 50782952!
+checkoutCart: aCart withCreditCard: aCreditCard
+	aCart isEmpty ifTrue: [self error: self class cantCheckoutEmptyCartErrorDescription].
+	(aCreditCard isExpiredFrom: date) ifTrue: [self error: self class expiredCreditCardErrorDescription ].
+
+	self recordSalesOnLedgerFor: aCart ! !
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 21:21:36'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 21:21:36'!
+PASSED!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 21:21:37'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardIsExpiredIfItReachedExpirationDate stamp: 'a s 11/4/2019 21:21:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardIsNotExpiredIfItHasNotReachedExpiration stamp: 'a s 11/4/2019 21:21:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardIsNotValidIfNameContainsNumbers stamp: 'a s 11/4/2019 21:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test01CantCheckoutEmptyCart stamp: 'a s 11/4/2019 21:21:49'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutCartWithOneItemSavesCartSoldItemsInLedger stamp: 'a s 11/4/2019 21:21:49'!
+PASSED!
+
+!testRun: #CashierTest #test03CantCheckoutWithExpiredCreditCard stamp: 'a s 11/4/2019 21:21:49'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test09EmptyCartHasAPriceOf0 stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+!testRun: #CartTest #test10CartPriceIsTheSumOfTheItemsPrice stamp: 'a s 11/4/2019 21:21:51'!
+PASSED!
+
+----SNAPSHOT----(4 November 2019 21:22:33) CuisUniversity-3938.image priorSource: 14376150!
+
+----QUIT----(4 November 2019 21:22:35) CuisUniversity-3938.image priorSource: 14445273!
