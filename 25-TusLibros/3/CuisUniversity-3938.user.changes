@@ -17130,3 +17130,4788 @@ PASSED!
 
 !testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/7/2019 20:43:31'!
 PASSED!
+
+----QUIT----(7 November 2019 20:44:22) CuisUniversity-3938.image priorSource: 14319118!
+
+----STARTUP---- (11 November 2019 17:39:27) as /Users/ssujarchuk/Downloads/macos64/CuisUniversity-3938.image!
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:53:27'!
+test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated
+	
+	self assert: (restapi listPurchrasesMadeByClient: self validUser withPassword: self validPassword) isEmpty! !
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 17:53:29'!
+ERROR!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:54:01' prior: 50798381!
+test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated
+	
+	self assert: (restapi listPurchrasesMadeByClient: testObjectsFactory validUser withPassword: testObjectsFactory validPassword) isEmpty! !
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 17:54:05'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 17:54:10'!
+listPurchrasesMadeByClient: aString withPassword: aString2 
+	self shouldBeImplemented.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 17:54:22' prior: 50798406!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	self shouldBeImplemented.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 17:54:36' prior: 50798412!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	^OrderedCollection new.! !
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 17:54:38'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:57:17'!
+test09ListPurchrasesReturns
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser withPassword: testObjectsFactory validPassword.
+	self assert: purchrasesByClient isEmpty! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:57:25' prior: 50798455!
+test09ListPurchrasesReturns
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	self assert: purchrasesByClient isEmpty! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:57:28' prior: 50798465!
+test09ListPurchrasesReturns
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient isEmpty! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:57:38' prior: 50798393!
+test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient isEmpty! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:58:13'!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient isEmpty! !
+
+!methodRemoval: RestAPITest #test09ListPurchrasesReturns stamp: 'ss 11/11/2019 17:58:16'!
+test09ListPurchrasesReturns
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient isEmpty!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:59:16' prior: 50798498!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| purchrasesByClient aCart |
+	
+	aCart := self createCart 
+	
+	self assert: purchrasesByClient isEmpty! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:00:06' prior: 50798520!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart |
+	
+	aCart := self createCart. 
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:00:28' prior: 50798528!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:00:33' prior: 50798537!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:00:57' prior: 50798549!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart purchrasesByClient |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:02:07' prior: 50798562!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart purchrasesByClient |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	self assert: purchrasesByClient size equals: 2.	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:04:20' prior: 50798580!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart purchrasesByClient |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient includes: aCart).
+	self assert: (purchrasesByClient includes: anotherCart).! !
+
+!testRun: #RestAPITest #test09ListPurchrasesReturnsThePurchrasesMadeByAClient stamp: 'ss 11/11/2019 18:04:24'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:04:30'!
+checkout: aSmallInteger with: aCreditCard 
+	self shouldBeImplemented.! !
+
+!methodRemoval: RestAPITest #test09ListPurchrasesReturnsThePurchrasesMadeByAClient stamp: 'ss 11/11/2019 18:08:29'!
+test09ListPurchrasesReturnsThePurchrasesMadeByAClient
+	
+	| aCart anotherCart purchrasesByClient |
+	
+	aCart := self createCart. 
+	anotherCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard.
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard.
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient includes: aCart).
+	self assert: (purchrasesByClient includes: anotherCart).!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:09:05'!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:09:29' prior: 50798653!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	
+	| aCart |
+	aCart := self createCart.
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:10:11' prior: 50798658!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:12:44' prior: 50798664!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	
+	
+	
+	! !
+
+!classDefinition: #RestAPITest category: #TusLibros stamp: 'ss 11/11/2019 18:13:11'!
+TestCase subclass: #RestAPITest
+	instanceVariableNames: 'testObjectsFactory restapi merchantProcessorMock'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 18:13:08' prior: 50797513!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest  new.
+	
+	restapi := testObjectsFactory createRestAPI ! !
+
+!methodRemoval: StoreTestObjectsFactory #createRestAPI stamp: 'ss 11/11/2019 18:13:35'!
+createRestAPI
+	^RestAPI newWithCatalog: self defaultCatalog authenticatingOn: self userStore.!
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 18:14:58' prior: 50798690!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest  new.
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: self userStore sendingPaymentsTo: merchantProcessorMock.! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:15:15' prior: 50798673!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	
+	
+	
+	! !
+!CashierTest methodsFor: 'merchant processor behaviour' stamp: 'ss 11/11/2019 18:18:41'!
+debitBehaviour: aBlock
+
+	debitBehavior  := aBlock! !
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 18:19:37' prior: 50798704!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: self userStore sendingPaymentsTo: merchantProcessorMock.! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:21:58' prior: 50798715!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	
+	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:22:19' prior: 50798740!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	
+	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:23:05'!
+test09CheckoutMakesPaymentAndAddsPurchrase
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 1
+	self assert: (purchrasesByClient at: 1) equals: aCart 	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:23:11' prior: 50798762!
+test09CheckoutMakesPaymentAndAddsPurchrase
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 1.
+	self assert: (purchrasesByClient at: 1) equals: aCart. 	
+	
+	
+	! !
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 18:23:25' prior: 50798729!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore sendingPaymentsTo: merchantProcessorMock.! !
+!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:23:36'!
+newWithCatalog: aDictionary authenticatingOn: aDictionary2 sendingPaymentsTo: aCashierTest 
+	self shouldBeImplemented.! !
+!RestAPI class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 18:24:27' prior: 50798808!
+newWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor 
+	^self new initializeNewWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor. ! !
+
+!methodRemoval: RestAPI class #newWithCatalog:authenticatingOn: stamp: 'ss 11/11/2019 18:24:37'!
+newWithCatalog: aCatalog authenticatingOn: userStore 
+	^self new initializeNewWithCatalog: aCatalog authenticatingOn: userStore. !
+
+!methodRemoval: RestAPI class #newWithCatalog: stamp: 'ss 11/11/2019 18:24:38'!
+newWithCatalog: aCatalog 
+	^self new initializeNewWithCatalog: aCatalog!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 18:25:06'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 18:25:03'!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor ! !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 18:25:07' prior: 50798844!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.! !
+
+!methodRemoval: RestAPI #initializeNewWithCatalog:authenticatingOn: stamp: 'ss 11/11/2019 18:25:09'!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore 
+	catalog := aCatalog.
+	usersStore := aUsersStore.!
+
+!methodRemoval: RestAPI #initializeNewWithCatalog: stamp: 'ss 11/11/2019 18:25:10'!
+initializeNewWithCatalog: aCatalog 
+	catalog := aCatalog.!
+
+!methodRemoval: RestAPITest #test09CheckoutMakesPaymentThroughMerchantProcessor stamp: 'ss 11/11/2019 18:25:20'!
+test09CheckoutMakesPaymentThroughMerchantProcessor
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	
+	
+	
+	
+	!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:25:21'!
+ERROR!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 18:27:51'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor purchrases'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:27:49' prior: 50798625!
+checkout: aCart with: aCreditCard 
+	purchrases add: aCart.! !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 18:28:04' prior: 50798853!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrases := OrderedCollection new.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:28:17' prior: 50798418!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	^purchrases .! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:28:20' prior: 50798916!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	^purchrases copy.! !
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:28:25'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:31:06'!
+test10ListPurchrasesReturnsEachClientPurchrases
+	| aCart anotherCart purchrasesByAnotherClient purchrasesByOneClient |
+	
+	aCart := restapi createCartForClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	anotherCart := restapi createCartForClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory anotherUserPassword.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByOneClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	purchrasesByAnotherClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:31:55' prior: 50798962!
+test10ListPurchrasesReturnsEachClientPurchrases
+	| aCart anotherCart purchrasesByAnotherClient purchrasesByOneClient |
+	
+	aCart := restapi createCartForClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	anotherCart := restapi createCartForClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword .
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByOneClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	purchrasesByAnotherClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword .
+	
+	
+	! !
+!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/11/2019 18:32:13'!
+anotherUser
+	^'another_valid_user'! !
+!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/11/2019 18:32:27' prior: 50797777!
+userStore
+
+	 ^Dictionary new
+		at: self validUser put: self validPassword;
+		at: self anotherUser put: self validPassword;
+		yourself ! !
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:32:32'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:33:51' prior: 50798991!
+test10ListPurchrasesReturnsEachClientPurchrases
+	| aCart anotherCart purchrasesByAnotherClient purchrasesByOneClient |
+	
+	aCart := restapi createCartForClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	anotherCart := restapi createCartForClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword .
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByOneClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	purchrasesByAnotherClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	self assert: purchrasesByOneClient size equals: 1.
+	self assert: (purchrasesByOneClient at: 1) equals: aCart.
+	
+	self assert: purchrasesByAnotherClient size equals: 1.
+	self assert: (purchrasesByAnotherClient at: 1) equals: anotherCart.
+	
+	
+	! !
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:33:52'!
+FAILURE!
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:34:04'!
+FAILURE!
+
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor cartByOwner purchrasesByClient'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 18:36:05'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor cartByOwner purchrasesByClient'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 18:36:29' prior: 50798905!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	cartByOwner  := Dictionary  new.
+		purchrasesByClient  := Dictionary  new.! !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 18:36:33' prior: 50799130!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	cartByOwner  := Dictionary  new.
+	purchrasesByClient  := Dictionary  new.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:38:06' prior: 50798900!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID |
+	cart := self listCartWithID: cartID.
+	clientID := cartsByID at: cartID.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:45:53' prior: 50799154!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID |
+	
+	cart := self listCartWithID: cartID.
+	clientID := cartsByID at: cartID.
+	
+	purchrasesByClient at: clientID ifPresent: [:purchases | purchases add: cart] 
+		ifAbsent: [OrderedCollection new with: cart]. ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 18:45:55'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 18:45:55'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:45:55'!
+ERROR!
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:45:55'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:46:43' prior: 50799161!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID |
+	
+	cart := self listCartWithID: cartID.
+	clientID := cartsByID at: cartID.
+	
+	purchrasesByClient at: clientID ifPresent: [:purchases | purchases add: cart] 
+		ifAbsent: [OrderedCollection with: cart]. ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 18:46:45'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 18:46:45'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:46:45'!
+ERROR!
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:46:45'!
+ERROR!
+
+!testRun: #RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:46:53'!
+ERROR!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:51:17'!
+test09CheckoutMakesPaymentAndAddsPurchrases
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi add: 2 of: testObjectsFactory itemSellByTheStore toCartWithID: aCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 1.
+	self assert: (purchrasesByClient at: 1) equals: aCart. 	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 18:52:13' prior: 50799256!
+test09CheckoutMakesPaymentAndAddsPurchrases
+	| purchrasesByClient aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 2 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient occurrencesOf: self itemSellByTheStore ) equals: 2. 	
+	
+	
+	! !
+
+!methodRemoval: RestAPITest #test10ListPurchrasesReturnsEachClientPurchrases stamp: 'ss 11/11/2019 18:53:03'!
+test10ListPurchrasesReturnsEachClientPurchrases
+	| aCart anotherCart purchrasesByAnotherClient purchrasesByOneClient |
+	
+	aCart := restapi createCartForClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	anotherCart := restapi createCartForClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword .
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	restapi checkout: anotherCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByOneClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	purchrasesByAnotherClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory anotherUser 
+		withPassword: testObjectsFactory validPassword.
+		
+	self assert: purchrasesByOneClient size equals: 1.
+	self assert: (purchrasesByOneClient at: 1) equals: aCart.
+	
+	self assert: purchrasesByAnotherClient size equals: 1.
+	self assert: (purchrasesByAnotherClient at: 1) equals: anotherCart.
+	
+	
+	!
+
+!methodRemoval: RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrase stamp: 'ss 11/11/2019 18:53:11'!
+test09CheckoutMakesPaymentAndAddsPurchrase
+	| aCart purchrasesByClient |
+	
+	aCart := self createCart.
+	
+	restapi checkout: aCart with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 1.
+	self assert: (purchrasesByClient at: 1) equals: aCart. 	
+	
+	
+	!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:53:13'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:54:51' prior: 50799207!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	clientID := cartsByID at: cartID.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:55:50'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:56:09'!
+itemsDo: aBlockClosure 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:56:46' prior: 50799367!
+itemsDo: aBlockClosure 
+	
+	items do: [:item | aBlockClosure value: item].! !
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:56:48'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:56:53'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:57:20' prior: 50798922!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:58:06' prior: 50799385!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	self assert: clientID hasPassword: password.
+	
+	^purchrasesByClient at: clientID ifAbsent: [Bag new]. 
+	! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 18:58:08'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:58:08'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:58:08'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 18:58:13'!
+FAILURE!
+
+cart!
+
+cart size!
+
+cartID!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:00:23' prior: 50798341!
+createCartForClient: clientID withPassword: password 
+	| cartID |
+	self assert: clientID hasPassword: password.
+	
+	cartID := self createNewCartID.
+	cartsByID at: cartID put: (Cart acceptingItemsOf: catalog).
+	(cartByOwner at: clientID ifAbsentPut: [OrderedCollection new]) add: cartID.
+	
+	^cartID ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:00:26'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:00:26'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:00:26'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:00:30'!
+FAILURE!
+
+clientID!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:01:29' prior: 50799353!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	clientID := cartByOwner at: cartID.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:02:02' prior: 50799438!
+createCartForClient: clientID withPassword: password 
+	| cartID |
+	self assert: clientID hasPassword: password.
+	
+	cartID := self createNewCartID.
+	cartsByID at: cartID put: (Cart acceptingItemsOf: catalog).
+	cartByOwner at: cartID put: clientID .
+	
+	^cartID ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:02:03'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:02:03'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:02:03'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:02:08'!
+ERROR!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:02:15' prior: 50799275!
+test09CheckoutMakesPaymentAndAddsPurchrases
+	| purchrasesByClient aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 2 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient occurrencesOf: testObjectsFactory itemSellByTheStore ) equals: 2. 	
+	
+	
+	! !
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:02:16'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:03:35'!
+test09CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient occurrencesOf: testObjectsFactory itemSellByTheStore ) equals: 2. 	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:03:55' prior: 50799605!
+test09CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:04:16'!
+test10CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard .	
+	
+	
+	! !
+
+!methodRemoval: RestAPITest #test09CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:04:16'!
+test09CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard .	
+	
+	
+	!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:05:04' prior: 50799629!
+test10CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood withExceptionDo: [:error |
+			
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:05:08' prior: 50799645!
+test10CheckoutFailsIfCartDoesNotExist
+	| purchrasesByClient aCartID |
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:05:13' prior: 50799656!
+test10CheckoutFailsIfCartDoesNotExist
+	| |
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:05:17' prior: 50799667!
+test10CheckoutFailsIfCartDoesNotExist
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:05:36' prior: 50799677!
+test10CheckoutFailsIfCartDoesNotExist
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartNotFoundErrorDescription 
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:06:49' prior: 50799687!
+test10CheckoutFailsIfCartDoesNotExist
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartNotFoundErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:07:41'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:07:54'!
+salesBook
+	self shouldBeImplemented.! !
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 19:08:03'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor cartByOwner purchrasesByClient salesBook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:08:01' prior: 50799715!
+salesBook
+	^salesBook! !
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:08:11'!
+ERROR!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 19:08:44' prior: 50799142!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	cartByOwner  := Dictionary  new.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.! !
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:08:50'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:10:07'!
+test11CheckoutFailsIfCartIsEmpty
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsEmptyErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:10:10'!
+ERROR!
+!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:10:21'!
+cartIsEmptyErrorDescription
+	self shouldBeImplemented.! !
+!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:10:28' prior: 50799802!
+cartIsEmptyErrorDescription
+	^'cart is empty'! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:10:36'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:10:36'!
+FAILURE!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:10:36'!
+FAILURE!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:10:58' prior: 50799786!
+test11CheckoutFailsIfCartIsEmpty
+	| aCartID |
+	aCartID := self createCart.
+
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsEmptyErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:11:00'!
+FAILURE!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:11:46' prior: 50799489!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart size = 0 ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:11:47'!
+PASSED!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:12:18' prior: 50799870!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:12:20'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:15:08'!
+test11CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	aCartID := self createCart.
+	
+	
+	merchantProcessorMock debitBehaviour: [].
+
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsEmptyErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:16:18' prior: 50799973!
+test11CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [debittedAmount  := 1].
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:17:14' prior: 50799990!
+test11CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [debittedAmount  := 1].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:17:22' prior: 50800001!
+test11CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [debittedAmount  := 1].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:17:59'!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [debittedAmount  := 1].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	! !
+
+!methodRemoval: RestAPITest #test11CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:17:59'!
+test11CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [debittedAmount  := 1].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:18:32' prior: 50800033!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card
+	].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:18:35' prior: 50800066!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:18:49' prior: 50800084!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedAmount equals: testObjectsFactory notExpiredCreditCard .
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:18:53'!
+FAILURE!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:19:29' prior: 50799922!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+		
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:21:35' prior: 50800126!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: GregorianDate today
+		registeringOn: salesBook.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:22:29' prior: 50800140!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: GregorianDate today
+		registeringOn: salesBook
+		checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:22:42' prior: 50800159!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: GregorianDate today
+		registeringOn: salesBook)
+		checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:22:47' prior: 50800178!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: GregorianDate today
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:22:50'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:22:50'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:22:50'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:22:57'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:23:26' prior: 50800197!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: FixedGregorianDate today 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:23:27'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:23:27'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:23:27'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:23:31'!
+ERROR!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:24:54' prior: 50800260!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:24:55'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:24:55'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:24:55'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:24:56'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:25:11'!
+FAILURE!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:25:17'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:25:17'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:25:17'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:25:21'!
+ERROR!
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 19:25:40' prior: 50798796!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	merchantProcessorMock debitBehaviour: [].
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore sendingPaymentsTo: merchantProcessorMock.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:25:42'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:25:42'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:25:42'!
+FAILURE!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:25:44'!
+ERROR!
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 19:26:01' prior: 50800433!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	merchantProcessorMock debitBehaviour: [:amount :card | ].
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore sendingPaymentsTo: merchantProcessorMock.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:26:02'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:26:02'!
+FAILURE!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:26:02'!
+FAILURE!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:26:06'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:26:06'!
+FAILURE!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:26:06'!
+FAILURE!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:26:10'!
+FAILURE!
+
+debitBehavior !
+
+debittedAmount!
+
+amount!
+
+debittedAmount !
+
+card!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:29:04' prior: 50800102!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard|
+	
+	aCartID := self createCart.
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedCard equals: testObjectsFactory notExpiredCreditCard .
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:29:05'!
+FAILURE!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:30:18' prior: 50800598!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard creditCard |
+	
+	aCartID := self createCart.
+	creditCard := testObjectsFactory notExpiredCreditCard.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedCard equals: testObjectsFactory notExpiredCreditCard .
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:30:31' prior: 50800622!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard creditCard |
+	
+	aCartID := self createCart.
+	creditCard := testObjectsFactory notExpiredCreditCard.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: creditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedCard equals: creditCard .
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:30:32'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:32:01'!
+test13CheckoutACartTwiceFails
+	| aCartID debittedAmount debittedCard creditCard |
+	
+	aCartID := self createCart.
+	creditCard := testObjectsFactory notExpiredCreditCard.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: creditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedCard equals: creditCard .
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:35:11' prior: 50800710!
+test13CheckoutACartTwiceFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsDisabledErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:35:18'!
+FAILURE!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 19:37:04'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor cartByOwner purchrasesByClient salesBook disabledCarts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:37:03' prior: 50800323!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	(disabledCarts includes: cartID) ifTrue: [self error: self class cartIsDisabledErrorDescription].
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].! !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 19:37:20' prior: 50799736!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	cartByOwner  := Dictionary  new.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	disabledCarts  := Set new.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:37:30'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:37:30'!
+FAILURE!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:37:30'!
+FAILURE!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:37:50' prior: 50800764!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	(disabledCarts includes: cartID) ifTrue: [self error: self class cartIsDisabledErrorDescription].
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].
+	
+	disabledCarts add: cartID.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:37:51'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:37:51'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:37:51'!
+ERROR!
+!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:37:58'!
+cartIsDisabledErrorDescription
+	self shouldBeImplemented.! !
+!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:38:07' prior: 50800916!
+cartIsDisabledErrorDescription
+	^'cart is disabled'! !
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:38:09'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:38:10'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:39:47'!
+test14AddToCartAfterCheckoutFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsDisabledErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 19:39:48'!
+FAILURE!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:42:57'!
+test15ListCartFailsIfCartIsDisabled
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsDisabledErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:43:12' prior: 50800995!
+test15ListCartFailsIfCartIsDisabled
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsDisabledErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 19:43:13'!
+FAILURE!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:44:22' prior: 50798293!
+listCartWithID: cartID 
+	self assertCartExistsWithID: cartID .
+	(disabledCarts includes: cartID ) ifTrue: [self error: self class cartIsDisabledErrorDescription ].
+	
+	 ^cartsByID at: cartID! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 19:44:23'!
+PASSED!
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 19:45:22'!
+assertCartIsEnabled: aCartID
+
+	^(disabledCarts includes: aCartID ) not! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 19:45:53' prior: 50801096!
+assertCartIsEnabled: aCartID
+
+	(disabledCarts includes: aCartID ) ifTrue: [self error: self class cartIsDisabledErrorDescription ]! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:46:04' prior: 50800847!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].
+	
+	disabledCarts add: cartID.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:46:30' prior: 50801037!
+listCartWithID: cartID 
+	self assertCartExistsWithID: cartID .
+	self assertCartIsEnabled: cartID.
+	
+	 ^cartsByID at: cartID! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 19:46:32'!
+PASSED!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:48:43' prior: 50799729!
+salesBook
+	^salesBook copy.! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 19:48:50' prior: 50801186!
+salesBook
+	^salesBook copy.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 19:49:00'!
+PASSED!
+
+Object subclass: #CartXXX
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartXXX category: #TusLibros stamp: 'ss 11/11/2019 19:58:21'!
+Object subclass: #CartXXX
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 19:59:39'!
+for: aCart withOwner: aClientID 
+
+	self new initializeFor: aCart withOwner: aClientID.! !
+!CartXXX methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:00:43'!
+cart
+	^cart! !
+!CartXXX methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:00:56'!
+ownerID
+	^ownerID! !
+!CartXXX methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:01:09'!
+id
+	^id! !
+!CartXXX methodsFor: 'testing' stamp: 'ss 11/11/2019 20:01:31'!
+isDisabled
+	^disabled! !
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 20:04:33'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog cartsByID usersStore merchantProcessor cartByOwner purchrasesByClient salesBook disabledCarts carts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:05:00' prior: 50799501!
+createCartForClient: clientID withPassword: password 
+	| cart |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  (CartXXX newFor: (Cart acceptingItemsOf: catalog) withOwner: clientID).
+	carts add: cart.
+		
+	^cart id. ! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 20:06:37' prior: 50798238!
+assertCartExistsWithID: aCartID
+	^cartsByID anySatisfy: [:cart | cart id = aCartID ].! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 20:07:12' prior: 50801294!
+assertCartExistsWithID: aCartID
+	(cartsByID anySatisfy: [:cart | cart id = aCartID ])  ifFalse: [self error: self class cartNotFoundErrorDescription ].! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 20:07:49' prior: 50801101!
+assertCartIsEnabled: aCart
+
+	aCart isDisabled ifTrue: [self error: self class cartIsDisabledErrorDescription ]! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:09:34' prior: 50801129!
+listCartWithID: cartID 	
+	| cart |
+	cart := carts detect: [:aCart | aCart id = cartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+	
+	self assertCartIsEnabled: cartID.
+	
+	 ^cart.! !
+
+!methodRemoval: RestAPI #assertCartExistsWithID: stamp: 'ss 11/11/2019 20:09:42'!
+assertCartExistsWithID: aCartID
+	(cartsByID anySatisfy: [:cart | cart id = aCartID ])  ifFalse: [self error: self class cartNotFoundErrorDescription ].!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:10:48' prior: 50801109!
+checkout: cartID with: aCreditCard 
+
+	| cart clientID purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	clientID := cartByOwner at: cartID.
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: clientID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].
+	
+	disabledCarts add: cartID.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:11:30' prior: 50801332!
+checkout: cartID with: aCreditCard 
+
+	| cart purchrases |
+	
+	cart := self listCartWithID: cartID.
+	cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	(Cashier
+		toCheckout: cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: cart ownerID ifAbsentPut: [Bag new].
+	cart itemsDo: [:item | purchrases add: item].
+	
+	cart disable.! !
+
+Cart subclass: #CartXXX
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartXXX category: #TusLibros stamp: 'ss 11/11/2019 20:11:40'!
+Cart subclass: #CartXXX
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CartXXX methodsFor: 'disabling' stamp: 'ss 11/11/2019 20:12:06'!
+disable
+	disabled := true! !
+
+!methodRemoval: RestAPI #initialize stamp: 'ss 11/11/2019 20:12:24'!
+initialize
+
+	cartsByID := Dictionary new.!
+
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook carts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 20:12:36'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook carts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:12:55' prior: 50800786!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	carts := OrderedCollection new.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:12:57'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:12:57'!
+ERROR!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:13:01'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:13:01'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:13:05'!
+ERROR!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:13:35'!
+for: aCart withOwner: aClientID acceptingItemsOf: aCatalog
+
+	self new initializeFor: aCart withOwner: aClientID.! !
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:13:51' prior: 50801521!
+for: aCart withOwner: aClientID acceptingItemsOf: aCatalog
+
+	self new initializeFor: aCart withOwner: aClientID acceptingItemsOf: aCatalog.! !
+
+!methodRemoval: CartXXX class #for:withOwner: stamp: 'ss 11/11/2019 20:14:22'!
+for: aCart withOwner: aClientID 
+
+	self new initializeFor: aCart withOwner: aClientID.!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:14:47' prior: 50801528!
+for: aCart withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeFor: aCart withOwner: aClientID acceptingItemsOf: aCatalog.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:15:04'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:15:04'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:15:08'!
+ERROR!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:16:03' prior: 50801284!
+createCartForClient: clientID withPassword: password 
+	| cart |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  CartXXX withOwner: clientID acceptingItemsOf: catalog.
+	carts add: cart.
+		
+	^cart id. ! !
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:16:22'!
+withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeWithOwner: aClientID acceptingItemsOf: aCatalog.! !
+
+!methodRemoval: CartXXX class #for:withOwner:acceptingItemsOf: stamp: 'ss 11/11/2019 20:16:25'!
+for: aCart withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeFor: aCart withOwner: aClientID acceptingItemsOf: aCatalog.!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:16:45' prior: 50801615!
+withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeWithID: self generateCartID WithOwner: aClientID acceptingItemsOf: aCatalog.! !
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:17:17'!
+ERROR!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:17:27'!
+generateCartID
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeGenerateCartID! !
+
+!methodRemoval: RestAPI #createNewCartID stamp: 'ss 11/11/2019 20:17:50'!
+createNewCartID
+
+	^100000 atRandom.!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:17:56' prior: 50801641!
+generateCartID
+	^100000 atRandom.! !
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:17:57'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:18:58'!
+ERROR!
+!CartXXX class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:19:31' prior: 50801630!
+withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeWithID: self generateCartID withOwner: aClientID acceptingItemsOf: aCatalog.! !
+!CartXXX methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:19:51'!
+initializeWithID: anID withOwner: aClientID acceptingItemsOf: aCatalog.! !
+!CartXXX methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:20:31' prior: 50801672!
+initializeWithID: anID withOwner: aClientID acceptingItemsOf: aCatalog
+
+	id := anID.
+	ownerID  := aClientID.! !
+!CartXXX methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:20:55' prior: 50801678!
+initializeWithID: anID withOwner: aClientID acceptingItemsOf: aCatalog
+	self initializeAcceptingItemsOf: aCatalog.
+	
+	id := anID.
+	ownerID  := aClientID.! !
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:21:01'!
+ERROR!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:21:30' prior: 50801315!
+listCartWithID: cartID 	
+	| cart |
+	cart := carts detect: [:aCart | aCart id = cartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+	
+	self assertCartIsEnabled: cart.
+	
+	 ^cart.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:21:33' prior: 50801696!
+listCartWithID: cartID 	
+	| cart |
+	cart := carts detect: [:aCart | aCart id = cartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertCartIsEnabled: cart.
+	
+	 ^cart.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:21:34' prior: 50801705!
+listCartWithID: cartID 	
+	| cart |
+	
+	cart := carts detect: [:aCart | aCart id = cartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertCartIsEnabled: cart.
+	
+	 ^cart.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:21:36'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:21:36'!
+FAILURE!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:21:36'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:21:41'!
+ERROR!
+
+aCart!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:22:30'!
+ERROR!
+
+aCart!
+
+aCart isDisabled !
+
+Cart subclass: #CartXXX
+	instanceVariableNames: 'id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartXXX category: #TusLibros stamp: 'ss 11/11/2019 20:23:15'!
+Cart subclass: #CartXXX
+	instanceVariableNames: 'id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CartXXX methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:23:24' prior: 50801685!
+initializeWithID: anID withOwner: aClientID acceptingItemsOf: aCatalog
+	self initializeAcceptingItemsOf: aCatalog.
+	
+	id := anID.
+	ownerID  := aClientID.
+	disabled := false.! !
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:23:54'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:23:54'!
+ERROR!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:23:58'!
+ERROR!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:24:37' prior: 50798304!
+add: anAmount of: anISBN toCartWithID: cartID
+	| cart |
+	cart := self listCartWithID: cartID.
+	
+	cart add: anAmount of: anISBN.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:24:46'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 20:24:50'!
+PASSED!
+
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 20:53:58'!
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+Object subclass: #CartXXX
+	instanceVariableNames: 'id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartXXX category: #TusLibros stamp: 'ss 11/11/2019 20:54:18'!
+Object subclass: #CartXXX
+	instanceVariableNames: 'id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #Session stamp: 'ss 11/11/2019 20:54:25'!
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 20:54:29' prior: 50801605!
+createCartForClient: clientID withPassword: password 
+	| cart |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  Session withOwner: clientID acceptingItemsOf: catalog.
+	carts add: cart.
+		
+	^cart id. ! !
+
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 20:55:24'!
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Session class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:56:47'!
+fromOwner: aClientID withCart: aCart 
+
+	^self new initializeWithOwner: aClientID withCart: aCart WithCartID: self generateCartID.! !
+
+!methodRemoval: Session class #withOwner:acceptingItemsOf: stamp: 'ss 11/11/2019 20:56:56'!
+withOwner: aClientID acceptingItemsOf: aCatalog
+
+	^self new initializeWithID: self generateCartID withOwner: aClientID acceptingItemsOf: aCatalog.!
+
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 20:57:51'!
+Object subclass: #Session
+	instanceVariableNames: 'cart id ownerID disabled cartID'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Session methodsFor: 'initialization' stamp: 'ss 11/11/2019 20:57:49'!
+initializeWithOwner: aClientID withCart: aCart WithCartID: aCartID	
+	cart := aCart.
+	cartID := aCartID.
+	ownerID  := aClientID.
+	disabled := false.! !
+
+!methodRemoval: Session #initializeWithID:withOwner:acceptingItemsOf: stamp: 'ss 11/11/2019 20:57:56'!
+initializeWithID: anID withOwner: aClientID acceptingItemsOf: aCatalog
+	self initializeAcceptingItemsOf: aCatalog.
+	
+	id := anID.
+	ownerID  := aClientID.
+	disabled := false.!
+
+Object subclass: #Session
+	instanceVariableNames: 'cart ownerID disabled cartID'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 20:58:03'!
+Object subclass: #Session
+	instanceVariableNames: 'cart ownerID disabled cartID'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Session methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:58:16'!
+cartID
+	^cartID! !
+
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook sessions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 20:58:32'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook sessions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:59:34' prior: 50801714!
+listCartWithID: cartID 	
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = cartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertCartIsEnabled: session.
+	
+	 ^session cart.! !
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:00:19'!
+sessionWithCartID: aCartID! !
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:00:59' prior: 50802095!
+sessionWithCartID: aCartID
+
+	| session |
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertCartIsEnabled: session.
+	
+	^session.! !
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:01:03' prior: 50802099!
+sessionWithCartID: aCartID
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertCartIsEnabled: session.
+	
+	^session.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:01:27' prior: 50802085!
+listCartWithID: cartID 	
+	| |
+	
+	 ^(self sessionWithCartID: cartID) cart.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:01:33' prior: 50802119!
+listCartWithID: cartID 	
+	 ^(self sessionWithCartID: cartID) cart.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:02:19' prior: 50801351!
+checkout: cartID with: aCreditCard 
+
+	| session purchrases |
+	
+	session := self sessionWithCartID: cartID.
+	session cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	(Cashier
+		toCheckout: sessions cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: session ownerID ifAbsentPut: [Bag new].
+	session cart itemsDo: [:item | purchrases add: item].
+	
+	session disable.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:03:24' prior: 50801995!
+createCartForClient: clientID withPassword: password 
+	| cart session |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  Cart acceptingItemsOf: catalog.
+	session := Session fromOwner: clientID withCart: cart.
+	
+	sessions add: session.
+		
+	^session cartID . ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:03:35'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:03:35'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:03:35'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:03:35'!
+ERROR!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:03:38'!
+ERROR!
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 21:04:29'!
+assertSessionIsActive: aSession
+
+	aSession isActive ifFalse: [self error: self class cartIsDisabledErrorDescription ]! !
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/11/2019 21:04:53' prior: 50800921!
+cartIsDisabledErrorDescription
+	^'session is not active'! !
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/11/2019 21:05:14'!
+sessionIsNotActiveErrorDescription
+	^'session is not active'! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:05:14' prior: 50801308!
+assertCartIsEnabled: aCart
+
+	aCart isDisabled ifTrue: [self error: self class sessionIsNotActiveErrorDescription ]! !
+!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:05:14' prior: 50802212!
+assertSessionIsActive: aSession
+
+	aSession isActive ifFalse: [self error: self class sessionIsNotActiveErrorDescription ]! !
+!RestAPITest methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:05:14' prior: 50800972!
+test14AddToCartAfterCheckoutFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:05:14' prior: 50801015!
+test15ListCartFailsIfCartIsDisabled
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:05:14' prior: 50800731!
+test13CheckoutACartTwiceFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!methodRemoval: RestAPI class #cartIsDisabledErrorDescription stamp: 'ss 11/11/2019 21:05:14'!
+cartIsDisabledErrorDescription
+	^'session is not active'!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:05:24'!
+ERROR!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:05:24'!
+ERROR!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:05:32' prior: 50801402!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:05:58'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:05:58'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:05:58'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:05:58'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:05:58'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:05:58'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:06:02'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:06:02'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:06:02'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:06:02'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:06:02'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:06:02'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:06:04'!
+ERROR!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:06:04'!
+ERROR!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:06:23' prior: 50802129!
+checkout: cartID with: aCreditCard 
+
+	| session purchrases |
+	
+	session := self sessionWithCartID: cartID.
+	session cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	(Cashier
+		toCheckout: session cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: session ownerID ifAbsentPut: [Bag new].
+	session cart itemsDo: [:item | purchrases add: item].
+	
+	session disable.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:06:23'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:07:03'!
+test16SessionExpiressAfter30MinutesFromLastOperation
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+d := FixedGregorianDate today!
+
+d!
+
+d add: 1!
+
+d := DateAndTime today!
+
+d minutes !
+
+d minute !
+
+l := DateAndTime today!
+
+d+ l!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!testRun: #RestAPITest #test16SessionExpiressAfter30MinutesFromLastOperation stamp: 'ss 11/11/2019 21:10:53'!
+PASSED!
+
+!methodRemoval: RestAPI #assertCartIsEnabled: stamp: 'ss 11/11/2019 21:11:09'!
+assertCartIsEnabled: aCart
+
+	aCart isDisabled ifTrue: [self error: self class sessionIsNotActiveErrorDescription ]!
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:11:23' prior: 50802109!
+sessionWithCartID: aCartID
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertSessionIsActive: session.
+	
+	^session.! !
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:11:35'!
+isActive
+	^disabled not! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+
+!testRun: #RestAPITest #test16SessionExpiressAfter30MinutesFromLastOperation stamp: 'ss 11/11/2019 21:11:38'!
+PASSED!
+!RestAPI class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 21:13:42'!
+newWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
+
+	^self new 
+		initializeNewWithCatalog: aCatalog 
+		authenticatingOn: userStore 
+		sendingPaymentsTo: aMerchantProcessor 
+		withTimeProvider: aTimeProvider.! !
+
+!methodRemoval: RestAPI class #newWithCatalog:authenticatingOn:sendingPaymentsTo: stamp: 'ss 11/11/2019 21:13:49'!
+newWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor 
+	^self new initializeNewWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor. !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:14:07'!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.! !
+
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 21:14:17'!
+Object subclass: #RestAPI
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook sessions timeProvider'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:14:15' prior: 50802679!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.
+	timeProvider := aTimeProvider ! !
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:14:18' prior: 50802702!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.
+	timeProvider := aTimeProvider.! !
+
+!methodRemoval: RestAPI #initializeNewWithCatalog:authenticatingOn:sendingPaymentsTo: stamp: 'ss 11/11/2019 21:14:21'!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor
+	catalog := aCatalog.
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.!
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 21:14:44' prior: 50800490!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	merchantProcessorMock debitBehaviour: [:amount :card | ].
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore 
+		sendingPaymentsTo: merchantProcessorMock
+		withTimeProvider: self.! !
+
+d := DateAndTime  now !
+
+d := DateAndTime  now  minute !
+
+!classDefinition: #RestAPITest category: #TusLibros stamp: 'ss 11/11/2019 21:15:59'!
+TestCase subclass: #RestAPITest
+	instanceVariableNames: 'testObjectsFactory restapi merchantProcessorMock presentTime'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!RestAPITest methodsFor: 'time provider protocol' stamp: 'ss 11/11/2019 21:15:57'!
+now
+	^presentTime! !
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 21:16:30' prior: 50802745!
+setUp 
+	
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	merchantProcessorMock := CashierTest new.
+	merchantProcessorMock debitBehaviour: [:amount :card | ].
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore 
+		sendingPaymentsTo: merchantProcessorMock
+		withTimeProvider: self.
+		
+	presentTime := DateAndTime now.! !
+
+(Duration minutes: 30)!
+
+(Duration minutes: 30) seconds !
+!RestAPITest methodsFor: 'support' stamp: 'ss 11/11/2019 21:18:11'!
+advanceTime30Minutes
+	presentTime := presentTime + Duration minutes: 30! !
+!RestAPITest methodsFor: 'support' stamp: 'ss 11/11/2019 21:18:27' prior: 50802791!
+advanceTime30Minutes
+	presentTime := presentTime + (Duration minutes: 30)! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:19:29'!
+test16CantListCartAfter30MinutesOfInactivity
+	| aCartID |
+	
+	aCartID := self createCart.
+
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:19:42' prior: 50802801!
+test16CantListCartAfter30MinutesOfInactivity
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime30Minutes 
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:19:57' prior: 50802815!
+test16CantListCartAfter30MinutesOfInactivity
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime30Minutes 
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+						]
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:20:08'!
+ERROR!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:20:16' prior: 50802830!
+test16CantListCartAfter30MinutesOfInactivity
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime30Minutes .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+						]
+
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:20:17'!
+FAILURE!
+
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 21:20:49'!
+Object subclass: #Session
+	instanceVariableNames: 'cart ownerID disabled cartID lastActivity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Session methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:20:59'!
+initializeWithOwner: aClientID withCart: aCart WithCartID: aCartID withCurrentTime: aTime	
+	cart := aCart.
+	cartID := aCartID.
+	ownerID  := aClientID.
+	lastActivity := aTime.
+	disabled := false.! !
+
+!methodRemoval: Session #initializeWithOwner:withCart:WithCartID: stamp: 'ss 11/11/2019 21:21:06'!
+initializeWithOwner: aClientID withCart: aCart WithCartID: aCartID	
+	cart := aCart.
+	cartID := aCartID.
+	ownerID  := aClientID.
+	disabled := false.!
+!Session class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 21:21:20'!
+fromOwner: aClientID withCart: aCart  withCurrentTime: aTime
+
+	^self new initializeWithOwner: aClientID withCart: aCart WithCartID: self generateCartID withCurrentTime: aTime.! !
+
+!methodRemoval: Session class #fromOwner:withCart: stamp: 'ss 11/11/2019 21:21:22'!
+fromOwner: aClientID withCart: aCart 
+
+	^self new initializeWithOwner: aClientID withCart: aCart WithCartID: self generateCartID.!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:21:47' prior: 50802148!
+createCartForClient: clientID withPassword: password 
+	| cart session |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  Cart acceptingItemsOf: catalog.
+	session := Session fromOwner: clientID withCart: cart withCurrentTime: timeProvider now.
+	
+	sessions add: session.
+		
+	^session cartID . ! !
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:22:20'!
+isActiveOn: aTime
+	^disabled not! !
+
+!methodRemoval: Session #isDisabled stamp: 'ss 11/11/2019 21:22:25'!
+isDisabled
+	^disabled!
+
+!methodRemoval: Session #isActive stamp: 'ss 11/11/2019 21:22:28'!
+isActive
+	^disabled not!
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:22:59' prior: 50802916!
+isActiveOn: aTime
+	^disabled not or: [(lastActivity - aTime ) minutes >= 30].! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 21:23:43' prior: 50802236!
+assertSessionIsActive: aSession
+
+	(aSession isActiveOn: self now) ifFalse: [self error: self class sessionIsNotActiveErrorDescription ]! !
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:23:54'!
+now
+	^timeProvider now! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:24:07' prior: 50802904!
+createCartForClient: clientID withPassword: password 
+	| cart session |
+	self assert: clientID hasPassword: password.
+	
+	cart :=  Cart acceptingItemsOf: catalog.
+	session := Session fromOwner: clientID withCart: cart withCurrentTime: self now.
+	
+	sessions add: session.
+		
+	^session cartID . ! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:24:14'!
+FAILURE!
+
+!testRun: #RestAPITest #test16SessionExpiressAfter30MinutesFromLastOperation stamp: 'ss 11/11/2019 21:24:14'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:24:14'!
+FAILURE!
+
+aTime!
+
+lastActivity !
+
+lastActivity!
+
+lastActivity!
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:25:52' prior: 50802926!
+isActiveOn: aTime
+	^disabled not or: [(aTime - lastActivity) minutes >= 30].! !
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:25:54'!
+FAILURE!
+
+(aTime - lastActivity)!
+
+(aTime - lastActivity) minutes!
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:26:51' prior: 50803018!
+isActiveOn: aTime
+	^disabled not and: [(aTime - lastActivity) minutes < 30].! !
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:26:52'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!testRun: #RestAPITest #test16SessionExpiressAfter30MinutesFromLastOperation stamp: 'ss 11/11/2019 21:26:56'!
+PASSED!
+
+!methodRemoval: RestAPITest #test16SessionExpiressAfter30MinutesFromLastOperation stamp: 'ss 11/11/2019 21:27:08'!
+test16SessionExpiressAfter30MinutesFromLastOperation
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:29:07'!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime30Minutes .
+	
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'support' stamp: 'ss 11/11/2019 21:29:18'!
+advanceTime15Minutes
+	presentTime := presentTime + (Duration minutes: 15)! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:29:36' prior: 50803115!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID 
+	
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:29:41' prior: 50803127!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+
+	
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:30:13' prior: 50803135!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self assert: (restapi listCartWithID: aCartID) isNotNil 
+
+
+
+	
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:30:16'!
+ERROR!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:31:04' prior: 50802124!
+listCartWithID: cartID 	
+	 | session |
+session := (self sessionWithCartID: cartID).
+	
+	session refreshActivityAt: self now.
+	
+	^session cart.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:31:09' prior: 50803157!
+listCartWithID: cartID 	
+	 | session |
+	
+	session := (self sessionWithCartID: cartID).
+	
+	session refreshActivityAt: self now.
+	
+	^session cart.! !
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:31:11'!
+PASSED!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:31:11'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:31:13'!
+ERROR!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:31:13'!
+ERROR!
+!Session methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:31:22'!
+refreshActivityAt: aDateAndTime 
+	self shouldBeImplemented.! !
+!Session methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:31:35' prior: 50803236!
+refreshActivityAt: aTime 
+	lastActivity := aTime.! !
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:31:38'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:31:41'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:31:42'!
+PASSED!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:31:42'!
+ERROR!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:31:42'!
+ERROR!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:32:07' prior: 50803143!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:32:08'!
+PASSED!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:32:13'!
+test17AddRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:32:34'!
+test18AddRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+!methodRemoval: RestAPITest #test17AddRefreshesCartLifetime stamp: 'ss 11/11/2019 21:32:34'!
+test17AddRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:33:07' prior: 50803389!
+test18AddRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID .
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test18AddRefreshesCartLifetime stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+
+!testRun: #RestAPITest #test18AddRefreshesCartLifetime stamp: 'ss 11/11/2019 21:33:08'!
+PASSED!
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:33:55' prior: 50802589!
+sessionWithCartID: aCartID
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertSessionIsActive: session.
+
+	
+	^session.! !
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:33:56' prior: 50803485!
+sessionWithCartID: aCartID
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertSessionIsActive: session.
+	
+	^session.! !
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:34:07'!
+test18CheckoutRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID .
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+!methodRemoval: RestAPITest #test18AddRefreshesCartLifetime stamp: 'ss 11/11/2019 21:34:16'!
+test18AddRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID .
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:34:36' prior: 50803505!
+test18CheckoutRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID .
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+!testRun: #RestAPITest #test18CheckoutRefreshesCartLifetime stamp: 'ss 11/11/2019 21:34:37'!
+ERROR!
+
+!methodRemoval: RestAPITest #test18CheckoutRefreshesCartLifetime stamp: 'ss 11/11/2019 21:34:59'!
+test18CheckoutRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID .
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test01ListCartFailsIfIDDoesNotExist stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test02CreateCartReturnsIDToListCartThatIsEmpty stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test03CreateCartReturnsDifferentIDsForEachCart stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test04AddToCartFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test05CanListItemsAfterAddingToExistingCart stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test06CantCreateCartIfClientDoesNotExist stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test07CantCreateCartIfClientPasswordIsIncorrect stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test09CheckoutMakesPaymentAndAddsPurchrases stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test10CheckoutFailsIfCartDoesNotExist stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test11CheckoutFailsIfCartIsEmpty stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test12CheckoutDebitsTheAmountOfthePurchrase stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test13CheckoutACartTwiceFails stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test14AddToCartAfterCheckoutFails stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test15ListCartFailsIfCartIsDisabled stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test16CantListCartAfter30MinutesOfInactivity stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!
+
+!testRun: #RestAPITest #test17ListRefreshesCartLifetime stamp: 'ss 11/11/2019 21:35:02'!
+PASSED!

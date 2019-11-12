@@ -1,4 +1,4 @@
-!classDefinition: #CartTest category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #CartTest category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 TestCase subclass: #CartTest
 	instanceVariableNames: 'testObjectsFactory'
 	classVariableNames: ''
@@ -98,7 +98,7 @@ setUp
 	testObjectsFactory := StoreTestObjectsFactory new.! !
 
 
-!classDefinition: #CashierTest category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #CashierTest category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 TestCase subclass: #CashierTest
 	instanceVariableNames: 'testObjectsFactory debitBehavior'
 	classVariableNames: ''
@@ -240,15 +240,21 @@ setUp
 	debitBehavior := [ :anAmount :aCreditCard | ]! !
 
 
+!CashierTest methodsFor: 'merchant processor behaviour' stamp: 'ss 11/11/2019 18:18:41'!
+debitBehaviour: aBlock
+
+	debitBehavior  := aBlock! !
+
+
 !CashierTest methodsFor: 'merchant processor protocol' stamp: 'HernanWilkinson 6/17/2013 19:02'!
 debit: anAmount from: aCreditCard 
 
 	^debitBehavior value: anAmount value: aCreditCard ! !
 
 
-!classDefinition: #RestAPITest category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #RestAPITest category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 TestCase subclass: #RestAPITest
-	instanceVariableNames: 'testObjectsFactory restapi'
+	instanceVariableNames: 'testObjectsFactory restapi merchantProcessorMock presentTime'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
@@ -326,14 +332,220 @@ test07CantCreateCartIfClientPasswordIsIncorrect
 			]
 	! !
 
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 17:57:38'!
+test08ListPurchrasesBeginsEmptyWhenRestAPIIsCreated
+	
+	| purchrasesByClient |
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient isEmpty! !
 
-!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/7/2019 19:51:32'!
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:02:15'!
+test09CheckoutMakesPaymentAndAddsPurchrases
+	| purchrasesByClient aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 2 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	purchrasesByClient :=  restapi listPurchrasesMadeByClient: testObjectsFactory validUser 
+		withPassword: testObjectsFactory validPassword.
+	
+	self assert: purchrasesByClient size equals: 2.
+	self assert: (purchrasesByClient occurrencesOf: testObjectsFactory itemSellByTheStore ) equals: 2. 	
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:06:49'!
+test10CheckoutFailsIfCartDoesNotExist
+
+	self should: [restapi checkout: '0' with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartNotFoundErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:10:58'!
+test11CheckoutFailsIfCartIsEmpty
+	| aCartID |
+	aCartID := self createCart.
+
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI cartIsEmptyErrorDescription. 
+			self assert: restapi salesBook isEmpty.
+		]  .	
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 19:30:31'!
+test12CheckoutDebitsTheAmountOfthePurchrase
+	| aCartID debittedAmount debittedCard creditCard |
+	
+	aCartID := self createCart.
+	creditCard := testObjectsFactory notExpiredCreditCard.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	merchantProcessorMock debitBehaviour: [:amount :card | 
+		debittedAmount := amount.
+		debittedCard := card.
+	].
+	
+	restapi checkout: aCartID with: creditCard.
+	
+	self assert: debittedAmount equals: testObjectsFactory itemSellByTheStorePrice .
+	self assert: debittedCard equals: creditCard .
+
+
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:05:14'!
+test13CheckoutACartTwiceFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:05:14'!
+test14AddToCartAfterCheckoutFails
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:05:14'!
+test15ListCartFailsIfCartIsDisabled
+	| aCartID |
+	
+	aCartID := self createCart.
+	
+	restapi add: 1 of: testObjectsFactory itemSellByTheStore toCartWithID: aCartID.
+	
+	restapi checkout: aCartID with: testObjectsFactory notExpiredCreditCard .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+			self assert: restapi salesBook size equals: 1.
+			]
+
+
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:20:16'!
+test16CantListCartAfter30MinutesOfInactivity
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime30Minutes .
+	
+	self should: [restapi listCartWithID: aCartID ] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:error |
+			self assert: error messageText equals: RestAPI sessionIsNotActiveErrorDescription.
+						]
+
+
+	
+	
+	! !
+
+!RestAPITest methodsFor: 'testing' stamp: 'ss 11/11/2019 21:32:07'!
+test17ListRefreshesCartLifetime
+	| aCartID |
+	
+	aCartID := self createCart.
+	self advanceTime15Minutes .
+	
+	restapi listCartWithID: aCartID.
+	
+	self advanceTime15Minutes .
+	
+	self deny: (restapi listCartWithID: aCartID) isNil
+
+
+
+	
+
+	
+	
+	! !
+
+
+!RestAPITest methodsFor: 'setUp' stamp: 'ss 11/11/2019 21:16:30'!
 setUp 
 	
 	testObjectsFactory := StoreTestObjectsFactory new.
 	
-	restapi := testObjectsFactory createRestAPI ! !
+	merchantProcessorMock := CashierTest new.
+	merchantProcessorMock debitBehaviour: [:amount :card | ].
+	
+	restapi := RestAPI newWithCatalog: testObjectsFactory defaultCatalog 
+		authenticatingOn: testObjectsFactory userStore 
+		sendingPaymentsTo: merchantProcessorMock
+		withTimeProvider: self.
+		
+	presentTime := DateAndTime now.! !
 
+
+!RestAPITest methodsFor: 'time provider protocol' stamp: 'ss 11/11/2019 21:15:57'!
+now
+	^presentTime! !
+
+
+!RestAPITest methodsFor: 'support' stamp: 'ss 11/11/2019 21:29:18'!
+advanceTime15Minutes
+	presentTime := presentTime + (Duration minutes: 15)! !
+
+!RestAPITest methodsFor: 'support' stamp: 'ss 11/11/2019 21:18:27'!
+advanceTime30Minutes
+	presentTime := presentTime + (Duration minutes: 30)! !
 
 !RestAPITest methodsFor: 'support' stamp: 'ss 11/7/2019 20:15:24'!
 createCart
@@ -341,7 +553,7 @@ createCart
 ! !
 
 
-!classDefinition: #Cart category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #Cart category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #Cart
 	instanceVariableNames: 'catalog items'
 	classVariableNames: ''
@@ -417,9 +629,15 @@ add: aQuantity of: anItem
 
 	1 to: aQuantity do: [ :aNumber | items add: anItem ]! !
 
+
+!Cart methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 18:56:46'!
+itemsDo: aBlockClosure 
+	
+	items do: [:item | aBlockClosure value: item].! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Cart class' category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: 'Cart class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Cart class
 	instanceVariableNames: ''!
 
@@ -429,7 +647,7 @@ acceptingItemsOf: aCatalog
 	^self new initializeAcceptingItemsOf: aCatalog ! !
 
 
-!classDefinition: #Cashier category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #Cashier category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #Cashier
 	instanceVariableNames: 'cart salesBook merchantProcessor creditCard total'
 	classVariableNames: ''
@@ -480,7 +698,7 @@ initializeToCheckout: aCart charging: aCreditCard throught: aMerchantProcessor r
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Cashier class' category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: 'Cashier class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Cashier class
 	instanceVariableNames: ''!
 
@@ -520,7 +738,7 @@ creditCardHasNoCreditErrorMessage
 	^'Credit card has no credit'! !
 
 
-!classDefinition: #CreditCard category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #CreditCard category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #CreditCard
 	instanceVariableNames: 'expiration'
 	classVariableNames: ''
@@ -540,7 +758,7 @@ initializeExpiringOn: aMonth
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CreditCard class' category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: 'CreditCard class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 CreditCard class
 	instanceVariableNames: ''!
 
@@ -550,9 +768,9 @@ expiringOn: aMonth
 	^self new initializeExpiringOn: aMonth! !
 
 
-!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #RestAPI category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #RestAPI
-	instanceVariableNames: 'catalog cartsByID usersStore'
+	instanceVariableNames: 'catalog usersStore merchantProcessor purchrasesByClient salesBook sessions timeProvider'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
@@ -564,85 +782,137 @@ assert: aUser hasPassword: aPassword
 		ifPresent: [:actualPassword | aPassword = actualPassword ifFalse: [self error: self class incorrectPasswordErrorDescription]] 
 		ifAbsent: [self error: self class userDoesNotExistErrorDescription].! !
 
-!RestAPI methodsFor: 'assertions' stamp: 'ss 11/7/2019 20:27:38'!
-assertCartExistsWithID: aCartID
-	 cartsByID at: aCartID ifAbsent: [self error: self class cartNotFoundErrorDescription].! !
+!RestAPI methodsFor: 'assertions' stamp: 'ss 11/11/2019 21:23:43'!
+assertSessionIsActive: aSession
+
+	(aSession isActiveOn: self now) ifFalse: [self error: self class sessionIsNotActiveErrorDescription ]! !
 
 
-!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:30:59'!
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:23:54'!
+now
+	^timeProvider now! !
+
+!RestAPI methodsFor: 'private' stamp: 'ss 11/11/2019 21:33:56'!
+sessionWithCartID: aCartID
+	| session |
+	
+	session := sessions detect: [:aSession | aSession cartID = aCartID ] ifNone: [self error: self class cartNotFoundErrorDescription ].
+		
+	self assertSessionIsActive: session.
+	
+	^session.! !
+
+
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 20:24:37'!
 add: anAmount of: anISBN toCartWithID: cartID
 	| cart |
 	cart := self listCartWithID: cartID.
 	
-	cart add: anAmount of: anISBN.
-	
-	cartsByID at: cartID put: cart.! !
+	cart add: anAmount of: anISBN.! !
 
-!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:36:54'!
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:06:23'!
+checkout: cartID with: aCreditCard 
+
+	| session purchrases |
+	
+	session := self sessionWithCartID: cartID.
+	session cart isEmpty ifTrue: [self error: self class cartIsEmptyErrorDescription].
+	
+	(Cashier
+		toCheckout: session cart 
+		charging: aCreditCard 
+		throught: merchantProcessor 
+		on: DateAndTime now 
+		registeringOn: salesBook) checkOut.
+	
+	purchrases := purchrasesByClient at: session ownerID ifAbsentPut: [Bag new].
+	session cart itemsDo: [:item | purchrases add: item].
+	
+	session disable.! !
+
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:24:07'!
 createCartForClient: clientID withPassword: password 
-	| cartID |
+	| cart session |
 	self assert: clientID hasPassword: password.
 	
-	cartID := self createNewCartID.
-	cartsByID at: cartID put: (Cart acceptingItemsOf: catalog).
+	cart :=  Cart acceptingItemsOf: catalog.
+	session := Session fromOwner: clientID withCart: cart withCurrentTime: self now.
 	
-	^cartID ! !
+	sessions add: session.
+		
+	^session cartID . ! !
 
-!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:36:38'!
-createNewCartID
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 21:31:09'!
+listCartWithID: cartID 	
+	 | session |
+	
+	session := (self sessionWithCartID: cartID).
+	
+	session refreshActivityAt: self now.
+	
+	^session cart.! !
 
-	^100000 atRandom.! !
+!RestAPI methodsFor: 'protocol' stamp: 'ss 11/11/2019 18:58:06'!
+listPurchrasesMadeByClient: clientID withPassword: password 
+	self assert: clientID hasPassword: password.
+	
+	^purchrasesByClient at: clientID ifAbsent: [Bag new]. 
+	! !
 
-!RestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:30:49'!
-listCartWithID: cartID 
-	self assertCartExistsWithID: cartID .
-	 ^cartsByID at: cartID! !
+
+!RestAPI methodsFor: 'testing' stamp: 'ss 11/11/2019 19:48:50'!
+salesBook
+	^salesBook copy.! !
 
 
-!RestAPI methodsFor: 'initialization' stamp: 'ss 11/7/2019 19:46:45'!
-initialize
-
-	cartsByID := Dictionary new.! !
-
-!RestAPI methodsFor: 'initialization' stamp: 'ss 11/7/2019 20:05:39'!
-initializeNewWithCatalog: aCatalog 
-	catalog := aCatalog.! !
-
-!RestAPI methodsFor: 'initialization' stamp: 'ss 11/7/2019 20:13:26'!
-initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore 
+!RestAPI methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:14:18'!
+initializeNewWithCatalog: aCatalog authenticatingOn: aUsersStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
 	catalog := aCatalog.
-	usersStore := aUsersStore.! !
+	usersStore := aUsersStore.
+	merchantProcessor := aMerchantProcessor.
+	purchrasesByClient  := Dictionary  new.
+	salesBook  := OrderedCollection new.
+	sessions := OrderedCollection new.
+	timeProvider := aTimeProvider.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'RestAPI class' category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: 'RestAPI class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 RestAPI class
 	instanceVariableNames: ''!
+
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/11/2019 19:10:28'!
+cartIsEmptyErrorDescription
+	^'cart is empty'! !
 
 !RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/7/2019 19:30:09'!
 cartNotFoundErrorDescription
 	^'cart not found'! !
 
-
-!RestAPI class methodsFor: 'instance creation' stamp: 'ss 11/7/2019 20:05:23'!
-newWithCatalog: aCatalog 
-	^self new initializeNewWithCatalog: aCatalog! !
-
-!RestAPI class methodsFor: 'instance creation' stamp: 'ss 11/7/2019 20:11:11'!
-newWithCatalog: aCatalog authenticatingOn: userStore 
-	^self new initializeNewWithCatalog: aCatalog authenticatingOn: userStore. ! !
-
-
-!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:23:05'!
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/7/2019 20:23:05'!
 incorrectPasswordErrorDescription
 	^'password is incorrect'! !
 
-!RestAPI class methodsFor: 'as yet unclassified' stamp: 'ss 11/7/2019 20:20:24'!
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/11/2019 21:05:14'!
+sessionIsNotActiveErrorDescription
+	^'session is not active'! !
+
+!RestAPI class methodsFor: 'error descriptions' stamp: 'ss 11/7/2019 20:20:24'!
 userDoesNotExistErrorDescription
 	^'user does not exist'! !
 
+
+!RestAPI class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 21:13:42'!
+newWithCatalog: aCatalog authenticatingOn: userStore sendingPaymentsTo: aMerchantProcessor withTimeProvider: aTimeProvider
+
+	^self new 
+		initializeNewWithCatalog: aCatalog 
+		authenticatingOn: userStore 
+		sendingPaymentsTo: aMerchantProcessor 
+		withTimeProvider: aTimeProvider.! !
+
 
-!classDefinition: #Sale category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #Sale category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #Sale
 	instanceVariableNames: 'total'
 	classVariableNames: ''
@@ -662,7 +932,7 @@ initializeTotal: aTotal
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Sale class' category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: 'Sale class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Sale class
 	instanceVariableNames: ''!
 
@@ -673,7 +943,70 @@ of: aTotal
 	^self new initializeTotal: aTotal ! !
 
 
-!classDefinition: #StoreTestObjectsFactory category: #TusLibros stamp: 'ss 11/7/2019 20:43:41'!
+!classDefinition: #Session category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
+Object subclass: #Session
+	instanceVariableNames: 'cart ownerID disabled cartID lastActivity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!Session methodsFor: 'testing' stamp: 'ss 11/11/2019 21:26:51'!
+isActiveOn: aTime
+	^disabled not and: [(aTime - lastActivity) minutes < 30].! !
+
+
+!Session methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:00:43'!
+cart
+	^cart! !
+
+!Session methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:58:16'!
+cartID
+	^cartID! !
+
+!Session methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:01:09'!
+id
+	^id! !
+
+!Session methodsFor: 'accessing' stamp: 'ss 11/11/2019 20:00:56'!
+ownerID
+	^ownerID! !
+
+
+!Session methodsFor: 'initialization' stamp: 'ss 11/11/2019 21:20:59'!
+initializeWithOwner: aClientID withCart: aCart WithCartID: aCartID withCurrentTime: aTime	
+	cart := aCart.
+	cartID := aCartID.
+	ownerID  := aClientID.
+	lastActivity := aTime.
+	disabled := false.! !
+
+
+!Session methodsFor: 'disabling' stamp: 'ss 11/11/2019 20:12:06'!
+disable
+	disabled := true! !
+
+
+!Session methodsFor: 'as yet unclassified' stamp: 'ss 11/11/2019 21:31:35'!
+refreshActivityAt: aTime 
+	lastActivity := aTime.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Session class' category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
+Session class
+	instanceVariableNames: ''!
+
+!Session class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 21:21:20'!
+fromOwner: aClientID withCart: aCart  withCurrentTime: aTime
+
+	^self new initializeWithOwner: aClientID withCart: aCart WithCartID: self generateCartID withCurrentTime: aTime.! !
+
+!Session class methodsFor: 'instance creation' stamp: 'ss 11/11/2019 20:17:56'!
+generateCartID
+	^100000 atRandom.! !
+
+
+!classDefinition: #StoreTestObjectsFactory category: #TusLibros stamp: 'ss 11/11/2019 21:35:23'!
 Object subclass: #StoreTestObjectsFactory
 	instanceVariableNames: 'today'
 	classVariableNames: ''
@@ -732,15 +1065,16 @@ today
 	^ today! !
 
 
-!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/7/2019 20:08:33'!
-createRestAPI
-	^RestAPI newWithCatalog: self defaultCatalog authenticatingOn: self userStore.! !
+!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/11/2019 18:32:13'!
+anotherUser
+	^'another_valid_user'! !
 
-!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/7/2019 20:09:39'!
+!StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/11/2019 18:32:27'!
 userStore
 
 	 ^Dictionary new
 		at: self validUser put: self validPassword;
+		at: self anotherUser put: self validPassword;
 		yourself ! !
 
 !StoreTestObjectsFactory methodsFor: 'REST API' stamp: 'ss 11/7/2019 20:10:14'!
