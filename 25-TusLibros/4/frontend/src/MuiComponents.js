@@ -23,4 +23,7 @@ const {
   ThemeProvider,
   Toolbar,
   Typography,
+  Modal,
+  Backdrop,
+  Fade,
 } = MaterialUI;

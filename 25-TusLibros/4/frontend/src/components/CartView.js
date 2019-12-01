@@ -1,10 +1,26 @@
 function CartView(props) {
-  const { router, username, cartID } = props;
+  const { router, username, password, cartID } = props;
   const classes = useStyles();
 
   const [cartSize, setCartSize] = React.useState(0)
 
   const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
+  const [checkoutModalOpen, setCheckoutModalOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setCheckoutModalOpen(true);
+  };
+
+  const handleClose = () => {
+    createCart(username,password)
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (json) {
+        setCheckoutModalOpen(false);
+        router.navigate("/catalog", { cartID: json.cart_id })
+      })
+  };
 
   if (loading) { return <div>Loading...</div> }
   if (error) { return <div>{error}</div> }
@@ -95,10 +111,30 @@ function CartView(props) {
         className={classes.Button}
         style={{float: 'right', marginTop: "15px"}}
         color="primary"
-        onClick={() => handleSend(values.username, values.password)}>
+        onClick={() => handleOpen()}>
         >
           Checkout
           </Button>
+
+     <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={checkoutModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={checkoutModalOpen}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Checkout</h2>
+            <p id="transition-modal-description">ticket</p>
+          </div>
+        </Fade>
+      </Modal>
     </div>
   )
 }

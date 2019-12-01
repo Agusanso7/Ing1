@@ -4,6 +4,7 @@ class App extends React.Component {
     this.state = {
       path: "/",
       username: '',
+      password: '',
       cartID: null,
       cartSize: 0
     };
@@ -32,12 +33,14 @@ class App extends React.Component {
       content = (<CartView
         router={router}
         username={this.state.username}
+        password={this.state.password}
         cartID={this.state.cartID}
       />)
-    } else if (this.state.path === "/details") {
-      content = (<SubstringDetailsView
+    } else if (this.state.path === "/purchrases") {
+      content = (<PurchrasesView
         router={router}
-        selectedSubstring={this.state.selectedSubstring}
+        username={this.state.username}
+        password={this.state.password}
       />)
     }
     return (

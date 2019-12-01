@@ -22,7 +22,7 @@ function MyToolBar(props) {
   </IconButton>
   )
 
-  let storeButton = ( <IconButton
+  let catalogButton  = ( <IconButton
     edge="end"
     className={classes.menuButton}
     color="inherit"
@@ -32,10 +32,33 @@ function MyToolBar(props) {
   </IconButton>
   )
 
+  let purchrasesButton = ( <IconButton
+    edge="end"
+    className={classes.menuButton}
+    color="inherit"
+    onClick={()=>router.navigate("/purchrases")} >
+
+    <Icon>history</Icon>
+  </IconButton>
+  )
+
+  if (router.current() === "/catalog") {
+    catalogButton  = null
+  }
+
+  if (router.current() === "/cart") {
+    cartButton = null
+  }
+
+  if (router.current() === "/purchrases") {
+    purchrasesButton = null
+  }
+
   if (router.current() === "/") {
     logoutButton= null
     cartButton = null
-    storeButton = null
+    catalogButton  = null
+    purchrasesButton = null
   }
 
   return (
@@ -45,8 +68,9 @@ function MyToolBar(props) {
           <Typography variant="h6" className={classes.title}>
             {title} - {username}
           </Typography>
-          {storeButton}
+          {catalogButton }
           {cartButton}
+          {purchrasesButton}
           {logoutButton}
         </Toolbar>
       </AppBar>

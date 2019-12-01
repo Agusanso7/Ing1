@@ -12,12 +12,12 @@ function CreateCartForm(props) {
   };
 
   const handleSend = (username, password) => {
-    getLocalAsJson(`createCart?username=${username}&password=${password}`)
+    createCart(username,password)
       .then(function (response) {
         return response.json()
       })
       .then(function (json) {
-        router.navigate("/catalog", { username: username, cartID: json.cart_id })
+        router.navigate("/catalog", { username: username, password: password, cartID: json.cart_id })
       })
       .catch(function (error) {
         console.log('Looks like there was a problem: \n', error);

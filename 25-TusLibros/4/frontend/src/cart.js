@@ -52,3 +52,7 @@ const handleRemoveFromCart = (id, book) => {
     });
 };
 
+const createCart = (username, password) => {
+  return getLocalAsJson(`createCart?username=${username}&password=${password}`)
+};
+
