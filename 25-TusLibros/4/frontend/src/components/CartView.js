@@ -1,4 +1,4 @@
-function CatalogView(props) {
+function CartView(props) {
   const { router, username, cartID } = props;
   const classes = useStyles();
 
@@ -7,17 +7,38 @@ function CatalogView(props) {
   const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
 
   if (loading) { return <div>Loading...</div> }
-  if (error) return <div>{error}</div>
+  if (error) { return <div>{error}</div> }
+
+
+  if(session.cart.length == 0) {
+    return (
+      <div>
+        <Typography variant="h4" component="h4" gutterBottom>
+            Cart
+        </Typography>
+
+        <Typography variant="h5"  gutterBottom>
+            Oops, Your cart is empty... why don't you buy something? :)
+        </Typography>
+      </div>
+    )
+  }
+
+  let total = session.cart.map(book => session.catalog[book]).reduce((x,y) => x + y, 0);
 
   return (
     <div>
-      <Typography variant="h4" component="h4" gutterBottom>
-          Catalogo
-      </Typography>
+        <Typography variant="h4" component="h4" gutterBottom>
+            Cart
+
+          <span style={{float: "right"}}>Total: ${total} </span>
+        </Typography>
 
       <List component="nav" className={classes.rootList} aria-label="catalog">
         {
-          Object.entries(session.catalog).map(([book, price]) => {
+          Object.entries(session.catalog)
+            .filter(([book, _]) => session.cart.includes(book)).map(([book, price]) => {
+
             let bookCount = session.cart.filter(b => b === book).length;
             let bookCountString = '';
 
@@ -69,6 +90,15 @@ function CatalogView(props) {
         }
       </List>
 
+      <Button
+      variant="contained"
+        className={classes.Button}
+        style={{float: 'right', marginTop: "15px"}}
+        color="primary"
+        onClick={() => handleSend(values.username, values.password)}>
+        >
+          Checkout
+          </Button>
     </div>
   )
 }

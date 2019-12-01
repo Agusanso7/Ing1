@@ -1,42 +1,52 @@
-const useFetchCart = (id) => {
-  const [cart, setCart] = React.useState([])
-  const [loading, setLoading] = React.useState(false)
+const useRefreshSession = (username, cartID, cartSize) => {
+  const [session, setSession] = React.useState({})
+  const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    setLoading(true)
-    setError(null)
+    let session = {
+      catalog: {},
+      cart: []
+    }
 
-    getLocalAsJson(`listCart?id=${id}`)
+    getLocalAsJson(`catalog`)
       .then(function (response) {
         return response.json()
       })
-      .then(function (cart) {
-        setLoading(false)
-        if (cart) {
-          setCart(cart)
-        } else {
-          setCart([])
+      .then(function (catalog) {
+        session.catalog = catalog
+      }).then(function() {
+        return getLocalAsJson(`listCart?id=${cartID}`)
+      }).then(function (response) {
+        return response.json()
+      }).then(function (cart) {
+        session.cart = cart
+
+        if(cart) {
+          setSession(session)
         }
+
+        setLoading(false)
       })
       .catch(err => {
         setError(err)
         setLoading(false)
       })
-  }, [id])
+  }, [username, cartID, cartSize])
 
-  return { cart, loading, error }
+  return { session, loading, error }
 }
 
+
 const handleAddToCart = (id, book, qty) => {
-  getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
+  return getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
     .catch(function (error) {
       console.log('Looks like there was a problem adding to cart: \n', error);
     });
 };
 
 const handleRemoveFromCart = (id, book) => {
-  getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
+  return getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
     .catch(function (error) {
       console.log('Looks like there was a problem removing from cart: \n', error);
     });

@@ -119,45 +119,55 @@
         }
       })
     }
-    const useFetchCart = (id) => {
-      const [cart, setCart] = React.useState([])
-      const [loading, setLoading] = React.useState(false)
+    const useRefreshSession = (username, cartID, cartSize) => {
+      const [session, setSession] = React.useState({})
+      const [loading, setLoading] = React.useState(true)
       const [error, setError] = React.useState(null)
     
       React.useEffect(() => {
-        setLoading(true)
-        setError(null)
+        let session = {
+          catalog: {},
+          cart: []
+        }
     
-        getLocalAsJson(`listCart?id=${id}`)
+        getLocalAsJson(`catalog`)
           .then(function (response) {
             return response.json()
           })
-          .then(function (cart) {
-            setLoading(false)
-            if (cart) {
-              setCart(cart)
-            } else {
-              setCart([])
+          .then(function (catalog) {
+            session.catalog = catalog
+          }).then(function() {
+            return getLocalAsJson(`listCart?id=${cartID}`)
+          }).then(function (response) {
+            return response.json()
+          }).then(function (cart) {
+            session.cart = cart
+    
+            if(cart) {
+              setSession(session)
             }
+    
+            setLoading(false)
           })
           .catch(err => {
             setError(err)
             setLoading(false)
           })
-      }, [id])
+      }, [username, cartID, cartSize])
     
-      return { cart, loading, error }
+      return { session, loading, error }
     }
     
+    
     const handleAddToCart = (id, book, qty) => {
-      getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
+      return getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
         .catch(function (error) {
           console.log('Looks like there was a problem adding to cart: \n', error);
         });
     };
     
     const handleRemoveFromCart = (id, book) => {
-      getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
+      return getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
         .catch(function (error) {
           console.log('Looks like there was a problem removing from cart: \n', error);
         });
@@ -166,44 +176,54 @@
 
     function MyToolBar(props) {
       const classes = useStyles();
-      const {title, router} = props;
+      const {title, router, username } = props;
     
-      let menuButton = (
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          onClick={()=>router.navigate("/", {
-            substrings: [],
-            selectedSubstring: "",})}
-          >
-          <Icon>home</Icon>
-        </IconButton>
+      let logoutButton = ( <IconButton
+        edge="start"
+        className={classes.menuButton}
+        color="inherit"
+        onClick={()=>router.navigate("/", { username: null, cartID: null })}
+      >
+        <Icon>exit_to_app</Icon>
+      </IconButton>
       )
     
-      if (router.current() === "/details") {
-        menuButton = (
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            onClick={()=>router.navigate("/list", {
-            selectedSubstring: "",})}
-          >
-            <Icon>keyboard_arrow_left</Icon>
-          </IconButton>
-        )
+      let cartButton = ( <IconButton
+        edge="end"
+        className={classes.menuButton}
+        color="inherit"
+        onClick={()=>router.navigate("/cart")} >
+    
+        <Icon>shopping_cart</Icon>
+      </IconButton>
+      )
+    
+      let storeButton = ( <IconButton
+        edge="end"
+        className={classes.menuButton}
+        color="inherit"
+        onClick={()=>router.navigate("/catalog")} >
+    
+        <Icon>store</Icon>
+      </IconButton>
+      )
+    
+      if (router.current() === "/") {
+        logoutButton= null
+        cartButton = null
+        storeButton = null
       }
     
       return (
         <div className={classes.rootToolBar}>
           <AppBar position="static">
             <Toolbar>
-              {menuButton}
               <Typography variant="h6" className={classes.title}>
-                {title}
+                {title} - {username}
               </Typography>
-              {/*<Button color="inherit">Login</Button>*/}
+              {storeButton}
+              {cartButton}
+              {logoutButton}
             </Toolbar>
           </AppBar>
         </div>
@@ -281,43 +301,15 @@
         </div>
       )
     }
-    const useFetchCatalog = (username) => {
-      const [catalog, setCatalog] = React.useState({})
-      const [loading, setLoading] = React.useState(false)
-      const [error, setError] = React.useState(null)
-    
-      React.useEffect(() => {
-        setLoading(true)
-        setError(null)
-    
-        getLocalAsJson(`catalog`)
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (catalog) {
-            setLoading(false)
-            if (catalog) {
-              setCatalog(catalog)
-            } else {
-              setCatalog({})
-            }
-          })
-          .catch(err => {
-            setError(err)
-            setLoading(false)
-          })
-      }, [username])
-    
-      return { catalog, loading, error }
-    }
-    
     function CatalogView(props) {
       const { router, username, cartID } = props;
       const classes = useStyles();
     
-      const { catalog, loading, error } = useFetchCatalog(username);
+      const [cartSize, setCartSize] = React.useState(0)
     
-      if (loading) return <div>Loading...</div>
+      const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
+    
+      if (loading) { return <div>Loading...</div> }
       if (error) return <div>{error}</div>
     
       return (
@@ -328,21 +320,50 @@
     
           <List component="nav" className={classes.rootList} aria-label="catalog">
             {
-              Object.entries(catalog).map(([book, price]) => {
+              Object.entries(session.catalog).map(([book, price]) => {
+                let bookCount = session.cart.filter(b => b === book).length;
+                let bookCountString = '';
+    
+                if(bookCount > 0) {
+                  bookCountString = ` - (${bookCount})`;
+                }
+    
                 return (
                   <ListItem
                     key={book}
                     dense
                     >
-                    <ListItemText primary={`${book} - $${price}`} />
+                    <ListItemText primary={<React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          {`${book} - $${price}`}
+                      </Typography>
+                      <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textSecondary"
+                        >
+                          {bookCountString}
+                      </Typography>
+                    </React.Fragment>
+                    } />
+    
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="comments"
-                        onClick={() => handleAddToCart(cartID, book, 1)}>
-                          +
+                        onClick={() => handleAddToCart(cartID, book, 1).then(() => setCartSize(session.cart.length+1))}>
+    
+                        <Icon>add_shopping_cart</Icon>
                       </IconButton>
+    
                       <IconButton edge="end" aria-label="comments"
-                        onClick={() => handleRemoveFromCart(cartID, book)}>
-                          -
+                        disabled={bookCount == 0}
+                        onClick={() => handleRemoveFromCart(cartID, book).then(() => setCartSize(session.cart.length-1))}>
+                        <Icon>remove_shopping_cart</Icon>
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
@@ -351,6 +372,110 @@
             }
           </List>
     
+        </div>
+      )
+    }
+    function CartView(props) {
+      const { router, username, cartID } = props;
+      const classes = useStyles();
+    
+      const [cartSize, setCartSize] = React.useState(0)
+    
+      const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
+    
+      if (loading) { return <div>Loading...</div> }
+      if (error) { return <div>{error}</div> }
+    
+    
+      if(session.cart.length == 0) {
+        return (
+          <div>
+            <Typography variant="h4" component="h4" gutterBottom>
+                Cart
+            </Typography>
+    
+            <Typography variant="h5"  gutterBottom>
+                Oops, Your cart is empty... why don't you buy something? :)
+            </Typography>
+          </div>
+        )
+      }
+    
+      let total = session.cart.map(book => session.catalog[book]).reduce((x,y) => x + y, 0);
+    
+      return (
+        <div>
+            <Typography variant="h4" component="h4" gutterBottom>
+                Cart
+    
+              <span style={{float: "right"}}>Total: ${total} </span>
+            </Typography>
+    
+          <List component="nav" className={classes.rootList} aria-label="catalog">
+            {
+              Object.entries(session.catalog)
+                .filter(([book, _]) => session.cart.includes(book)).map(([book, price]) => {
+    
+                let bookCount = session.cart.filter(b => b === book).length;
+                let bookCountString = '';
+    
+                if(bookCount > 0) {
+                  bookCountString = ` - (${bookCount})`;
+                }
+    
+                return (
+                  <ListItem
+                    key={book}
+                    dense
+                    >
+                    <ListItemText primary={<React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          {`${book} - $${price}`}
+                      </Typography>
+                      <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textSecondary"
+                        >
+                          {bookCountString}
+                      </Typography>
+                    </React.Fragment>
+                    } />
+    
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="comments"
+                        onClick={() => handleAddToCart(cartID, book, 1).then(() => setCartSize(session.cart.length+1))}>
+    
+                        <Icon>add_shopping_cart</Icon>
+                      </IconButton>
+    
+                      <IconButton edge="end" aria-label="comments"
+                        disabled={bookCount == 0}
+                        onClick={() => handleRemoveFromCart(cartID, book).then(() => setCartSize(session.cart.length-1))}>
+                        <Icon>remove_shopping_cart</Icon>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                )
+              })
+            }
+          </List>
+    
+          <Button
+          variant="contained"
+            className={classes.Button}
+            style={{float: 'right', marginTop: "15px"}}
+            color="primary"
+            onClick={() => handleSend(values.username, values.password)}>
+            >
+              Checkout
+              </Button>
         </div>
       )
     }
@@ -562,7 +687,7 @@
           path: "/",
           username: '',
           cartID: null,
-          cartContent: []
+          cartSize: 0
         };
       }
     
@@ -585,6 +710,12 @@
             username={this.state.username}
             cartID={this.state.cartID}
           />)
+        } else if (this.state.path === "/cart") {
+          content = (<CartView
+            router={router}
+            username={this.state.username}
+            cartID={this.state.cartID}
+          />)
         } else if (this.state.path === "/details") {
           content = (<SubstringDetailsView
             router={router}
@@ -596,6 +727,7 @@
             <MyToolBar
               title={title}
               router={router}
+              username={this.state.username}
             />
             <Container maxWidth="sm">
               <div style={{ marginTop: 24, }}>

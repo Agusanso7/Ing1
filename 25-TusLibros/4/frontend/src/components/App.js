@@ -5,7 +5,7 @@ class App extends React.Component {
       path: "/",
       username: '',
       cartID: null,
-      cartContent: []
+      cartSize: 0
     };
   }
 
@@ -28,6 +28,12 @@ class App extends React.Component {
         username={this.state.username}
         cartID={this.state.cartID}
       />)
+    } else if (this.state.path === "/cart") {
+      content = (<CartView
+        router={router}
+        username={this.state.username}
+        cartID={this.state.cartID}
+      />)
     } else if (this.state.path === "/details") {
       content = (<SubstringDetailsView
         router={router}
@@ -39,6 +45,7 @@ class App extends React.Component {
         <MyToolBar
           title={title}
           router={router}
+          username={this.state.username}
         />
         <Container maxWidth="sm">
           <div style={{ marginTop: 24, }}>

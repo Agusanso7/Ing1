@@ -1,43 +1,53 @@
 function MyToolBar(props) {
   const classes = useStyles();
-  const {title, router} = props;
+  const {title, router, username } = props;
 
-  let menuButton = (
-    <IconButton
-      edge="start"
-      className={classes.menuButton}
-      color="inherit"
-      onClick={()=>router.navigate("/", {
-        substrings: [],
-        selectedSubstring: "",})}
-      >
-      <Icon>home</Icon>
-    </IconButton>
+  let logoutButton = ( <IconButton
+    edge="start"
+    className={classes.menuButton}
+    color="inherit"
+    onClick={()=>router.navigate("/", { username: null, cartID: null })}
+  >
+    <Icon>exit_to_app</Icon>
+  </IconButton>
   )
 
-  if (router.current() === "/details") {
-    menuButton = (
-      <IconButton
-        edge="start"
-        className={classes.menuButton}
-        color="inherit"
-        onClick={()=>router.navigate("/list", {
-        selectedSubstring: "",})}
-      >
-        <Icon>keyboard_arrow_left</Icon>
-      </IconButton>
-    )
+  let cartButton = ( <IconButton
+    edge="end"
+    className={classes.menuButton}
+    color="inherit"
+    onClick={()=>router.navigate("/cart")} >
+
+    <Icon>shopping_cart</Icon>
+  </IconButton>
+  )
+
+  let storeButton = ( <IconButton
+    edge="end"
+    className={classes.menuButton}
+    color="inherit"
+    onClick={()=>router.navigate("/catalog")} >
+
+    <Icon>store</Icon>
+  </IconButton>
+  )
+
+  if (router.current() === "/") {
+    logoutButton= null
+    cartButton = null
+    storeButton = null
   }
 
   return (
     <div className={classes.rootToolBar}>
       <AppBar position="static">
         <Toolbar>
-          {menuButton}
           <Typography variant="h6" className={classes.title}>
-            {title}
+            {title} - {username}
           </Typography>
-          {/*<Button color="inherit">Login</Button>*/}
+          {storeButton}
+          {cartButton}
+          {logoutButton}
         </Toolbar>
       </AppBar>
     </div>
