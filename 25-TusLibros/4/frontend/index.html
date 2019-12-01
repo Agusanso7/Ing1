@@ -38,7 +38,6 @@
       createMuiTheme,
       CssBaseline,
       Icon,
-      IconButton,
       InputAdornment,
       InputLabel,
       FormControl,
@@ -47,6 +46,9 @@
       ListItem,
       ListItemIcon,
       ListItemText,
+      ListItemSecondaryAction,
+      IconButton,
+      CommentIcon,
       makeStyles,
       OutlinedInput,
       TextField,
@@ -107,7 +109,7 @@
     const getLocalAsJson = (path) => {
     
       // var port = 8080
-      var port = 8082
+      var port = 8085
     
       return fetch(`http://localhost:${port}/${path}`, {
         method: "GET",
@@ -117,6 +119,50 @@
         }
       })
     }
+    const useFetchCart = (id) => {
+      const [cart, setCart] = React.useState([])
+      const [loading, setLoading] = React.useState(false)
+      const [error, setError] = React.useState(null)
+    
+      React.useEffect(() => {
+        setLoading(true)
+        setError(null)
+    
+        getLocalAsJson(`listCart?id=${id}`)
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (cart) {
+            setLoading(false)
+            if (cart) {
+              setCart(cart)
+            } else {
+              setCart([])
+            }
+          })
+          .catch(err => {
+            setError(err)
+            setLoading(false)
+          })
+      }, [id])
+    
+      return { cart, loading, error }
+    }
+    
+    const handleAddToCart = (id, book, qty) => {
+      getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
+        .catch(function (error) {
+          console.log('Looks like there was a problem adding to cart: \n', error);
+        });
+    };
+    
+    const handleRemoveFromCart = (id, book) => {
+      getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
+        .catch(function (error) {
+          console.log('Looks like there was a problem removing from cart: \n', error);
+        });
+    };
+    
 
     function MyToolBar(props) {
       const classes = useStyles();
@@ -167,6 +213,28 @@
       const { router } = props
       const classes = useStyles();
     
+      const [values, setValues] = React.useState({
+        username: '',
+        password: '',
+      });
+    
+      const handleChange = prop => event => {
+        setValues({ ...values, [prop]: event.target.value });
+      };
+    
+      const handleSend = (username, password) => {
+        getLocalAsJson(`createCart?username=${username}&password=${password}`)
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (json) {
+            router.navigate("/catalog", { username: username, cartID: json.cart_id })
+          })
+          .catch(function (error) {
+            console.log('Looks like there was a problem: \n', error);
+          });
+      };
+    
       return (
         <div>
           <Typography component="h1" gutterBottom>
@@ -183,20 +251,20 @@
                   required
                   id="outlined-required"
                   label="User"
-                  defaultValue="Hello World"
                   className={classes.textField}
                   margin="normal"
                   variant="outlined"
+                  onChange={handleChange('username')}
                 />
               <TextField
                 required
                 id="outlined-required"
                 label="Password"
-                defaultValue="Hello World"
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
                 type="password"
+                onChange={handleChange('password')}
               />
             </FormControl>
     
@@ -205,10 +273,84 @@
             className={classes.Button}
             style={{float: 'right'}}
             color="primary"
+            onClick={() => handleSend(values.username, values.password)}>
             >
               Create cart
               </Button>
           </form>
+        </div>
+      )
+    }
+    const useFetchCatalog = (username) => {
+      const [catalog, setCatalog] = React.useState({})
+      const [loading, setLoading] = React.useState(false)
+      const [error, setError] = React.useState(null)
+    
+      React.useEffect(() => {
+        setLoading(true)
+        setError(null)
+    
+        getLocalAsJson(`catalog`)
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (catalog) {
+            setLoading(false)
+            if (catalog) {
+              setCatalog(catalog)
+            } else {
+              setCatalog({})
+            }
+          })
+          .catch(err => {
+            setError(err)
+            setLoading(false)
+          })
+      }, [username])
+    
+      return { catalog, loading, error }
+    }
+    
+    function CatalogView(props) {
+      const { router, username, cartID } = props;
+      const classes = useStyles();
+    
+      const { catalog, loading, error } = useFetchCatalog(username);
+    
+      if (loading) return <div>Loading...</div>
+      if (error) return <div>{error}</div>
+    
+      return (
+        <div>
+          <Typography variant="h4" component="h4" gutterBottom>
+              Catalogo
+          </Typography>
+    
+          <List component="nav" className={classes.rootList} aria-label="catalog">
+            {
+              Object.entries(catalog).map(([book, price]) => {
+                return (
+                  <ListItem
+                    key={book}
+                    dense
+                    >
+                    <ListItemText primary={`${book} - $${price}`} />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="comments"
+                        onClick={() => handleAddToCart(cartID, book, 1)}>
+                          +
+                      </IconButton>
+                      <IconButton edge="end" aria-label="comments"
+                        onClick={() => handleRemoveFromCart(cartID, book)}>
+                          -
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                )
+              })
+            }
+          </List>
+    
         </div>
       )
     }
@@ -418,8 +560,9 @@
         super(props);
         this.state = {
           path: "/",
-          substrings: [],
-          selectedSubstring: "",
+          username: '',
+          cartID: null,
+          cartContent: []
         };
       }
     
@@ -436,10 +579,11 @@
     
         if (this.state.path === "/") {
           content = (<CreateCartForm router={router} />)
-        } else if (this.state.path === "/list") {
-          content = (<SubstringsView
+        } else if (this.state.path === "/catalog") {
+          content = (<CatalogView
             router={router}
-            substrings={this.state.substrings}
+            username={this.state.username}
+            cartID={this.state.cartID}
           />)
         } else if (this.state.path === "/details") {
           content = (<SubstringDetailsView

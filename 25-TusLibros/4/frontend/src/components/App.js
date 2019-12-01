@@ -3,8 +3,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       path: "/",
-      substrings: [],
-      selectedSubstring: "",
+      username: '',
+      cartID: null,
+      cartContent: []
     };
   }
 
@@ -21,10 +22,11 @@ class App extends React.Component {
 
     if (this.state.path === "/") {
       content = (<CreateCartForm router={router} />)
-    } else if (this.state.path === "/list") {
-      content = (<SubstringsView
+    } else if (this.state.path === "/catalog") {
+      content = (<CatalogView
         router={router}
-        substrings={this.state.substrings}
+        username={this.state.username}
+        cartID={this.state.cartID}
       />)
     } else if (this.state.path === "/details") {
       content = (<SubstringDetailsView
