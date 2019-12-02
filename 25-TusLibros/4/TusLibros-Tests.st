@@ -10,7 +10,7 @@ test01NewCartsAreCreatedEmpty
 
 	self assert: testObjectsFactory createCart isEmpty! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:10'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:47:16'!
 test02CanNotAddItemsThatDoNotBelongToStore
 
 	| cart |
@@ -18,23 +18,23 @@ test02CanNotAddItemsThatDoNotBelongToStore
 	cart := testObjectsFactory createCart.
 
 	self
-		should: [ cart add: testObjectsFactory itemNotSellByTheStore ]
+		should: [ cart add: testObjectsFactory itemNotSellByTheStoreISBN ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = cart invalidItemErrorMessage.
 			self assert: cart isEmpty ]! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:10'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test03AfterAddingAnItemTheCartIsNotEmptyAnymore
 
 	| cart |
 
 	cart := testObjectsFactory createCart.
 
-	cart add: testObjectsFactory itemSellByTheStore.
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
 	self deny: cart isEmpty ! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:10'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test04CanNotAddNonPositiveNumberOfItems
 
 	| cart |
@@ -42,13 +42,13 @@ test04CanNotAddNonPositiveNumberOfItems
 	cart := testObjectsFactory createCart.
 
 	self
-		should: [cart add: 0 of: testObjectsFactory itemSellByTheStore ]
+		should: [cart add: 0 of: testObjectsFactory itemSellByTheStoreISBN ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = cart invalidQuantityErrorMessage.
 			self assert: cart isEmpty ]! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:10'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:47:16'!
 test05CanNotAddMoreThanOneItemNotSellByTheStore
 
 	| cart |
@@ -56,60 +56,60 @@ test05CanNotAddMoreThanOneItemNotSellByTheStore
 	cart := testObjectsFactory createCart.
 
 	self
-		should: [cart add: 2 of: testObjectsFactory itemNotSellByTheStore  ]
+		should: [cart add: 2 of: testObjectsFactory itemNotSellByTheStoreISBN  ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = cart invalidItemErrorMessage.
 			self assert: cart isEmpty ]! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:11'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test06CartRemembersAddedItems
 
 	| cart |
 
 	cart := testObjectsFactory createCart.
 
-	cart add: testObjectsFactory itemSellByTheStore.
-	self assert: (cart includes: testObjectsFactory itemSellByTheStore)! !
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
+	self assert: (cart includes: testObjectsFactory itemSellByTheStoreISBN)! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:11'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test07CartDoesNotHoldNotAddedItems
 
 	| cart |
 
 	cart := testObjectsFactory createCart.
 
-	self deny: (cart includes: testObjectsFactory itemSellByTheStore)! !
+	self deny: (cart includes: testObjectsFactory itemSellByTheStoreISBN)! !
 
-!CartTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/17/2013 18:11'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test08CartRemembersTheNumberOfAddedItems
 
 	| cart |
 
 	cart := testObjectsFactory createCart.
 
-	cart add: 2 of: testObjectsFactory itemSellByTheStore.
-	self assert: (cart occurrencesOf: testObjectsFactory itemSellByTheStore) = 2! !
+	cart add: 2 of: testObjectsFactory itemSellByTheStoreISBN.
+	self assert: (cart occurrencesOf: testObjectsFactory itemSellByTheStoreISBN) = 2! !
 
-!CartTest methodsFor: 'tests' stamp: 'ss 11/25/2019 19:13:35'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test09CartCantRemoveAnItemThatIsNotIncluded
 	| cart |
 	cart := testObjectsFactory createCart .
 	
 	self
-		should: [cart remove: testObjectsFactory itemSellByTheStore ]
+		should: [cart remove: testObjectsFactory itemSellByTheStoreISBN ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = Cart itemIsNotInCartErrorDescription.
 			self assert: cart isEmpty ]! !
 
-!CartTest methodsFor: 'tests' stamp: 'ss 11/25/2019 19:11:38'!
+!CartTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test10CartCanRemoveAnIncludedItem
 	| cart |
 	cart := testObjectsFactory createCart .
-	cart add: 3 of: testObjectsFactory itemSellByTheStore.
+	cart add: 3 of: testObjectsFactory itemSellByTheStoreISBN.
 	
-	cart remove: testObjectsFactory itemSellByTheStore.
+	cart remove: testObjectsFactory itemSellByTheStoreISBN.
 	
 	self assert: cart size equals: 2.
 	
@@ -149,13 +149,13 @@ test01CanNotCheckoutAnEmptyCart
 			self assert: anError messageText = Cashier cartCanNotBeEmptyErrorMessage.
 			self assert: salesBook isEmpty ]! !
 
-!CashierTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/22/2013 12:22'!
+!CashierTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test02CalculatedTotalIsCorrect
 
 	| cart cashier |
 
 	cart := testObjectsFactory createCart.
-	cart add: 2 of: testObjectsFactory itemSellByTheStore.
+	cart add: 2 of: testObjectsFactory itemSellByTheStoreISBN.
 
 	cashier :=  Cashier
 		toCheckout: cart
@@ -163,18 +163,18 @@ test02CalculatedTotalIsCorrect
 		charging: testObjectsFactory notExpiredCreditCard
 		throught: self
 		on: testObjectsFactory today
-		registeringOn: OrderedCollection new.
+		registeringOn: SalesBook new.
 
 	self assert: cashier checkOut total = (testObjectsFactory itemSellByTheStorePrice * 2)! !
 
-!CashierTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/22/2013 12:01'!
+!CashierTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test03CanNotCheckoutWithAnExpiredCreditCart
 
 	| cart salesBook |
 
 	cart := testObjectsFactory createCart.
-	cart add: testObjectsFactory itemSellByTheStore.
-	salesBook := OrderedCollection new.
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
+	salesBook := SalesBook new.
 
 	self
 		should: [ Cashier
@@ -189,14 +189,14 @@ test03CanNotCheckoutWithAnExpiredCreditCart
 			self assert: anError messageText = Cashier canNotChargeAnExpiredCreditCardErrorMessage.
 			self assert: salesBook isEmpty ]! !
 
-!CashierTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/22/2013 12:23'!
+!CashierTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test04CheckoutRegistersASale
 
 	| cart cashier salesBook total |
 
 	cart := testObjectsFactory createCart.
-	cart add: testObjectsFactory itemSellByTheStore.
-	salesBook := OrderedCollection new.
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
+	salesBook := SalesBook new.
 
 	cashier:= Cashier
 		toCheckout: cart
@@ -209,17 +209,17 @@ test04CheckoutRegistersASale
 	total := cashier checkOut total.
 
 	self assert: salesBook size = 1.
-	self assert: salesBook first total = total.! !
+	self assert: (salesBook at: 1) total = total.! !
 
-!CashierTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/22/2013 12:22'!
+!CashierTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test05CashierChargesCreditCardUsingMerchantProcessor
 
 	| cart cashier salesBook total creditCard debitedAmout debitedCreditCard  |
 
 	cart := testObjectsFactory createCart.
-	cart add: testObjectsFactory itemSellByTheStore.
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
 	creditCard := testObjectsFactory notExpiredCreditCard.
-	salesBook := OrderedCollection new.
+	salesBook := SalesBook new.
 
 	cashier:= Cashier
 		toCheckout: cart
@@ -237,15 +237,15 @@ test05CashierChargesCreditCardUsingMerchantProcessor
 	self assert: debitedCreditCard = creditCard.
 	self assert: debitedAmout = total.! !
 
-!CashierTest methodsFor: 'tests' stamp: 'HernanWilkinson 6/22/2013 12:02'!
+!CashierTest methodsFor: 'tests' stamp: 'ss 12/2/2019 20:44:50'!
 test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit
 
 	| cart cashier salesBook creditCard |
 
 	cart := testObjectsFactory createCart.
-	cart add: testObjectsFactory itemSellByTheStore.
+	cart add: testObjectsFactory itemSellByTheStoreISBN.
 	creditCard := testObjectsFactory notExpiredCreditCard.
-	salesBook := OrderedCollection new.
+	salesBook := SalesBook new.
  	debitBehavior := [ :anAmount :aCreditCard | self error: Cashier creditCardHasNoCreditErrorMessage].
 
 	cashier:= Cashier
@@ -358,7 +358,7 @@ test17CanNotAddToCartWhenSessionIsExpired
 ! !
 
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - list purchases' stamp: 'HAW 11/26/2018 18:07:48'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - list purchases' stamp: 'ss 12/2/2019 19:45:34'!
 test14ListPurchasesIncludesBoughtItems
 
 	| cartId purchases |
@@ -368,14 +368,12 @@ test14ListPurchasesIncludesBoughtItems
 	systemFacade add: 1 of: self anotherValidBook toCartIdentifiedAs: cartId.
 	systemFacade
 		checkOutCartIdentifiedAs: cartId
-		withCreditCardNumbered: '1111222233334444'
-		ownedBy: 'Juan Perez'
-		expiringOn: testObjectsFactory notExpiredMonthOfYear.
+		withCreditCard: testObjectsFactory notExpiredCreditCard .
 
 	purchases := systemFacade listPurchasesOf: self validUser authenticatingWith: self validUserPassword.
 
-	self assert: (purchases at: self validBook) equals: (testObjectsFactory itemSellByTheStorePrice * 2).
-	self assert: (purchases at: self anotherValidBook) equals: testObjectsFactory anotherItemSellByTheStorePrice.! !
+	self assert: (purchases at: self validBook) total equals: (testObjectsFactory itemSellByTheStorePrice * 2).
+	self assert: (purchases at: self anotherValidBook) total equals: testObjectsFactory anotherItemSellByTheStorePrice.! !
 
 !TusLibrosSystemFacadeTest methodsFor: 'tests - list purchases' stamp: 'HAW 11/26/2018 18:10:29'!
 test15CanNotListPurchasesOfInvalidCustomer
@@ -429,17 +427,17 @@ debit: anAmount from: aCreditCard
 ! !
 
 
-!TusLibrosSystemFacadeTest methodsFor: 'setup' stamp: 'HernanWilkinson 6/22/2013 11:42'!
+!TusLibrosSystemFacadeTest methodsFor: 'setup' stamp: 'ss 12/2/2019 19:38:03'!
 createSalesBook
 
-	^OrderedCollection new! !
+	^SalesBook new! !
 
 !TusLibrosSystemFacadeTest methodsFor: 'setup' stamp: 'HernanWilkinson 6/22/2013 11:47'!
 merchantProcessor
 
 	^self! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'setup' stamp: 'HernanWilkinson 6/17/2015 20:53'!
+!TusLibrosSystemFacadeTest methodsFor: 'setup' stamp: 'ss 12/2/2019 17:59:51'!
 setUp
 
 	testObjectsFactory := StoreTestObjectsFactory new.
@@ -450,18 +448,19 @@ setUp
 		registeringOn: self createSalesBook
 		debitingThrought: self merchantProcessor
 		measuringTimeWith: clock
+		storingCreditCardsOn: self usersCreditCard
 ! !
 
 
-!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'HernanWilkinson 6/22/2013 00:15'!
+!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'ss 12/2/2019 20:45:48'!
 anotherValidBook
 
-	^testObjectsFactory anotherItemSellByTheStore ! !
+	^testObjectsFactory anotherItemSellByTheStoreISBN ! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'HernanWilkinson 6/21/2013 23:49'!
+!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'ss 12/2/2019 20:47:16'!
 invalidBook
 
-	^testObjectsFactory itemNotSellByTheStore ! !
+	^testObjectsFactory itemNotSellByTheStoreISBN ! !
 
 !TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'HernanWilkinson 6/21/2013 23:25'!
 invalidCartId
@@ -479,10 +478,16 @@ invalidUser
 
 	^'invalidUser'! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'HernanWilkinson 6/21/2013 23:50'!
+!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'ss 12/2/2019 18:14:06'!
+usersCreditCard
+	^Dictionary new
+		at: self validUser put: testObjectsFactory notExpiredCreditCard ;
+		yourself! !
+
+!TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'ss 12/2/2019 20:44:51'!
 validBook
 
-	^testObjectsFactory itemSellByTheStore ! !
+	^testObjectsFactory itemSellByTheStoreISBN ! !
 
 !TusLibrosSystemFacadeTest methodsFor: 'test objects' stamp: 'HernanWilkinson 6/21/2013 22:27'!
 validUser
@@ -502,7 +507,7 @@ validUsersAndPasswords
 		yourself! !
 
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'HAW 6/19/2018 11:45:13'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 19:59:35'!
 test10CanCheckoutACart
 
 	| cartId purchases |
@@ -511,31 +516,27 @@ test10CanCheckoutACart
 	systemFacade add: 1 of: self validBook toCartIdentifiedAs: cartId.
 	systemFacade
 		checkOutCartIdentifiedAs: cartId
-		withCreditCardNumbered: testObjectsFactory notExpiredCreditCardNumber
-		ownedBy: testObjectsFactory notExpiredCreditCardOwner
-		expiringOn: testObjectsFactory notExpiredMonthOfYear.
+		withCreditCard: testObjectsFactory notExpiredCreditCard.
 
 	purchases := systemFacade listPurchasesOf: self validUser authenticatingWith: self validUserPassword.
 
-	self assert: (purchases at: self validBook) equals: testObjectsFactory itemSellByTheStorePrice.
+	self assert: (purchases at: self validBook) total equals: testObjectsFactory itemSellByTheStorePrice.
 ! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'HAW 11/26/2018 18:05:20'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 18:25:25'!
 test11CanNotCheckoutANotCreatedCart
 
 	self
 		should: [systemFacade
 			checkOutCartIdentifiedAs: self invalidCartId
-			withCreditCardNumbered: testObjectsFactory notExpiredCreditCardNumber
-			ownedBy: testObjectsFactory notExpiredCreditCardOwner
-			expiringOn: testObjectsFactory notExpiredMonthOfYear ]
+			withCreditCard: testObjectsFactory notExpiredCreditCard ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText equals: systemFacade invalidCartIdErrorDescription ]
 
 		! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'HAW 11/26/2018 18:06:07'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 18:25:25'!
 test12CanNotCheckoutAnEmptyCart
 
 	| cartId |
@@ -544,9 +545,7 @@ test12CanNotCheckoutAnEmptyCart
 	self
 		should: [systemFacade
 			checkOutCartIdentifiedAs: cartId
-			withCreditCardNumbered: testObjectsFactory notExpiredCreditCardNumber
-			ownedBy: testObjectsFactory notExpiredCreditCardOwner
-			expiringOn: testObjectsFactory notExpiredMonthOfYear ]
+			withCreditCard: testObjectsFactory notExpiredCreditCard ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText equals: systemFacade cartCanNotBeEmptyErrorMessage.
@@ -554,7 +553,7 @@ test12CanNotCheckoutAnEmptyCart
 
 		! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'HAW 11/26/2018 18:07:02'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 18:25:25'!
 test13CanNotCheckoutWithAnExpiredCreditCard
 
 	| cartId |
@@ -564,9 +563,7 @@ test13CanNotCheckoutWithAnExpiredCreditCard
 	self
 		should: [systemFacade
 			checkOutCartIdentifiedAs: cartId
-			withCreditCardNumbered: testObjectsFactory notExpiredCreditCardNumber
-			ownedBy: testObjectsFactory notExpiredCreditCardOwner
-			expiringOn: testObjectsFactory expiredMonthOfYear ]
+			withCreditCard: testObjectsFactory expiredCreditCard ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText equals: systemFacade canNotChargeAnExpiredCreditCardErrorMessage.
@@ -574,7 +571,7 @@ test13CanNotCheckoutWithAnExpiredCreditCard
 
 		! !
 
-!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'HAW 11/26/2018 18:07:15'!
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 18:25:25'!
 test19CanNotCheckOutCartWhenSessionIsExpired
 
 	| cartId |
@@ -585,15 +582,37 @@ test19CanNotCheckOutCartWhenSessionIsExpired
 	self should: [
 		systemFacade
 			checkOutCartIdentifiedAs: cartId
-			withCreditCardNumbered: testObjectsFactory notExpiredCreditCardNumber
-			ownedBy: testObjectsFactory notExpiredCreditCardOwner
-			expiringOn: testObjectsFactory notExpiredMonthOfYear ]
+			withCreditCard: testObjectsFactory expiredCreditCard ]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 			self assert: anError messageText equals: systemFacade sessionHasExpiredErrorDescription.
 			self assert: (systemFacade listPurchasesOf: self validUser authenticatingWith: self validUserPassword) isEmpty ]
 
 
+	! !
+
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 17:50:12'!
+test22CantGetUserCreditCardWhenNotAuthenticated
+
+	self should: [systemFacade creditCardFor: self validUser authenticatedWith: self invalidPassword]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError | 
+			self assert: anError messageText equals: systemFacade invalidUserAndOrPasswordErrorDescription.
+			].
+		
+	! !
+
+!TusLibrosSystemFacadeTest methodsFor: 'tests - checkout' stamp: 'ss 12/2/2019 17:53:12'!
+test23CanGetUserCreditCardWhenAuthenticated
+
+	| userCreditCard returnedCreditCard |
+	
+	userCreditCard := testObjectsFactory notExpiredCreditCard.
+	returnedCreditCard := systemFacade creditCardFor: self validUser authenticatedWith: self validUserPassword.
+	
+	self assert: returnedCreditCard equals: userCreditCard.
+		
+		
 	! !
 
 
@@ -710,25 +729,45 @@ Object subclass: #StoreTestObjectsFactory
 	poolDictionaries: ''
 	category: 'TusLibros-Tests'!
 
-!StoreTestObjectsFactory methodsFor: 'items' stamp: 'HernanWilkinson 6/22/2013 00:16'!
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'ss 12/2/2019 20:45:54'!
 anotherItemSellByTheStore
 
-	^'anotherValidBook'! !
+	^Book named: 'anothervalidBook' 
+		by: 'pepe perez'
+		withISBN: '9876543' 
+		withDescription: 'another interesting book'
+		withPrice: self anotherItemSellByTheStorePrice .! !
+
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'ss 12/2/2019 20:46:06'!
+anotherItemSellByTheStoreISBN
+
+	^self anotherItemSellByTheStore isbn! !
 
 !StoreTestObjectsFactory methodsFor: 'items' stamp: 'HernanWilkinson 6/22/2013 00:16'!
 anotherItemSellByTheStorePrice
 
 	^15! !
 
-!StoreTestObjectsFactory methodsFor: 'items' stamp: 'HernanWilkinson 6/17/2013 18:08'!
-itemNotSellByTheStore
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'ss 12/2/2019 20:47:16'!
+itemNotSellByTheStoreISBN
 
-	^'invalidBook'! !
+	^'123123123123131231238865'! !
 
-!StoreTestObjectsFactory methodsFor: 'items' stamp: 'HernanWilkinson 6/17/2013 18:08'!
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'ss 12/2/2019 20:45:08'!
 itemSellByTheStore
 
-	^ 'validBook'! !
+	^Book named: 'validBook' 
+		by: 'pepe perez'
+		withISBN: '123456' 
+		withDescription: 'a much interesting book'
+		withPrice: self itemSellByTheStorePrice.
+! !
+
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'ss 12/2/2019 20:47:00'!
+itemSellByTheStoreISBN
+
+	^self itemSellByTheStore isbn.
+! !
 
 !StoreTestObjectsFactory methodsFor: 'items' stamp: 'HernanWilkinson 6/17/2013 18:08'!
 itemSellByTheStorePrice
@@ -741,29 +780,33 @@ createCart
 
 	^Cart acceptingItemsOf: self defaultCatalog! !
 
-!StoreTestObjectsFactory methodsFor: 'cart' stamp: 'HernanWilkinson 6/22/2013 00:16'!
+!StoreTestObjectsFactory methodsFor: 'cart' stamp: 'ss 12/2/2019 20:46:40'!
 defaultCatalog
 
 	^ Dictionary new
-		at: self itemSellByTheStore put: self itemSellByTheStorePrice;
-		at: self anotherItemSellByTheStore put: self anotherItemSellByTheStorePrice;
+		at: self itemSellByTheStoreISBN put: self itemSellByTheStore;
+		at: self anotherItemSellByTheStoreISBN put: self anotherItemSellByTheStore;
 		yourself ! !
 
 
-!StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'HernanWilkinson 6/22/2013 11:24'!
+!StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'ss 12/2/2019 18:07:44'!
+creditCardNumber
+	^'1234567890'! !
+
+!StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'ss 12/2/2019 18:05:41'!
 expiredCreditCard
 
-	^CreditCard expiringOn: self expiredMonthOfYear ! !
+	^CreditCard withNumber: self creditCardNumber expiringOn: self expiredMonthOfYear ! !
 
 !StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'HernanWilkinson 6/22/2013 11:24'!
 expiredMonthOfYear
 
 	^ Month month: today monthIndex year: today yearNumber - 1! !
 
-!StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'HernanWilkinson 6/22/2013 11:06'!
+!StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'ss 12/2/2019 18:05:41'!
 notExpiredCreditCard
 
-	^CreditCard expiringOn: self notExpiredMonthOfYear! !
+	^CreditCard withNumber: self creditCardNumber expiringOn: self notExpiredMonthOfYear! !
 
 !StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'HAW 6/19/2018 11:45:30'!
 notExpiredCreditCardNumber

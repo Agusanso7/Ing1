@@ -1,3 +1,61 @@
+!classDefinition: #Book category: #'TusLibros-Model'!
+Object subclass: #Book
+	instanceVariableNames: 'name isbn author description price'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Model'!
+
+!Book methodsFor: 'initialization' stamp: 'ss 12/2/2019 20:26:30'!
+initializeNamed: aName by: anAuthor withISBN: anISBN withDescription: aDescription withPrice: aPrice
+
+	name := aName.
+	author := anAuthor.
+	isbn := anISBN.
+	description  := aDescription.
+	price := aPrice.
+	! !
+
+
+!Book methodsFor: 'accessing' stamp: 'ss 12/2/2019 20:27:33'!
+author
+	^author! !
+
+!Book methodsFor: 'accessing' stamp: 'ss 12/2/2019 20:27:41'!
+description
+	^description ! !
+
+!Book methodsFor: 'accessing' stamp: 'ss 12/2/2019 20:27:53'!
+isbn
+	^isbn ! !
+
+!Book methodsFor: 'accessing' stamp: 'ss 12/2/2019 20:27:28'!
+name
+	^name! !
+
+!Book methodsFor: 'accessing' stamp: 'ss 12/2/2019 20:26:56'!
+price
+	^price! !
+
+
+!Book methodsFor: 'testing' stamp: 'ss 12/2/2019 20:28:39'!
+= aBook
+	^isbn = aBook isbn! !
+
+!Book methodsFor: 'testing' stamp: 'ss 12/2/2019 20:28:51'!
+hash
+	^isbn hash! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Book class' category: #'TusLibros-Model'!
+Book class
+	instanceVariableNames: ''!
+
+!Book class methodsFor: 'instance creation' stamp: 'ss 12/2/2019 20:26:43'!
+named: aName by: anAuthor withISBN: anISBN withDescription: aDescription withPrice: aPrice
+	^self new initializeNamed: aName by: anAuthor withISBN: anISBN withDescription: aDescription withPrice: aPrice ! !
+
+
 !classDefinition: #Cart category: #'TusLibros-Model'!
 Object subclass: #Cart
 	instanceVariableNames: 'catalog items'
@@ -16,10 +74,10 @@ invalidQuantityErrorMessage
 	^self class invalidQuantityErrorMessage ! !
 
 
-!Cart methodsFor: 'assertions' stamp: 'HernanWilkinson 6/22/2013 14:17'!
-assertIsValidItem: anItem
+!Cart methodsFor: 'assertions' stamp: 'ss 12/2/2019 20:47:34'!
+assertIsValidItem: anItemISBN
 
-	(catalog includesKey: anItem) ifFalse: [ self signalInvalidItem ]! !
+	(catalog includesKey: anItemISBN) ifFalse: [ self signalInvalidItem ]! !
 
 !Cart methodsFor: 'assertions' stamp: 'HernanWilkinson 6/22/2013 14:18'!
 assertIsValidQuantity: aQuantity
@@ -192,13 +250,13 @@ cartContent
 
 	^cart content! !
 
-!CartSession methodsFor: 'cart' stamp: 'HernanWilkinson 6/17/2015 20:35'!
-checkOutCartWithCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
+!CartSession methodsFor: 'cart' stamp: 'ss 12/2/2019 18:21:51'!
+checkOutCartWithCreditCard: aCreditCard
 
 	^(Cashier
 		toCheckout: cart
 		ownedBy: owner
-		charging: (CreditCard expiringOn: anExpirationMonthOfYear)
+		charging: aCreditCard
 		throught: systemFacade merchantProcessor
 		on: self today
 		registeringOn: systemFacade salesBook) checkOut ! !
@@ -255,15 +313,15 @@ debitTotal
 	merchantProcessor debit: ticket total from: creditCard.
 	! !
 
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/17/2013 19:06'!
+!Cashier methodsFor: 'checkout - private' stamp: 'ss 12/2/2019 19:38:51'!
 registerSale
 
-	salesBook add: self createSale! !
+	salesBook register: self createSale! !
 
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/22/2013 12:17'!
-totalOf: anItem quantity: aQuantity
+!Cashier methodsFor: 'checkout - private' stamp: 'ss 12/2/2019 20:47:54'!
+totalOf: anItemISBN quantity: aQuantity
 
-	^(cart catalog at: anItem) * aQuantity  ! !
+	^(cart catalog at: anItemISBN) price * aQuantity  ! !
 
 
 !Cashier methodsFor: 'checkout' stamp: 'HernanWilkinson 6/22/2013 12:28'!
@@ -358,10 +416,28 @@ today
 
 !classDefinition: #CreditCard category: #'TusLibros-Model'!
 Object subclass: #CreditCard
-	instanceVariableNames: 'expiration'
+	instanceVariableNames: 'expiration number'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
+
+!CreditCard methodsFor: 'accessing' stamp: 'ss 12/2/2019 18:12:26'!
+expiration
+	^expiration copy! !
+
+!CreditCard methodsFor: 'accessing' stamp: 'ss 12/2/2019 18:12:18'!
+number
+	^number copy! !
+
+
+!CreditCard methodsFor: 'testing' stamp: 'ss 12/2/2019 18:12:02'!
+= aCreditCard
+
+	^number = aCreditCard number and: [expiration = aCreditCard expiration].! !
+
+!CreditCard methodsFor: 'testing' stamp: 'ss 12/2/2019 20:29:03'!
+hash
+	^number hash! !
 
 !CreditCard methodsFor: 'testing' stamp: 'HernanWilkinson 6/17/2013 18:39'!
 isExpiredOn: aDate
@@ -369,9 +445,10 @@ isExpiredOn: aDate
 	^expiration start < (Month month: aDate monthIndex year: aDate yearNumber) start ! !
 
 
-!CreditCard methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 18:38'!
-initializeExpiringOn: aMonth
+!CreditCard methodsFor: 'initialization' stamp: 'ss 12/2/2019 18:08:23'!
+initializeWithNumber: aCreditCardNumber expiringOn: aMonth
 
+	number := aCreditCardNumber.
 	expiration := aMonth ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -380,10 +457,10 @@ initializeExpiringOn: aMonth
 CreditCard class
 	instanceVariableNames: ''!
 
-!CreditCard class methodsFor: 'instance creation' stamp: 'HernanWilkinson 6/17/2013 18:38'!
-expiringOn: aMonth
+!CreditCard class methodsFor: 'instance creation' stamp: 'ss 12/2/2019 18:06:36'!
+withNumber: aCreditCardNumber expiringOn: aMonth
 
-	^self new initializeExpiringOn: aMonth! !
+	^self new initializeWithNumber: aCreditCardNumber expiringOn: aMonth! !
 
 
 !classDefinition: #LineItem category: #'TusLibros-Model'!
@@ -397,6 +474,11 @@ Object subclass: #LineItem
 item
 
 	^ item! !
+
+!LineItem methodsFor: 'accessing' stamp: 'ss 12/2/2019 19:14:57'!
+quantity
+
+	^ quantity ! !
 
 !LineItem methodsFor: 'accessing' stamp: 'HernanWilkinson 6/22/2013 12:21'!
 total
@@ -488,6 +570,87 @@ doneBy: aCustomer certifiedWith: aTicket
 	^self new initializeDoneBy: aCustomer certifiedWith: aTicket ! !
 
 
+!classDefinition: #SalesBook category: #'TusLibros-Model'!
+Object subclass: #SalesBook
+	instanceVariableNames: 'sales'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Model'!
+
+!SalesBook methodsFor: 'accessing' stamp: 'ss 12/2/2019 19:41:19'!
+at: anIndex
+	^sales at: anIndex.! !
+
+!SalesBook methodsFor: 'accessing' stamp: 'ss 12/2/2019 19:41:03'!
+size
+	^sales size! !
+
+
+!SalesBook methodsFor: 'testing' stamp: 'ss 12/2/2019 19:40:26'!
+isEmpty
+	^sales isEmpty! !
+
+
+!SalesBook methodsFor: 'initialization' stamp: 'ss 12/2/2019 19:36:17'!
+initialize
+	sales := OrderedCollection new.! !
+
+
+!SalesBook methodsFor: 'registering' stamp: 'ss 12/2/2019 19:38:37'!
+register: aSale
+	sales add: aSale.! !
+
+
+!SalesBook methodsFor: 'sales by user' stamp: 'ss 12/2/2019 19:51:22'!
+boughtBooksBy: aUser 
+	| boughtBooks |
+	
+	boughtBooks := Set new.
+	self lineItemsBy: aUser do: [:aLineItem | boughtBooks add: aLineItem item].
+	
+	^boughtBooks 
+	! !
+
+!SalesBook methodsFor: 'sales by user' stamp: 'ss 12/2/2019 19:52:24'!
+lineItemsBy: aUser do: aBlock 
+	(self salesBy: aUser) do: [:aSale | aSale lineItemsDo: aBlock]! !
+
+!SalesBook methodsFor: 'sales by user' stamp: 'ss 12/2/2019 19:59:07'!
+purchrasesBy: aUser
+	|purchrases|
+
+	purchrases := Dictionary new.
+	
+	(self boughtBooksBy: aUser) do: [:aBook | 
+		purchrases at: aBook put: (self purchrasesOf: aBook by: aUser) 
+	].
+
+	^purchrases 
+
+
+	! !
+
+!SalesBook methodsFor: 'sales by user' stamp: 'ss 12/2/2019 19:56:26'!
+purchrasesOf: aBook by: aUser 
+	| quantity total |
+	total := 0.
+	quantity := 0.
+	
+	self lineItemsBy: aUser do: [:aLineItem | 
+		aLineItem item = aBook ifTrue: [
+			total := total + aLineItem total.
+			quantity := quantity + aLineItem quantity .
+			]
+	].
+
+	^LineItem of: aBook quantity: quantity total: total.! !
+
+!SalesBook methodsFor: 'sales by user' stamp: 'ss 12/2/2019 19:43:56'!
+salesBy: aUser
+
+	^sales select: [:aSale | aSale wasDoneBy: aUser]! !
+
+
 !classDefinition: #Ticket category: #'TusLibros-Model'!
 Object subclass: #Ticket
 	instanceVariableNames: 'lineItems'
@@ -531,17 +694,51 @@ Object subclass: #TusLibrosRestAPI
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:50:52'!
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:06'!
+catalogResponse: aCatalog
+	| response  |
+	
+	response := OrderedCollection new.
+
+	aCatalog values do: [:aBook | | bookResponse | 
+		bookResponse := Dictionary new.
+		
+		bookResponse at: 'name' put: aBook name.
+		bookResponse at: 'author' put: aBook author .
+		bookResponse at: 'isbn' put: aBook isbn .
+		bookResponse at: 'description' put: aBook description .
+		bookResponse at: 'price' put: aBook price.
+		
+		response add: bookResponse.
+	].
+	
+	^response asArray
+	! !
+
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 19:37:07'!
 createSalesBook
 
-	^OrderedCollection new! !
+	^SalesBook new! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:50:28'!
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:35:35'!
 defaultCatalog
 
+	| aBook anotherBook |
+	aBook := Book named: 'the history of books' 
+		by: 'booky mcbooks' 
+		withISBN: '123' 
+		withDescription: 'booky takes us through the history of books'
+		withPrice: 550.
+	
+	anotherBook := Book named: 'who let the books out?'
+		by: 'Pages mcbooks' 
+		withISBN: '987654' 
+		withDescription: 'pages asks important questions such as: who let the books out?'
+		withPrice: 314.
+
 	^ Dictionary new
-		at: 'book1' put: 100;
-		at: 'book2' put: 30;
+		at: aBook isbn put: aBook;
+		at: anotherBook isbn put: anotherBook ;
 		yourself ! !
 
 !TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:55:00'!
@@ -549,7 +746,7 @@ destroy
 	
 	webserver ifNotNil:[webserver destroy].! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 19:24:16'!
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:53:10'!
 initializeWith: aPortNumber
 
 	systemFacade := TusLibrosSystemFacade
@@ -557,7 +754,8 @@ initializeWith: aPortNumber
 		acceptingItemsOf: self defaultCatalog
 		registeringOn: self createSalesBook
 		debitingThrought: MerchantProcessor new
-		measuringTimeWith: DateAndTime.
+		measuringTimeWith: DateAndTime 
+		storingCreditCardsOn: self userCreditCard.
 	
 	port:= aPortNumber.
 	
@@ -597,33 +795,57 @@ initializeWith: aPortNumber
 					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
 		].
 	
-	webserver addService: '/listPurchrases' action: [:request | |purchrases |	
+	webserver addService: '/listPurchrases' action: [:request | |purchrases purchrasesResponse |	
 		purchrases := systemFacade listPurchasesOf:  (request fields at: 'username') 
 			authenticatingWith: (request fields at: 'password').
+			
+		purchrasesResponse := (self lineItemsResponse: purchrases values).
 
-		request send200Response: (WebUtils jsonEncode: purchrases )
+		request send200Response: (WebUtils jsonEncode: purchrasesResponse )
 				 contentType: 'application/json; charset=utf-8' do: [:resp | 
 					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
 		].
 	
-	webserver addService: '/checkout' action: [:request |
-		 systemFacade checkOutCartIdentifiedAs: (request fields at: 'cart_id') asInteger 
-			withCreditCardNumbered: (request fields at: 'ccn') 
-			ownedBy: (request fields at: 'cco') 
-			expiringOn: (self parseMonthOfYear: (request fields at: 'cced')).
-			
-		request send200Response: ''
+	webserver addService: '/checkout' action: [:request | |userCreditCard ticket |
+		userCreditCard := systemFacade creditCardFor: (request fields at: 'username') 
+			authenticatedWith: (request fields at: 'password').
+		
+		 ticket := systemFacade checkOutCartIdentifiedAs: (request fields at: 'cart_id') asInteger 
+			withCreditCard: userCreditCard.
+		
+		request send200Response: (WebUtils jsonEncode: (self ticketResponse: ticket))
 				 contentType: 'application/json; charset=utf-8' do: [:resp | 
 					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
 		].
 	
 	webserver addService: '/catalog' action: [:request |
-		request send200Response: (WebUtils jsonEncode: systemFacade catalog) 
+		request send200Response: (WebUtils jsonEncode: (self catalogResponse: systemFacade catalog)) 
 				 contentType: 'application/json; charset=utf-8' do: [:resp | 
 					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
 		].
 	
 	
+	
+	! !
+
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:15'!
+lineItemsResponse: aListOfLineItems
+	| lineItemsResponse |
+	
+	lineItemsResponse := OrderedCollection new.
+	
+	aListOfLineItems do: [:aLineItem | | lineItemResponse |
+		lineItemResponse := Dictionary new.
+		
+		lineItemResponse at: 'name' put: aLineItem item.
+		lineItemResponse at: 'quantity' put: aLineItem quantity .
+		lineItemResponse at: 'total' put: aLineItem total.
+		
+		lineItemsResponse add: lineItemResponse.
+	].
+
+	^lineItemsResponse asArray 
+
 	
 	! !
 
@@ -658,11 +880,45 @@ stopListening
 	
 	^'Stopped listening from port: ',  port asString! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:49:19'!
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:21'!
+ticketResponse: aTicket
+	| response lineItems |
+	
+	response := Dictionary new.
+	response at: 'total' put: aTicket total.
+	
+	lineItems := OrderedCollection new.	
+	aTicket lineItemsDo: [:aLineItem | lineItems add: aLineItem ].
+
+	response at: 'items' put: (self lineItemsResponse: lineItems) .
+	
+	^response 
+	! !
+
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 18:56:28'!
+userCreditCard
+	| notExpiredCreditCard today expiredCreditCard |
+	
+	today := DateAndTime today.
+	
+	expiredCreditCard :=  CreditCard withNumber: '321321' 
+		expiringOn: (Month month: today monthIndex year: today yearNumber -1).
+		
+	notExpiredCreditCard :=  CreditCard withNumber: '123123' 
+		expiringOn:(Month month: today monthIndex year: today yearNumber +1).
+	
+
+	^Dictionary new
+		at: 'user' put: notExpiredCreditCard;
+		at: 'expired' put: expiredCreditCard;
+		yourself! !
+
+!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 18:32:17'!
 validUsersAndPasswords
 
 	^Dictionary new
 		at: 'user' put: 'pass';
+		at: 'expired' put: 'pass';
 		yourself! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -678,7 +934,7 @@ listeningOn: aPortNumber
 
 !classDefinition: #TusLibrosSystemFacade category: #'TusLibros-Model'!
 Object subclass: #TusLibrosSystemFacade
-	instanceVariableNames: 'validUsersAndPasswords catalog lastId merchantProcessor salesBook clock cartSessions'
+	instanceVariableNames: 'validUsersAndPasswords catalog lastId merchantProcessor salesBook clock cartSessions usersCreditCard'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
@@ -756,6 +1012,12 @@ signalInvalidUserAndOrPassword
 	self error: self invalidUserAndOrPasswordErrorDescription! !
 
 
+!TusLibrosSystemFacade methodsFor: 'cart session management' stamp: 'ss 12/2/2019 17:56:07'!
+creditCardFor: aUser authenticatedWith: aPassword 
+	self if: aUser authenticatesWith: aPassword do: [ 
+		^usersCreditCard at: aUser. 
+	].! !
+
 !TusLibrosSystemFacade methodsFor: 'cart session management' stamp: 'HernanWilkinson 6/21/2013 23:32'!
 generateCartId
 
@@ -790,15 +1052,12 @@ add: anAmount of: aBook toCartIdentifiedAs: aCartId
 
 	self withCartSessionIdentifiedAs: aCartId do: [ :cartSession | cartSession addToCart: anAmount of: aBook ]! !
 
-!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'HernanWilkinson 6/17/2015 20:47'!
-checkOutCartIdentifiedAs: aCartId withCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
+!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'ss 12/2/2019 19:01:32'!
+checkOutCartIdentifiedAs: aCartId withCreditCard: aCreditCard 
 
-	self
+	^self
 		withCartSessionIdentifiedAs: aCartId
-		do: [ :cartSession | cartSession
-			checkOutCartWithCreditCardNumbered: aCreditCartNumber
-			ownedBy: anOwner
-			expiringOn: anExpirationMonthOfYear ]
+		do: [ :cartSession | cartSession checkOutCartWithCreditCard: aCreditCard]
 ! !
 
 !TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'HernanWilkinson 6/17/2015 20:52'!
@@ -817,16 +1076,10 @@ listCartIdentifiedAs: aCartId
 
 	^ self withCartSessionIdentifiedAs: aCartId do: [ :cartSession | cartSession cartContent ]! !
 
-!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'HAW 11/26/2018 20:33:49'!
+!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'ss 12/2/2019 19:49:26'!
 listPurchasesOf: aUser authenticatingWith: aPassword
 
-	^self if: aUser authenticatesWith: aPassword do: [ | sales |
-		sales := self salesDoneBy: aUser.
-		sales
-			inject: Dictionary new
-			into: [ :salesOrderedByBook :aSale |
-				self list: aSale on: salesOrderedByBook.
-				salesOrderedByBook ] ]! !
+	^self if: aUser authenticatesWith: aPassword do: [ salesBook purchrasesBy: aUser ]! !
 
 !TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'ss 11/25/2019 19:21:31'!
 remove: aBook fromCartIdentifiedAs: aCartId 
@@ -845,7 +1098,7 @@ salesBook
 	^ salesBook! !
 
 
-!TusLibrosSystemFacade methodsFor: 'private' stamp: 'HernanWilkinson 6/17/2015 20:56'!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'ss 12/2/2019 19:34:41'!
 list: aSale on: salesOrderedByBook
 
 	"Esto es un indicio de que por ahi conviene empezar a pensar en modelar un SaleBook - Hernan"
@@ -854,19 +1107,14 @@ list: aSale on: salesOrderedByBook
 		newTotal := oldTotal + aLineItem total.
 		salesOrderedByBook at: aLineItem item put: newTotal ]! !
 
-!TusLibrosSystemFacade methodsFor: 'private' stamp: 'HernanWilkinson 6/17/2015 20:55'!
-salesDoneBy: aUser
 
-	"Esto es un indicio de que por ahi conviene empezar a pensar en modelar un SaleBook - Hernan"
-	^ salesBook select: [ :aSale | aSale wasDoneBy: aUser ]! !
-
-
-!TusLibrosSystemFacade methodsFor: 'initialization' stamp: 'HernanWilkinson 6/22/2013 14:17'!
+!TusLibrosSystemFacade methodsFor: 'initialization' stamp: 'ss 12/2/2019 17:58:08'!
 initializeAuthenticatingWith: aValidUsersAndPasswords
 	acceptingItemsOf: aCatalog
 	registeringOn: aSalesBook
 	debitingThrought: aMerchantProcessor
-	measuringTimeWith: aClock
+	measuringTimeWith: aClock 
+	storingCreditCardsOn: aUsersCreditCardStore 
 
 	validUsersAndPasswords := aValidUsersAndPasswords.
 	catalog := aCatalog.
@@ -875,7 +1123,9 @@ initializeAuthenticatingWith: aValidUsersAndPasswords
 	clock := aClock.
 
 	cartSessions := Dictionary new.
-	lastId := 0.! !
+	lastId := 0.
+	
+	usersCreditCard := aUsersCreditCardStore.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -883,16 +1133,17 @@ initializeAuthenticatingWith: aValidUsersAndPasswords
 TusLibrosSystemFacade class
 	instanceVariableNames: ''!
 
-!TusLibrosSystemFacade class methodsFor: 'instance creation' stamp: 'HernanWilkinson 6/22/2013 14:17'!
+!TusLibrosSystemFacade class methodsFor: 'instance creation' stamp: 'ss 12/2/2019 17:59:11'!
 authenticatingWith: aValidUsersAndPasswords
 	acceptingItemsOf: aCatalog
 	registeringOn: aSalesBook
 	debitingThrought: aMerchantProcessor
-	measuringTimeWith: aClock
+	measuringTimeWith: aClock 
+	storingCreditCardsOn: aUsersCreditCardStore 
 
 	^self new
 		initializeAuthenticatingWith: aValidUsersAndPasswords
 		acceptingItemsOf: aCatalog
 		registeringOn: aSalesBook
 		debitingThrought: aMerchantProcessor
-		measuringTimeWith: aClock! !
+		measuringTimeWith: aClock storingCreditCardsOn: aUsersCreditCardStore! !
