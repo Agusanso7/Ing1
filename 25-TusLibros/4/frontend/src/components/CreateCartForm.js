@@ -7,6 +7,8 @@ function CreateCartForm(props) {
     password: '',
   });
 
+  const [error, setError] = React.useState(false)
+
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -14,13 +16,18 @@ function CreateCartForm(props) {
   const handleSend = (username, password) => {
     createCart(username,password)
       .then(function (response) {
+        if(!response.ok) {
+          throw Error(response)
+        }
+
         return response.json()
       })
       .then(function (json) {
         router.navigate("/catalog", { username: username, password: password, cartID: json.cart_id })
       })
       .catch(function (error) {
-        console.log('Looks like there was a problem: \n', error);
+        setError(true)
+        setValues({ username: '', password: ''})
       });
   };
 
@@ -43,6 +50,7 @@ function CreateCartForm(props) {
               className={classes.textField}
               margin="normal"
               variant="outlined"
+              value={values.username}
               onChange={handleChange('username')}
             />
           <TextField
@@ -53,9 +61,16 @@ function CreateCartForm(props) {
             margin="normal"
             variant="outlined"
             type="password"
+            value={values.password}
             onChange={handleChange('password')}
           />
         </FormControl>
+
+       { error &&
+            <Typography component="p" color="error" gutterBottom>
+                Invalid user or password
+            </Typography>
+        }
 
       <Button
       variant="contained"

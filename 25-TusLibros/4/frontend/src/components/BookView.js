@@ -30,6 +30,7 @@ function BookView(props) {
         </IconButton>
 
         <IconButton edge="end" aria-label="comments"
+          disabled={quantity === 0}
           onClick={() => removeFromCart(cartID, book.isbn, 1).then(refreshCart)}>
           <Icon>remove_shopping_cart</Icon>
         </IconButton>
