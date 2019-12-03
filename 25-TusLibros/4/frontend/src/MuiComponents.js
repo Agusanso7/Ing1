@@ -26,4 +26,5 @@ const {
   Modal,
   Backdrop,
   Fade,
+  Paper,
 } = MaterialUI;

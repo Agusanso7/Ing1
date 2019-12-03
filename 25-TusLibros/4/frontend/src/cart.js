@@ -39,14 +39,14 @@ const useRefreshSession = (username, cartID, cartSize) => {
 
 
 const handleAddToCart = (id, book, qty) => {
-  return getLocalAsJson(`addToCart?cart_id=${id}&book_id=${book}&quantity=${qty}`)
+  return getLocalAsJson(`addToCart?cart_id=${id}&isbn=${book}&quantity=${qty}`)
     .catch(function (error) {
       console.log('Looks like there was a problem adding to cart: \n', error);
     });
 };
 
 const handleRemoveFromCart = (id, book) => {
-  return getLocalAsJson(`removeFromCart?cart_id=${id}&book_id=${book}`)
+  return getLocalAsJson(`removeFromCart?cart_id=${id}&isbn=${book}`)
     .catch(function (error) {
       console.log('Looks like there was a problem removing from cart: \n', error);
     });
@@ -54,5 +54,9 @@ const handleRemoveFromCart = (id, book) => {
 
 const createCart = (username, password) => {
   return getLocalAsJson(`createCart?username=${username}&password=${password}`)
+};
+
+const checkoutCart = (id, username, password) => {
+  return getLocalAsJson(`checkout?cart_id=${id}&username=${username}&password=${password}`)
 };
 

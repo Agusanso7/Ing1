@@ -17,8 +17,8 @@ function CatalogView(props) {
 
       <List component="nav" className={classes.rootList} aria-label="catalog">
         {
-          Object.entries(session.catalog).map(([book, price]) => {
-            let bookCount = session.cart.filter(b => b === book).length;
+          session.catalog.map(book => {
+            let bookCount = session.cart.filter(isbn => isbn === book.isbn).length;
             let bookCountString = '';
 
             if(bookCount > 0) {
@@ -37,7 +37,7 @@ function CatalogView(props) {
                       className={classes.inline}
                       color="textPrimary"
                     >
-                      {`${book} - $${price}`}
+                      {`${book.name} - $${book.price}`}
                   </Typography>
                   <Typography
                       component="span"
@@ -52,14 +52,14 @@ function CatalogView(props) {
 
                 <ListItemSecondaryAction>
                   <IconButton edge="end" aria-label="comments"
-                    onClick={() => handleAddToCart(cartID, book, 1).then(() => setCartSize(session.cart.length+1))}>
+                    onClick={() => handleAddToCart(cartID, book.isbn, 1).then(() => setCartSize(session.cart.length+1))}>
 
                     <Icon>add_shopping_cart</Icon>
                   </IconButton>
 
                   <IconButton edge="end" aria-label="comments"
                     disabled={bookCount == 0}
-                    onClick={() => handleRemoveFromCart(cartID, book).then(() => setCartSize(session.cart.length-1))}>
+                    onClick={() => handleRemoveFromCart(cartID, book.isbn).then(() => setCartSize(session.cart.length-1))}>
                     <Icon>remove_shopping_cart</Icon>
                   </IconButton>
                 </ListItemSecondaryAction>

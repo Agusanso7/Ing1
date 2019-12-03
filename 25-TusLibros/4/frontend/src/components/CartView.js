@@ -5,9 +5,23 @@ function CartView(props) {
   const [cartSize, setCartSize] = React.useState(0)
 
   const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
-  const [checkoutModalOpen, setCheckoutModalOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const [checkoutModalOpen, setCheckoutModalOpen] = React.useState(false);
+  const [ticket, setTicket] = React.useState({});
+
+  const bookByISBN = (isbn) => session.catalog.find(book => book.isbn === isbn)
+
+  const handleCheckout = () => {
+    checkoutCart(cartID, username, password)
+      .then(function (response) {
+        return response.json()
+      }).then(function (ticket) {
+        setTicket(ticket)
+
+        setCheckoutModalOpen(true);
+      }).catch(function (error) {
+        console.log('Looks like there was a problem removing from cart: \n', error);
+      });
     setCheckoutModalOpen(true);
   };
 
@@ -40,7 +54,9 @@ function CartView(props) {
     )
   }
 
-  let total = session.cart.map(book => session.catalog[book]).reduce((x,y) => x + y, 0);
+  let total = session.cart
+    .map(isbn => bookByISBN(isbn).price)
+    .reduce((x,y) => x + y, 0);
 
   return (
     <div>
@@ -52,10 +68,9 @@ function CartView(props) {
 
       <List component="nav" className={classes.rootList} aria-label="catalog">
         {
-          Object.entries(session.catalog)
-            .filter(([book, _]) => session.cart.includes(book)).map(([book, price]) => {
+          session.catalog.filter(book => session.cart.includes(book.isbn)).map(book => {
 
-            let bookCount = session.cart.filter(b => b === book).length;
+            let bookCount = session.cart.filter(isbn => isbn === book.isbn).length;
             let bookCountString = '';
 
             if(bookCount > 0) {
@@ -74,7 +89,7 @@ function CartView(props) {
                       className={classes.inline}
                       color="textPrimary"
                     >
-                      {`${book} - $${price}`}
+                      {`${book.name} - $${book.price}`}
                   </Typography>
                   <Typography
                       component="span"
@@ -89,14 +104,14 @@ function CartView(props) {
 
                 <ListItemSecondaryAction>
                   <IconButton edge="end" aria-label="comments"
-                    onClick={() => handleAddToCart(cartID, book, 1).then(() => setCartSize(session.cart.length+1))}>
+                    onClick={() => handleAddToCart(cartID, book.isbn, 1).then(() => setCartSize(session.cart.length+1))}>
 
                     <Icon>add_shopping_cart</Icon>
                   </IconButton>
 
                   <IconButton edge="end" aria-label="comments"
                     disabled={bookCount == 0}
-                    onClick={() => handleRemoveFromCart(cartID, book).then(() => setCartSize(session.cart.length-1))}>
+                    onClick={() => handleRemoveFromCart(cartID, book.isbn).then(() => setCartSize(session.cart.length-1))}>
                     <Icon>remove_shopping_cart</Icon>
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -111,7 +126,7 @@ function CartView(props) {
         className={classes.Button}
         style={{float: 'right', marginTop: "15px"}}
         color="primary"
-        onClick={() => handleOpen()}>
+        onClick={() => handleCheckout()}>
         >
           Checkout
           </Button>
@@ -130,8 +145,23 @@ function CartView(props) {
       >
         <Fade in={checkoutModalOpen}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Checkout</h2>
-            <p id="transition-modal-description">ticket</p>
+            <typography component="h1" id="transition-modal-title"><strong>Ticket</strong></typography>
+
+            <Paper className={classes.root} id="transition-modal-description">
+              <List component="nav" aria-label="main mailbox folders">
+                {
+                  (ticket.items || []).map(item => {
+                    return (
+                      <ListItem key={item.name}>
+                        <ListItemText primary={`${bookByISBN(item.name).name} X ${item.quantity} - $${item.total}`} secondary={`ISBN: ${item.name}`} />
+                      </ListItem>
+                    )
+                  })
+                }
+              </List>
+            </Paper>
+
+            <typography component="h3" id="transition-modal-title">Total: ${ticket.total}</typography>
           </div>
         </Fade>
       </Modal>
