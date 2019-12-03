@@ -1,13 +1,6 @@
 function CatalogView(props) {
-  const { router, username, cartID } = props;
+  const { router, cartID, catalog, cartContent, refreshCart } = props;
   const classes = useStyles();
-
-  const [cartSize, setCartSize] = React.useState(0)
-
-  const { session, loading, error } = useRefreshSession(username, cartID, cartSize);
-
-  if (loading) { return <div>Loading...</div> }
-  if (error) return <div>{error}</div>
 
   return (
     <div>
@@ -17,58 +10,22 @@ function CatalogView(props) {
 
       <List component="nav" className={classes.rootList} aria-label="catalog">
         {
-          session.catalog.map(book => {
-            let bookCount = session.cart.filter(isbn => isbn === book.isbn).length;
-            let bookCountString = '';
-
-            if(bookCount > 0) {
-              bookCountString = ` - (${bookCount})`;
-            }
+          catalog.map(book => {
+            let bookCount = cartContent.filter(isbn => isbn === book.isbn).length;
 
             return (
-              <ListItem
-                key={book}
-                dense
-                >
-                <ListItemText primary={<React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      {`${book.name} - $${book.price}`}
-                  </Typography>
-                  <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textSecondary"
-                    >
-                      {bookCountString}
-                  </Typography>
-                </React.Fragment>
-                } />
-
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="comments"
-                    onClick={() => handleAddToCart(cartID, book.isbn, 1).then(() => setCartSize(session.cart.length+1))}>
-
-                    <Icon>add_shopping_cart</Icon>
-                  </IconButton>
-
-                  <IconButton edge="end" aria-label="comments"
-                    disabled={bookCount == 0}
-                    onClick={() => handleRemoveFromCart(cartID, book.isbn).then(() => setCartSize(session.cart.length-1))}>
-                    <Icon>remove_shopping_cart</Icon>
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+              <BookListItem
+                key={book.isbn}
+                cartID={cartID}
+                book={book}
+                quantity={bookCount}
+                handleAdd={() => addToCart(cartID, book.isbn, 1).then(refreshCart)}
+                handleRemove={() => removeFromCart(cartID, book.isbn).then(refreshCart)}
+              />
             )
           })
         }
       </List>
-
     </div>
   )
 }

@@ -25,10 +25,12 @@ const useFetchPurchrases = (username, password) => {
 }
 
 function PurchrasesView(props) {
-  const { router, username, password } = props;
+  const { router, username, password, catalog } = props;
   const classes = useStyles();
 
   let { purchrases, loading, error } = useFetchPurchrases(username, password)
+
+  const bookByISBN = (isbn) => catalog.find(book => book.isbn === isbn)
 
   if (loading) { return <div>Loading...</div> }
   if (error) return <div>{error}</div>
@@ -41,16 +43,14 @@ function PurchrasesView(props) {
 
       <List component="nav" className={classes.rootList} aria-label="catalog">
         {
-          Object.entries(purchrases).map(([book, total]) => {
-            return (
-              <ListItem
-                key={book}
-                dense
-                >
-                <ListItemText primary={`${book} - $${total}`} />
-              </ListItem>
-            )
-          })
+          purchrases.map(item => (
+            <ListItem key={item.name} dense >
+              <ListItemText
+                primary={`${bookByISBN(item.name).name} - $${item.total}`}
+                secondary={`ISBN: ${item.name} - Quantity: ${item.quantity}`}
+              />
+            </ListItem>
+          ))
         }
       </List>
 

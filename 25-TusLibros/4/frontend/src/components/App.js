@@ -6,8 +6,39 @@ class App extends React.Component {
       username: '',
       password: '',
       cartID: null,
-      cartSize: 0
+      catalog: [],
+      cartContent: [],
     };
+  }
+
+  refreshCart = () => {
+    if(!this.state.cartID) {
+      this.setState({ cartContent: [] })
+      return
+    }
+
+    listCart(this.state.cartID)
+      .then(response => {
+        return response.json()
+      }).then(cartContent => {
+        this.setState({ cartContent: cartContent })
+      })
+  }
+
+  componentDidMount() {
+    getLocalAsJson(`catalog`)
+      .then(response => {
+        return response.json()
+      }).then(catalog => {
+        this.setState({ catalog: catalog })
+      })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState)
+    if(prevState.cartID !== this.state.cartID) {
+      this.refreshCart()
+    }
   }
 
   render() {
@@ -28,6 +59,9 @@ class App extends React.Component {
         router={router}
         username={this.state.username}
         cartID={this.state.cartID}
+        catalog={this.state.catalog}
+        cartContent={this.state.cartContent}
+        refreshCart={this.refreshCart}
       />)
     } else if (this.state.path === "/cart") {
       content = (<CartView
@@ -35,12 +69,16 @@ class App extends React.Component {
         username={this.state.username}
         password={this.state.password}
         cartID={this.state.cartID}
+        catalog={this.state.catalog}
+        cartContent={this.state.cartContent}
+        refreshCart={this.refreshCart}
       />)
     } else if (this.state.path === "/purchrases") {
       content = (<PurchrasesView
         router={router}
         username={this.state.username}
         password={this.state.password}
+        catalog={this.state.catalog}
       />)
     }
     return (

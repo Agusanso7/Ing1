@@ -27,4 +27,6 @@ const {
   Backdrop,
   Fade,
   Paper,
+  Collapse,
+  StarBorder,
 } = MaterialUI;
