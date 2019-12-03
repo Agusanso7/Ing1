@@ -174,16 +174,15 @@ invalidQuantityErrorMessage
 
 	^'Invalid number of items'! !
 
+!Cart class methodsFor: 'error messages' stamp: 'ss 11/25/2019 19:12:54'!
+itemIsNotInCartErrorDescription
+	^'item is not in cart'! !
+
 
 !Cart class methodsFor: 'instance creation' stamp: 'HernanWilkinson 6/17/2013 17:48'!
 acceptingItemsOf: aCatalog
 
 	^self new initializeAcceptingItemsOf: aCatalog ! !
-
-
-!Cart class methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 19:12:54'!
-itemIsNotInCartErrorDescription
-	^'item is not in cart'! !
 
 
 !classDefinition: #CartSession category: #'TusLibros-Model'!
@@ -694,7 +693,122 @@ Object subclass: #TusLibrosRestAPI
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:06'!
+!TusLibrosRestAPI methodsFor: 'initialization' stamp: 'ss 12/3/2019 18:52:08'!
+initializeWith: aPortNumber
+
+	systemFacade := self createSystemFacade.
+	
+	port:= aPortNumber.
+	
+	webserver := WebServer new listenOn: aPortNumber.
+	
+	self setupServices.
+	
+	
+	
+	! !
+
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 11/25/2019 17:55:00'!
+destroy
+	
+	webserver ifNotNil:[webserver destroy].! !
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 12/3/2019 18:48:32'!
+errorHandlerFor: aRequest
+
+	^ [:anError | | jsonResponse | 
+		jsonResponse :=  (WebUtils jsonEncode: (Dictionary new at: 'message' put: anError messageText ; yourself )).
+		aRequest send404Response: jsonResponse  
+			do: [:resp | resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
+	]! !
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 12/3/2019 18:40:16'!
+send200JSONResponse: aBody for: aRequest
+	aRequest send200Response: (WebUtils jsonEncode: aBody)
+				 contentType: 'application/json; charset=utf-8' do: [:resp | 
+					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
+	
+	! !
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 12/3/2019 18:52:08'!
+setupServices
+
+	webserver addService: '/createCart' action: [:request | | cartID  |	
+		[
+			cartID := systemFacade createCartFor: (request fields at: 'username') authenticatedWith: (request fields at: 'password').
+		
+			self send200JSONResponse: (Dictionary new at: 'cart_id' put: cartID; yourself ) 
+				for: request
+		]
+		on: Error do: (self errorHandlerFor: request)
+	].
+	
+	webserver addService: '/listCart' action: [:request | | cartContent |	
+		cartContent := systemFacade listCartIdentifiedAs: (request fields at: 'id') asInteger .
+		
+		self send200JSONResponse: cartContent asArray for: request.
+	
+	].
+	
+	webserver addService: '/addToCart' action: [:request | |cartContent |	
+		systemFacade add: (request fields at: 'quantity') asInteger 
+			of: (request fields at: 'isbn') 
+			toCartIdentifiedAs: (request fields at: 'cart_id') asInteger. 
+
+		self send200JSONResponse: String new for: request	
+	].
+	
+	webserver addService: '/removeFromCart' action: [:request | |cartContent |
+		systemFacade remove: (request fields at: 'isbn')  fromCartIdentifiedAs: (request fields at: 'cart_id') asInteger.
+
+		self send200JSONResponse: String new for: request	
+
+	].
+	
+	webserver addService: '/listPurchrases' action: [:request | |purchrases |	
+		purchrases := systemFacade listPurchasesOf:  (request fields at: 'username') 
+			authenticatingWith: (request fields at: 'password').
+			
+		self send200JSONResponse: (self lineItemsResponse: purchrases values)
+			for: request.
+	].
+	
+	webserver addService: '/checkout' action: [:request | |userCreditCard ticket |
+		[
+			userCreditCard := systemFacade creditCardFor: (request fields at: 'username') 
+				authenticatedWith: (request fields at: 'password').
+		
+		 	ticket := systemFacade checkOutCartIdentifiedAs: (request fields at: 'cart_id') asInteger 
+				withCreditCard: userCreditCard.
+		
+			self send200JSONResponse: (self ticketResponse: ticket)
+				 for: request.
+		] 
+		on: Error do: (self errorHandlerFor: request)
+	].
+	
+	webserver addService: '/catalog' action: [:request |
+		self send200JSONResponse:  (self catalogResponse: systemFacade catalog) 
+				 for: request 
+	]! !
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 11/25/2019 17:54:30'!
+startListening
+	
+	webserver startListener.
+
+	^ 'Listening on port: ', port asString.! !
+
+!TusLibrosRestAPI methodsFor: 'server' stamp: 'ss 11/25/2019 17:54:46'!
+stopListening
+	
+	webserver stopListener.
+	
+	^'Stopped listening from port: ',  port asString! !
+
+
+!TusLibrosRestAPI methodsFor: 'responses' stamp: 'ss 12/2/2019 20:52:06'!
 catalogResponse: aCatalog
 	| response  |
 	
@@ -715,120 +829,7 @@ catalogResponse: aCatalog
 	^response asArray
 	! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 19:37:07'!
-createSalesBook
-
-	^SalesBook new! !
-
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:35:35'!
-defaultCatalog
-
-	| aBook anotherBook |
-	aBook := Book named: 'the history of books' 
-		by: 'booky mcbooks' 
-		withISBN: '123' 
-		withDescription: 'booky takes us through the history of books'
-		withPrice: 550.
-	
-	anotherBook := Book named: 'who let the books out?'
-		by: 'Pages mcbooks' 
-		withISBN: '987654' 
-		withDescription: 'pages asks important questions such as: who let the books out?'
-		withPrice: 314.
-
-	^ Dictionary new
-		at: aBook isbn put: aBook;
-		at: anotherBook isbn put: anotherBook ;
-		yourself ! !
-
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:55:00'!
-destroy
-	
-	webserver ifNotNil:[webserver destroy].! !
-
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:53:10'!
-initializeWith: aPortNumber
-
-	systemFacade := TusLibrosSystemFacade
-		authenticatingWith: self validUsersAndPasswords
-		acceptingItemsOf: self defaultCatalog
-		registeringOn: self createSalesBook
-		debitingThrought: MerchantProcessor new
-		measuringTimeWith: DateAndTime 
-		storingCreditCardsOn: self userCreditCard.
-	
-	port:= aPortNumber.
-	
-	webserver := WebServer new listenOn: aPortNumber.
-	
-	webserver addService: '/createCart' action: [:request | | cartID  |	
-		cartID := systemFacade createCartFor: (request fields at: 'username') authenticatedWith: (request fields at: 'password').
-		
-		request send200Response: (WebUtils jsonEncode: (Dictionary new at: 'cart_id' put: cartID; yourself ))
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/listCart' action: [:request | | cartContent |	
-		cartContent := systemFacade listCartIdentifiedAs: (request fields at: 'id') asInteger .
-		
-		request send200Response: (WebUtils jsonEncode: cartContent asArray)
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/addToCart' action: [:request | |cartContent |	
-		systemFacade add: (request fields at: 'quantity') asInteger 
-			of: (request fields at: 'book_id') 
-			toCartIdentifiedAs: (request fields at: 'cart_id') asInteger. 
-
-		request send200Response: String new
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/removeFromCart' action: [:request | |cartContent |
-		systemFacade remove: (request fields at: 'book_id')  fromCartIdentifiedAs: (request fields at: 'cart_id') asInteger.
-
-		request send200Response: String new
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/listPurchrases' action: [:request | |purchrases purchrasesResponse |	
-		purchrases := systemFacade listPurchasesOf:  (request fields at: 'username') 
-			authenticatingWith: (request fields at: 'password').
-			
-		purchrasesResponse := (self lineItemsResponse: purchrases values).
-
-		request send200Response: (WebUtils jsonEncode: purchrasesResponse )
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/checkout' action: [:request | |userCreditCard ticket |
-		userCreditCard := systemFacade creditCardFor: (request fields at: 'username') 
-			authenticatedWith: (request fields at: 'password').
-		
-		 ticket := systemFacade checkOutCartIdentifiedAs: (request fields at: 'cart_id') asInteger 
-			withCreditCard: userCreditCard.
-		
-		request send200Response: (WebUtils jsonEncode: (self ticketResponse: ticket))
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	webserver addService: '/catalog' action: [:request |
-		request send200Response: (WebUtils jsonEncode: (self catalogResponse: systemFacade catalog)) 
-				 contentType: 'application/json; charset=utf-8' do: [:resp | 
-					resp headerAt: 'Access-Control-Allow-Origin' put: '*'.]
-		].
-	
-	
-	
-	! !
-
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:15'!
+!TusLibrosRestAPI methodsFor: 'responses' stamp: 'ss 12/2/2019 20:52:15'!
 lineItemsResponse: aListOfLineItems
 	| lineItemsResponse |
 	
@@ -849,7 +850,23 @@ lineItemsResponse: aListOfLineItems
 	
 	! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 18:56:05'!
+!TusLibrosRestAPI methodsFor: 'responses' stamp: 'ss 12/2/2019 20:52:21'!
+ticketResponse: aTicket
+	| response lineItems |
+	
+	response := Dictionary new.
+	response at: 'total' put: aTicket total.
+	
+	lineItems := OrderedCollection new.	
+	aTicket lineItemsDo: [:aLineItem | lineItems add: aLineItem ].
+
+	response at: 'items' put: (self lineItemsResponse: lineItems) .
+	
+	^response 
+	! !
+
+
+!TusLibrosRestAPI methodsFor: 'parsing' stamp: 'ss 11/25/2019 18:56:05'!
 parseMonthOfYear: aString
 	
 	| delimiterIndex parsedMonthNumber parsedYearNumber |
@@ -866,36 +883,45 @@ parseMonthOfYear: aString
 	
 	! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:54:30'!
-startListening
-	
-	webserver startListener.
 
-	^ 'Listening on port: ', port asString.! !
+!TusLibrosRestAPI methodsFor: 'private' stamp: 'ss 12/2/2019 19:37:07'!
+createSalesBook
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 11/25/2019 17:54:46'!
-stopListening
-	
-	webserver stopListener.
-	
-	^'Stopped listening from port: ',  port asString! !
+	^SalesBook new! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 20:52:21'!
-ticketResponse: aTicket
-	| response lineItems |
-	
-	response := Dictionary new.
-	response at: 'total' put: aTicket total.
-	
-	lineItems := OrderedCollection new.	
-	aTicket lineItemsDo: [:aLineItem | lineItems add: aLineItem ].
+!TusLibrosRestAPI methodsFor: 'private' stamp: 'ss 12/3/2019 18:51:13'!
+createSystemFacade
 
-	response at: 'items' put: (self lineItemsResponse: lineItems) .
-	
-	^response 
-	! !
+	^ TusLibrosSystemFacade
+		authenticatingWith: self validUsersAndPasswords
+		acceptingItemsOf: self defaultCatalog
+		registeringOn: self createSalesBook
+		debitingThrought: MerchantProcessor new
+		measuringTimeWith: DateAndTime 
+		storingCreditCardsOn: self userCreditCard! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 18:56:28'!
+!TusLibrosRestAPI methodsFor: 'private' stamp: 'ss 12/2/2019 20:35:35'!
+defaultCatalog
+
+	| aBook anotherBook |
+	aBook := Book named: 'the history of books' 
+		by: 'booky mcbooks' 
+		withISBN: '123' 
+		withDescription: 'booky takes us through the history of books'
+		withPrice: 550.
+	
+	anotherBook := Book named: 'who let the books out?'
+		by: 'Pages mcbooks' 
+		withISBN: '987654' 
+		withDescription: 'pages asks important questions such as: who let the books out?'
+		withPrice: 314.
+
+	^ Dictionary new
+		at: aBook isbn put: aBook;
+		at: anotherBook isbn put: anotherBook ;
+		yourself ! !
+
+!TusLibrosRestAPI methodsFor: 'private' stamp: 'ss 12/2/2019 18:56:28'!
 userCreditCard
 	| notExpiredCreditCard today expiredCreditCard |
 	
@@ -913,7 +939,7 @@ userCreditCard
 		at: 'expired' put: expiredCreditCard;
 		yourself! !
 
-!TusLibrosRestAPI methodsFor: 'as yet unclassified' stamp: 'ss 12/2/2019 18:32:17'!
+!TusLibrosRestAPI methodsFor: 'private' stamp: 'ss 12/2/2019 18:32:17'!
 validUsersAndPasswords
 
 	^Dictionary new
