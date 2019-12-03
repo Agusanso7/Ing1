@@ -65,6 +65,7 @@ function CartView(props) {
 
             return (
               <BookListItem
+                router={router}
                 key={book.isbn}
                 cartID={cartID}
                 book={book}

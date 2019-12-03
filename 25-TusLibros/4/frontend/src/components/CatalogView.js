@@ -16,6 +16,7 @@ function CatalogView(props) {
             return (
               <BookListItem
                 key={book.isbn}
+                router={router}
                 cartID={cartID}
                 book={book}
                 quantity={bookCount}

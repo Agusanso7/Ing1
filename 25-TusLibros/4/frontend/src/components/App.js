@@ -8,6 +8,7 @@ class App extends React.Component {
       cartID: null,
       catalog: [],
       cartContent: [],
+      selectedBook: {},
     };
   }
 
@@ -35,7 +36,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState)
     if(prevState.cartID !== this.state.cartID) {
       this.refreshCart()
     }
@@ -57,7 +57,6 @@ class App extends React.Component {
     } else if (this.state.path === "/catalog") {
       content = (<CatalogView
         router={router}
-        username={this.state.username}
         cartID={this.state.cartID}
         catalog={this.state.catalog}
         cartContent={this.state.cartContent}
@@ -79,6 +78,13 @@ class App extends React.Component {
         username={this.state.username}
         password={this.state.password}
         catalog={this.state.catalog}
+      />)
+    } else if (this.state.path === "/book") {
+      content = (<BookView
+        book={this.state.selectedBook}
+        cartID={this.state.cartID}
+        cartContent={this.state.cartContent}
+        refreshCart={this.refreshCart}
       />)
     }
     return (

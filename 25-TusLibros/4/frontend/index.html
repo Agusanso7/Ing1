@@ -137,46 +137,6 @@
         }
       })
     }
-    const useRefreshSession = (username, cartID, cartSize) => {
-      const [session, setSession] = React.useState({})
-      const [loading, setLoading] = React.useState(true)
-      const [error, setError] = React.useState(null)
-    
-      React.useEffect(() => {
-        let session = {
-          catalog: {},
-          cart: []
-        }
-    
-        getLocalAsJson(`catalog`)
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (catalog) {
-            session.catalog = catalog
-          }).then(function() {
-            return getLocalAsJson(`listCart?id=${cartID}`)
-          }).then(function (response) {
-            return response.json()
-          }).then(function (cart) {
-            session.cart = cart
-    
-            if(cart) {
-              setSession(session)
-            }
-    
-            setLoading(false)
-          })
-          .catch(err => {
-            setError(err)
-            setLoading(false)
-          })
-      }, [username, cartID, cartSize])
-    
-      return { session, loading, error }
-    }
-    
-    
     const addToCart = (id, book, qty) => {
       return getLocalAsJson(`addToCart?cart_id=${id}&isbn=${book}&quantity=${qty}`)
         .catch(function (error) {
@@ -212,7 +172,7 @@
         edge="start"
         className={classes.menuButton}
         color="inherit"
-        onClick={()=>router.navigate("/", { username: null, cartID: null })}
+        onClick={()=>router.navigate("/", { username: '', cartID: '' })}
       >
         <Icon>exit_to_app</Icon>
       </IconButton>
@@ -272,7 +232,7 @@
           <AppBar position="static">
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
-                {title} - {username}
+                  {title} {username.length > 0 ? `- ${username}` : ''}
               </Typography>
               {catalogButton }
               {cartButton}
@@ -373,6 +333,7 @@
                 return (
                   <BookListItem
                     key={book.isbn}
+                    router={router}
                     cartID={cartID}
                     book={book}
                     quantity={bookCount}
@@ -453,6 +414,7 @@
     
                 return (
                   <BookListItem
+                    router={router}
                     key={book.isbn}
                     cartID={cartID}
                     book={book}
@@ -512,6 +474,50 @@
         </div>
       )
     }
+    function BookView(props) {
+      const classes = useStyles();
+      const { cartID, book, refreshCart, cartContent } = props;
+    
+      let quantity = cartContent.filter(isbn => isbn === book.isbn).length
+    
+      return (
+        <div>
+          <Paper className={classes.root} style={{padding: theme.spacing(3, 2)}}>
+            <Typography variant="h4" component="h4" gutterBottom>
+                {book.name}
+            </Typography>
+    
+            <Typography variant="subtitle1" component="subtitle1" gutterBottom>
+                By: {book.author} - ISBN: {book.isbn}
+            </Typography>
+    
+            <Typography variant="p" component="p" style={{ marginTop: '10px' }} gutterBottom>
+                {book.description}
+            </Typography>
+          </Paper>
+    
+          <Paper className={classes.root} style={{marginTop: '10px', padding: theme.spacing(3, 2)}}>
+            <strong>Price ${book.price}</strong>
+    
+            <IconButton edge="end" aria-label="comments"
+              onClick={() => addToCart(cartID, book.isbn, 1).then(refreshCart)}>
+    
+              <Icon>add_shopping_cart</Icon>
+            </IconButton>
+    
+            <IconButton edge="end" aria-label="comments"
+              onClick={() => removeFromCart(cartID, book.isbn, 1).then(refreshCart)}>
+              <Icon>remove_shopping_cart</Icon>
+            </IconButton>
+    
+            <Typography variant="p" component="p" style={{ marginTop: '10px' }} color="textSecondary" gutterBottom>
+                Quantity: {quantity}
+            </Typography>
+          </Paper>
+        </div>
+      )
+    }
+    
     const useFetchPurchrases = (username, password) => {
       const [purchrases, setPurchrases] = React.useState([])
       const [loading, setLoading] = React.useState(true)
@@ -572,7 +578,7 @@
       )
     }
     function BookListItem(props) {
-      const { cartID, book, quantity, handleAdd, handleRemove } = props;
+      const { router, cartID, book, quantity, handleAdd, handleRemove } = props;
       const classes = useStyles();
     
       let bookCountString = '';
@@ -585,6 +591,8 @@
         <ListItem
           key={book}
           dense
+          button
+          onClick={() => {router.navigate('/book', { selectedBook: book })}}
         >
           <ListItemText primary={<React.Fragment>
               <Typography
@@ -632,6 +640,7 @@
           cartID: null,
           catalog: [],
           cartContent: [],
+          selectedBook: {},
         };
       }
     
@@ -659,7 +668,6 @@
       }
     
       componentDidUpdate(prevProps, prevState) {
-        console.log(prevState)
         if(prevState.cartID !== this.state.cartID) {
           this.refreshCart()
         }
@@ -681,7 +689,6 @@
         } else if (this.state.path === "/catalog") {
           content = (<CatalogView
             router={router}
-            username={this.state.username}
             cartID={this.state.cartID}
             catalog={this.state.catalog}
             cartContent={this.state.cartContent}
@@ -703,6 +710,13 @@
             username={this.state.username}
             password={this.state.password}
             catalog={this.state.catalog}
+          />)
+        } else if (this.state.path === "/book") {
+          content = (<BookView
+            book={this.state.selectedBook}
+            cartID={this.state.cartID}
+            cartContent={this.state.cartContent}
+            refreshCart={this.refreshCart}
           />)
         }
         return (

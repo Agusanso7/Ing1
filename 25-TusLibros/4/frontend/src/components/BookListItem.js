@@ -1,5 +1,5 @@
 function BookListItem(props) {
-  const { cartID, book, quantity, handleAdd, handleRemove } = props;
+  const { router, cartID, book, quantity, handleAdd, handleRemove } = props;
   const classes = useStyles();
 
   let bookCountString = '';
@@ -12,6 +12,8 @@ function BookListItem(props) {
     <ListItem
       key={book}
       dense
+      button
+      onClick={() => {router.navigate('/book', { selectedBook: book })}}
     >
       <ListItemText primary={<React.Fragment>
           <Typography

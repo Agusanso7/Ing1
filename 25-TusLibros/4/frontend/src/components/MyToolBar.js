@@ -6,7 +6,7 @@ function MyToolBar(props) {
     edge="start"
     className={classes.menuButton}
     color="inherit"
-    onClick={()=>router.navigate("/", { username: null, cartID: null })}
+    onClick={()=>router.navigate("/", { username: '', cartID: '' })}
   >
     <Icon>exit_to_app</Icon>
   </IconButton>
@@ -66,7 +66,7 @@ function MyToolBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            {title} - {username}
+              {title} {username.length > 0 ? `- ${username}` : ''}
           </Typography>
           {catalogButton }
           {cartButton}
