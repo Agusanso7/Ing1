@@ -34,11 +34,11 @@ function CreateCartForm(props) {
   return (
     <div>
       <Typography component="h1" gutterBottom>
-        Bienvenido a Tus Libros, donde tus sueños se vuelven realidad....
+          Welcome to Tus Libros <i>(Your Books)</i>, where your dreams come true....
           </Typography>
       <Typography component="h2" gutterBottom>
-        Crea un carrito para comenzar
-          </Typography>
+          Login to begin having fun
+      </Typography>
 
      <form className={classes.container} noValidate autoComplete="off">
 

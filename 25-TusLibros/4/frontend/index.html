@@ -279,11 +279,11 @@
       return (
         <div>
           <Typography component="h1" gutterBottom>
-            Bienvenido a Tus Libros, donde tus sueños se vuelven realidad....
+              Welcome to Tus Libros <i>(Your Books)</i>, where your dreams come true....
               </Typography>
           <Typography component="h2" gutterBottom>
-            Crea un carrito para comenzar
-              </Typography>
+              Login to begin having fun
+          </Typography>
     
          <form className={classes.container} noValidate autoComplete="off">
     
@@ -337,7 +337,7 @@
       return (
         <div>
           <Typography variant="h4" component="h4" gutterBottom>
-              Catalogo
+              Catalog
           </Typography>
     
           <List component="nav" className={classes.rootList} aria-label="catalog">
@@ -368,21 +368,28 @@
     
       const [checkoutModalOpen, setCheckoutModalOpen] = React.useState(false);
       const [ticket, setTicket] = React.useState({});
+      const [error, setError] = React.useState(null)
     
       const bookByISBN = (isbn) => catalog.find(book => book.isbn === isbn)
     
       const handleCheckout = () => {
         checkoutCart(cartID, username, password)
           .then(function (response) {
+            if(!response.ok) {
+              throw response
+            }
+    
             return response.json()
           }).then(function (ticket) {
             setTicket(ticket)
     
             setCheckoutModalOpen(true);
           }).catch(function (error) {
-            console.log('Looks like there was a problem removing from cart: \n', error);
+            console.log(error)
+            error.json().then(function(jsonError) {
+              setError(jsonError)
+            })
           });
-        setCheckoutModalOpen(true);
       };
     
       const handleClose = () => {
@@ -442,6 +449,12 @@
             }
           </List>
     
+          { error !== null &&
+                <Typography component="p" color="error" gutterBottom>
+                    {error.message}
+                </Typography>
+          }
+    
           <Button
             variant="contained"
             className={classes.Button}
@@ -466,7 +479,7 @@
           >
             <Fade in={checkoutModalOpen}>
               <div className={classes.paper}>
-                <typography component="h1" id="transition-modal-title"><strong>Ticket</strong></typography>
+                <Typography component="h1" id="transition-modal-title"><strong>Ticket</strong></Typography>
     
                 <Paper className={classes.root} id="transition-modal-description">
                   <List component="nav" aria-label="main mailbox folders">
@@ -482,7 +495,7 @@
                   </List>
                 </Paper>
     
-                <typography component="h3" id="transition-modal-title">Total: ${ticket.total}</typography>
+                <Typography component="h3" id="transition-modal-title">Total: ${ticket.total}</Typography>
               </div>
             </Fade>
           </Modal>
@@ -577,18 +590,26 @@
               Purchrases
           </Typography>
     
-          <List component="nav" className={classes.rootList} aria-label="catalog">
-            {
-              purchrases.map(item => (
-                <ListItem key={item.name} dense >
-                  <ListItemText
-                    primary={`${bookByISBN(item.name).name} - $${item.total}`}
-                    secondary={`ISBN: ${item.name} - Quantity: ${item.quantity}`}
-                  />
-                </ListItem>
-              ))
+            { purchrases.length == 0 &&
+                <Typography variant="h5"  gutterBottom>
+                    You should buy something... ;)
+                </Typography>
             }
-          </List>
+    
+            { purchrases.length > 0 &&
+                <List component="nav" className={classes.rootList} aria-label="catalog">
+                  {
+                    purchrases.map(item => (
+                      <ListItem key={item.name} dense >
+                        <ListItemText
+                          primary={`${bookByISBN(item.name).name} - $${item.total}`}
+                          secondary={`ISBN: ${item.name} - Quantity: ${item.quantity}`}
+                        />
+                      </ListItem>
+                    ))
+                  }
+                </List>
+            }
     
         </div>
       )

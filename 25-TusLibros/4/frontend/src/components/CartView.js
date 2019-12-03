@@ -4,21 +4,28 @@ function CartView(props) {
 
   const [checkoutModalOpen, setCheckoutModalOpen] = React.useState(false);
   const [ticket, setTicket] = React.useState({});
+  const [error, setError] = React.useState(null)
 
   const bookByISBN = (isbn) => catalog.find(book => book.isbn === isbn)
 
   const handleCheckout = () => {
     checkoutCart(cartID, username, password)
       .then(function (response) {
+        if(!response.ok) {
+          throw response
+        }
+
         return response.json()
       }).then(function (ticket) {
         setTicket(ticket)
 
         setCheckoutModalOpen(true);
       }).catch(function (error) {
-        console.log('Looks like there was a problem removing from cart: \n', error);
+        console.log(error)
+        error.json().then(function(jsonError) {
+          setError(jsonError)
+        })
       });
-    setCheckoutModalOpen(true);
   };
 
   const handleClose = () => {
@@ -78,6 +85,12 @@ function CartView(props) {
         }
       </List>
 
+      { error !== null &&
+            <Typography component="p" color="error" gutterBottom>
+                {error.message}
+            </Typography>
+      }
+
       <Button
         variant="contained"
         className={classes.Button}
@@ -102,7 +115,7 @@ function CartView(props) {
       >
         <Fade in={checkoutModalOpen}>
           <div className={classes.paper}>
-            <typography component="h1" id="transition-modal-title"><strong>Ticket</strong></typography>
+            <Typography component="h1" id="transition-modal-title"><strong>Ticket</strong></Typography>
 
             <Paper className={classes.root} id="transition-modal-description">
               <List component="nav" aria-label="main mailbox folders">
@@ -118,7 +131,7 @@ function CartView(props) {
               </List>
             </Paper>
 
-            <typography component="h3" id="transition-modal-title">Total: ${ticket.total}</typography>
+            <Typography component="h3" id="transition-modal-title">Total: ${ticket.total}</Typography>
           </div>
         </Fade>
       </Modal>

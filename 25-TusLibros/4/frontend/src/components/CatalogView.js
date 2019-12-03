@@ -5,7 +5,7 @@ function CatalogView(props) {
   return (
     <div>
       <Typography variant="h4" component="h4" gutterBottom>
-          Catalogo
+          Catalog
       </Typography>
 
       <List component="nav" className={classes.rootList} aria-label="catalog">

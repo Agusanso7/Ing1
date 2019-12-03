@@ -41,18 +41,26 @@ function PurchrasesView(props) {
           Purchrases
       </Typography>
 
-      <List component="nav" className={classes.rootList} aria-label="catalog">
-        {
-          purchrases.map(item => (
-            <ListItem key={item.name} dense >
-              <ListItemText
-                primary={`${bookByISBN(item.name).name} - $${item.total}`}
-                secondary={`ISBN: ${item.name} - Quantity: ${item.quantity}`}
-              />
-            </ListItem>
-          ))
+        { purchrases.length == 0 &&
+            <Typography variant="h5"  gutterBottom>
+                You should buy something... ;)
+            </Typography>
         }
-      </List>
+
+        { purchrases.length > 0 &&
+            <List component="nav" className={classes.rootList} aria-label="catalog">
+              {
+                purchrases.map(item => (
+                  <ListItem key={item.name} dense >
+                    <ListItemText
+                      primary={`${bookByISBN(item.name).name} - $${item.total}`}
+                      secondary={`ISBN: ${item.name} - Quantity: ${item.quantity}`}
+                    />
+                  </ListItem>
+                ))
+              }
+            </List>
+        }
 
     </div>
   )
